@@ -27,7 +27,7 @@ const openai = new OpenAI({
 // API endpoint to generate an image
 app.post('/api/generate-image', async (req, res) => {
   try {
-    const { prompt, size, quality } = req.body;
+    const { prompt, size, quality, styleType, stylePreset } = req.body;
     
     console.log('Generating image with prompt:', prompt);
     
@@ -41,9 +41,28 @@ app.post('/api/generate-image', async (req, res) => {
       apiQuality = "auto";
     }
     
+    // Construct an enhanced prompt with style information
+    let enhancedPrompt = prompt;
+    
+    // Add style type to prompt if provided
+    if (styleType === "dark") {
+      enhancedPrompt += ", dark mood, dark lighting, dramatic shadows";
+    } else if (styleType === "light") {
+      enhancedPrompt += ", bright lighting, soft light, well lit";
+    }
+    
+    // Add style preset to prompt if provided
+    if (stylePreset === "internal") {
+      enhancedPrompt += ", professional corporate style, clean detailed look";
+    } else if (stylePreset === "proposals") {
+      enhancedPrompt += ", presentation quality, high detail, professional look";
+    } else if (stylePreset === "general") {
+      enhancedPrompt += ", balanced composition, natural look";
+    }
+    
     const result = await openai.images.generate({
       model: "gpt-image-1",
-      prompt,
+      prompt: enhancedPrompt,
       size: size || "1024x1024",
       quality: apiQuality
     });

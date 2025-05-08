@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const promptForm = document.getElementById('promptForm');
   const promptInput = document.getElementById('prompt');
-  const qualitySelect = document.getElementById('quality');
   const generateBtn = document.getElementById('generateBtn');
   const imageContainer = document.getElementById('imageContainer');
   const placeholder = document.getElementById('placeholder');
@@ -11,6 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Size buttons
   const sizeButtons = document.querySelectorAll('.size-btn');
   let selectedSize = "1024x1024"; // Default size
+
+  // Quality buttons
+  const qualityButtons = document.querySelectorAll('.quality-btn');
+  let selectedQuality = "low"; // Default to low
+
+  // Style Type buttons
+  const styleTypeButtons = document.querySelectorAll('.style-type-btn');
+  let selectedStyleType = "dark"; // Default to dark
+
+  // Style Preset buttons
+  const stylePresetButtons = document.querySelectorAll('.style-preset-btn');
+  let selectedStylePreset = "internal"; // Default to internal
 
   // Add click event to size buttons
   sizeButtons.forEach(button => {
@@ -24,12 +35,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Add click event to quality buttons
+  qualityButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      qualityButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
+      button.classList.add('active');
+      // Update selected quality
+      selectedQuality = button.getAttribute('data-quality');
+    });
+  });
+
+  // Add click event to style type buttons
+  styleTypeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      styleTypeButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
+      button.classList.add('active');
+      // Update selected style type
+      selectedStyleType = button.getAttribute('data-style-type');
+    });
+  });
+
+  // Add click event to style preset buttons
+  stylePresetButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      stylePresetButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
+      button.classList.add('active');
+      // Update selected style preset
+      selectedStylePreset = button.getAttribute('data-style-preset');
+    });
+  });
+
   // State
   let isGenerating = false;
   let currentImage = null;
 
   // Event Listeners
-  promptForm.addEventListener('submit', handleFormSubmit);
+  generateBtn.addEventListener('click', handleFormSubmit);
 
   // Form submission handler
   async function handleFormSubmit(e) {
@@ -52,7 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = {
         prompt: prompt,
         size: selectedSize,
-        quality: qualitySelect.value
+        quality: selectedQuality,
+        styleType: selectedStyleType,
+        stylePreset: selectedStylePreset
       };
       
       // Log generation attempt
