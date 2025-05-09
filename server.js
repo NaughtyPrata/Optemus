@@ -78,29 +78,54 @@ app.post('/api/generate-image', async (req, res) => {
     }
 
     // Request image from OpenAI using GPT-4o's image generation (gpt-image-1)
-    const response = await openai.images.generate({
-      model: "gpt-image-1",
-      prompt: enhancedPrompt,
-      size: size || "1024x1024",
-      // Using the correct quality parameters for gpt-image-1
-      quality: quality || "medium", // gpt-image-1 supports 'low', 'medium', 'high', and 'auto'
-      n: imageCount // Generate multiple images based on count
-    });
-
-    if (!response.data || response.data.length === 0) {
+    const generatedResponses = [];
+    
+    // For multiple images, we'll create variations on the prompt to encourage diversity
+    for (let i = 0; i < imageCount; i++) {
+      let currentPrompt = enhancedPrompt;
+      
+      // Add variation instructions based on the image index
+      if (imageCount > 1) {
+        if (i === 0) {
+          currentPrompt += " Make this version unique with its own distinctive style and perspective.";
+        } else if (i === 1) {
+          currentPrompt += " Create a completely different interpretation from the first version, with contrasting elements and viewpoint.";
+        } else if (i === 2) {
+          currentPrompt += " Create a third unique version with different lighting, angle, and artistic approach from the previous versions.";
+        } else if (i === 3) {
+          currentPrompt += " Create a fourth distinct version that explores a different aspect of the concept, with its own unique composition and elements.";
+        }
+      }
+      
+      console.log(`Generating image ${i+1}/${imageCount} with prompt: ${currentPrompt.substring(0, 100)}...`);
+      
+      // Generate the image with the varied prompt
+      const response = await openai.images.generate({
+        model: "gpt-image-1",
+        prompt: currentPrompt,
+        size: size || "1024x1024",
+        quality: quality || "medium", // gpt-image-1 supports 'low', 'medium', 'high', and 'auto'
+        n: 1
+      });
+      
+      if (response.data && response.data.length > 0) {
+        generatedResponses.push(response.data[0]);
+      }
+    }
+    
+    // Check if we got any images back
+    if (generatedResponses.length === 0) {
       throw new Error('No image data received from OpenAI');
     }
-
-    // Get image data from response
-    // The response format for gpt-image-1 might be different
-    console.log('API Response:', JSON.stringify(response, null, 2));
     
-    // Process each image in the response
+    console.log(`Successfully generated ${generatedResponses.length} images`);
+    
+    // Process each image in the responses
     const generatedImages = [];
     
-    for (let i = 0; i < response.data.length; i++) {
+    for (let i = 0; i < generatedResponses.length; i++) {
       let imageUrl = '';
-      const imageData = response.data[i];
+      const imageData = generatedResponses[i];
       
       // Check different possible response formats and extract the image URL
       if (imageData.url) {
@@ -154,9 +179,8 @@ app.post('/api/generate-image', async (req, res) => {
     res.json({
       success: true,
       images: generatedImages,
-      count: generatedImages.length,
-      // Include raw response data for debugging if needed
-      rawResponse: response
+      count: generatedImages.length
+      // Don't include raw responses as they could be very large with multiple images
     });
   } catch (error) {
     console.error('Error generating image:', error);
