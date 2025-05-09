@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const stylePresetButtons = document.querySelectorAll('.style-preset-btn');
   let selectedStylePreset = "internal"; // Default to internal
 
+  // Image Count buttons
+  const countButtons = document.querySelectorAll('.count-btn');
+  let selectedCount = "1"; // Default to 1 image
+
   // Add click event to size buttons
   sizeButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -71,10 +75,25 @@ document.addEventListener('DOMContentLoaded', () => {
       selectedStylePreset = button.getAttribute('data-style-preset');
     });
   });
+  
+  // Add click event to count buttons
+  countButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      countButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
+      button.classList.add('active');
+      // Update selected count
+      selectedCount = button.getAttribute('data-count');
+      
+      // Update the image container layout based on count
+      updateImageContainerLayout(selectedCount);
+    });
+  });
 
   // State
   let isGenerating = false;
-  let currentImage = null;
+  let currentImages = []; // Array to hold multiple images
 
   // Event Listeners
   generateBtn.addEventListener('click', handleFormSubmit);
@@ -108,7 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
         size: selectedSize,
         quality: selectedQuality,
         styleType: selectedStyleType,
-        stylePreset: selectedStylePreset
+        stylePreset: selectedStylePreset,
+        count: selectedCount // Add the count parameter
       };
       
       // Log generation attempt
@@ -132,23 +152,31 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(errorMsg);
       }
       
-      // Track current image
-      currentImage = {
-        url: data.image,
-        localPath: data.localImage || null,
-        filename: data.filename
-      };
-      
-      console.log('Current image data:', currentImage);
-      
-      // Display the image
-      displayImage(data.image);
-      
-      // Trigger automatic download if we have a filename
-      if (data.filename && data.filename !== 'direct_url_image') {
-        console.log('Initiating automatic download...');
-        // Use the direct download endpoint
-        window.location.href = `/api/download/${data.filename}`;
+      // Track current images
+      if (data.images && data.images.length > 0) {
+        currentImages = data.images;
+        console.log(`Received ${currentImages.length} images:`, currentImages);
+        
+        // Display the images
+        displayImages(currentImages);
+        
+        // Disable save button for multi-image display to avoid confusion
+        // User can download individual images from the gallery instead
+        if (currentImages.length > 1) {
+          saveImageBtn.disabled = true;
+          saveImageBtn.style.opacity = '0.5';
+          saveImageBtn.style.cursor = 'not-allowed';
+          saveImageBtn.innerHTML = '<i class="ti ti-photo"></i> View in Gallery';
+          saveImageBtn.onclick = () => window.location.href = 'viewer.html';
+        } else {
+          saveImageBtn.disabled = false;
+          saveImageBtn.style.opacity = '1';
+          saveImageBtn.style.cursor = 'pointer';
+          saveImageBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Save Image';
+          saveImageBtn.onclick = handleSaveImage;
+        }
+      } else {
+        throw new Error('No images received in response');
       }
       
       // Success animation
@@ -164,10 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle save image click
   async function handleSaveImage() {
-    if (!currentImage) return;
+    if (currentImages.length === 0) return;
     
-    // Get image data
-    const imageUrl = currentImage.url;
+    // Get image data from the first image (for single image view)
+    const imageData = currentImages[0];
+    const imageUrl = imageData.image;
     const prompt = promptInput.value.trim();
     
     if (!imageUrl) {
@@ -178,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Saving image to project folder...');
     
     try {
-      console.log('Current image object:', { ...currentImage, url: currentImage.url ? (currentImage.url.length > 50 ? currentImage.url.substring(0, 50) + '...' : currentImage.url) : 'undefined' });
+      console.log('Current image data:', imageData);
       
       // Prepare the data for server-side saving
       const saveData = {
@@ -233,11 +262,13 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(result.error || 'Failed to save image');
       }
       
-      // Update current image with saved data
-      currentImage = {
-        ...currentImage,
-        ...result.image
-      };
+      // Update the first image in currentImages with saved data
+      if (currentImages.length > 0) {
+        currentImages[0] = {
+          ...currentImages[0],
+          ...result.image
+        };
+      }
       
       console.log('Image saved successfully:', result.image);
       showSuccess(`Image saved to project folder: ${result.image.filename}`);
@@ -247,43 +278,88 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
-  // Display the generated image
-  function displayImage(imageUrl) {
+  // Update the image container layout based on count
+  function updateImageContainerLayout(count) {
+    // Remove any existing layout classes
+    imageContainer.classList.remove('single-image-layout', 'two-image-layout', 'four-image-layout');
+    
+    // Add the appropriate layout class
+    if (count === '1') {
+      imageContainer.classList.add('single-image-layout');
+    } else if (count === '2') {
+      imageContainer.classList.add('two-image-layout');
+    } else if (count === '4') {
+      imageContainer.classList.add('four-image-layout');
+    }
+  }
+  
+  // Display multiple images
+  function displayImages(images) {
     // Hide placeholder
     placeholder.classList.add('hidden');
     
-    // Remove any existing image
-    const existingImage = document.getElementById('resultWrapper');
-    if (existingImage) {
-      existingImage.remove();
+    // Remove any existing image wrappers
+    const existingWrappers = document.querySelectorAll('.image-wrapper');
+    existingWrappers.forEach(wrapper => wrapper.remove());
+    
+    // If there are no images, show placeholder
+    if (!images || images.length === 0) {
+      placeholder.classList.remove('hidden');
+      return;
     }
     
-    // Create and add new image
-    const imgWrapper = document.createElement('div');
-    imgWrapper.id = 'resultWrapper';
-    imgWrapper.className = 'image-wrapper';
+    // Set the appropriate layout
+    updateImageContainerLayout(images.length.toString());
     
-    const img = document.createElement('img');
-    img.id = 'resultImage';
-    img.className = 'result-image';
-    img.alt = 'Generated image';
-    img.src = imageUrl;
+    // Create a wrapper for all images
+    const galleryWrapper = document.createElement('div');
+    galleryWrapper.className = `gallery-wrapper count-${images.length}`;
+    imageContainer.appendChild(galleryWrapper);
     
-    imgWrapper.appendChild(img);
-    imageContainer.appendChild(imgWrapper);
-    
-    // Enable the save button
-    saveImageBtn.disabled = false;
-    saveImageBtn.style.opacity = '1';
-    saveImageBtn.style.cursor = 'pointer';
+    // Add each image
+    images.forEach((imageData, index) => {
+      const imgWrapper = document.createElement('div');
+      imgWrapper.className = 'image-wrapper';
+      
+      const img = document.createElement('img');
+      img.className = 'result-image';
+      img.alt = `Generated image ${index + 1}`;
+      img.src = imageData.image;
+      
+      // Add click event to show image details or download
+      img.addEventListener('click', () => {
+        console.log(`Image ${index + 1} clicked: ${imageData.filename}`);
+        // Open image download link
+        window.open(`/api/download/${imageData.filename}`, '_blank');
+      });
+      
+      // Add hover effect to show the image is clickable
+      imgWrapper.addEventListener('mouseenter', () => {
+        const downloadIcon = document.createElement('div');
+        downloadIcon.className = 'download-icon';
+        downloadIcon.innerHTML = '<i class="ti ti-download"></i>';
+        imgWrapper.appendChild(downloadIcon);
+      });
+      
+      imgWrapper.addEventListener('mouseleave', () => {
+        const downloadIcon = imgWrapper.querySelector('.download-icon');
+        if (downloadIcon) {
+          downloadIcon.remove();
+        }
+      });
+      
+      imgWrapper.appendChild(img);
+      galleryWrapper.appendChild(imgWrapper);
+    });
     
     // Animation
     anime({
-      targets: imgWrapper,
+      targets: '.image-wrapper',
       opacity: [0, 1],
       scale: [0.9, 1],
       easing: 'easeOutElastic(1, .6)',
-      duration: 800
+      duration: 800,
+      delay: anime.stagger(100)
     });
   }
 

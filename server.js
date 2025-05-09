@@ -49,13 +49,16 @@ app.post('/save-image', (req, res) => {
 // Generate image using OpenAI API with GPT-4o (gpt-image-1)
 app.post('/api/generate-image', async (req, res) => {
   try {
-    const { prompt, size, quality, styleType, stylePreset } = req.body;
+    const { prompt, size, quality, styleType, stylePreset, count = 1 } = req.body;
+    
+    // Validate count (only allow 1, 2, or 4)
+    const imageCount = [1, 2, 4].includes(Number(count)) ? Number(count) : 1;
 
     if (!prompt) {
       return res.status(400).json({ success: false, error: 'Prompt is required' });
     }
 
-    console.log(`Generating image with prompt: ${prompt}`);
+    console.log(`Generating ${imageCount} images with prompt: ${prompt}`);
     console.log(`Settings: size=${size}, quality=${quality}, styleType=${styleType}, stylePreset=${stylePreset}`);
 
     // Enhanced prompt based on style settings
@@ -81,7 +84,7 @@ app.post('/api/generate-image', async (req, res) => {
       size: size || "1024x1024",
       // Using the correct quality parameters for gpt-image-1
       quality: quality || "medium", // gpt-image-1 supports 'low', 'medium', 'high', and 'auto'
-      n: 1
+      n: imageCount // Generate multiple images based on count
     });
 
     if (!response.data || response.data.length === 0) {
@@ -92,52 +95,67 @@ app.post('/api/generate-image', async (req, res) => {
     // The response format for gpt-image-1 might be different
     console.log('API Response:', JSON.stringify(response, null, 2));
     
-    let imageUrl = '';
-    // Check different possible response formats and extract the image URL
-    if (response.data && response.data.length > 0) {
-      if (response.data[0].url) {
-        imageUrl = response.data[0].url;
-      } else if (response.data[0].b64_json) {
-        imageUrl = `data:image/png;base64,${response.data[0].b64_json}`;
-      }
-    }
+    // Process each image in the response
+    const generatedImages = [];
     
-    console.log(`Image generated successfully${imageUrl ? ': ' + imageUrl.substring(0, 50) + '...' : ''}`);
-
-    // Generate a random filename
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `generated_${timestamp}_${randomUUID().substring(0, 8)}.png`;
-    const filePath = path.join(imagesDir, filename);
-    
-    // If we have a URL, download the image so it's available for direct download
-    if (imageUrl && imageUrl.startsWith('http')) {
-      try {
-        console.log(`Downloading image from URL to make it available locally: ${imageUrl.substring(0, 50)}...`);
-        await downloadImage(imageUrl, filePath);
-        console.log(`Image saved locally at: ${filePath}`);
-      } catch (downloadError) {
-        console.warn('Warning: Could not download image from URL:', downloadError.message);
-        // Continue anyway, as we still have the URL to display the image
+    for (let i = 0; i < response.data.length; i++) {
+      let imageUrl = '';
+      const imageData = response.data[i];
+      
+      // Check different possible response formats and extract the image URL
+      if (imageData.url) {
+        imageUrl = imageData.url;
+      } else if (imageData.b64_json) {
+        imageUrl = `data:image/png;base64,${imageData.b64_json}`;
       }
-    }
-    // If we have base64 data, save it to disk
-    else if (imageUrl && imageUrl.startsWith('data:image')) {
-      try {
-        console.log('Saving base64 image data to file...');
-        const data = imageUrl.replace(/^data:image\/\w+;base64,/, '');
-        fs.writeFileSync(filePath, Buffer.from(data, 'base64'));
-        console.log(`Image saved locally at: ${filePath}`);
-      } catch (saveError) {
-        console.warn('Warning: Could not save base64 image data:', saveError.message);
+      
+      if (!imageUrl) {
+        console.warn(`No URL or base64 data found for image ${i+1}`);
+        continue;
       }
+      
+      console.log(`Image ${i+1} generated successfully${imageUrl ? ': ' + imageUrl.substring(0, 50) + '...' : ''}`);
+      
+      // Generate a random filename
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const filename = `generated_${timestamp}_${randomUUID().substring(0, 8)}_${i+1}.png`;
+      const filePath = path.join(imagesDir, filename);
+      
+      // If we have a URL, download the image so it's available for direct download
+      if (imageUrl && imageUrl.startsWith('http')) {
+        try {
+          console.log(`Downloading image ${i+1} from URL to make it available locally: ${imageUrl.substring(0, 50)}...`);
+          await downloadImage(imageUrl, filePath);
+          console.log(`Image ${i+1} saved locally at: ${filePath}`);
+        } catch (downloadError) {
+          console.warn(`Warning: Could not download image ${i+1} from URL:`, downloadError.message);
+          // Continue anyway, as we still have the URL to display the image
+        }
+      }
+      // If we have base64 data, save it to disk
+      else if (imageUrl && imageUrl.startsWith('data:image')) {
+        try {
+          console.log(`Saving base64 image ${i+1} data to file...`);
+          const data = imageUrl.replace(/^data:image\/\w+;base64,/, '');
+          fs.writeFileSync(filePath, Buffer.from(data, 'base64'));
+          console.log(`Image ${i+1} saved locally at: ${filePath}`);
+        } catch (saveError) {
+          console.warn(`Warning: Could not save base64 image ${i+1} data:`, saveError.message);
+        }
+      }
+      
+      generatedImages.push({
+        image: imageUrl,
+        filename: filename
+      });
     }
 
-    // Return success with the image URL or data
+    // Return success with all generated images
     res.json({
       success: true,
-      image: imageUrl || '',
-      filename: filename,
-      // Include full response data for debugging
+      images: generatedImages,
+      count: generatedImages.length,
+      // Include raw response data for debugging if needed
       rawResponse: response
     });
   } catch (error) {
