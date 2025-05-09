@@ -413,6 +413,7 @@ label {
   display: flex;
   gap: 10px;
   z-index: 20;
+  width: 180px;
 }
 
 .save-img-btn, .gallery-btn {
@@ -443,6 +444,11 @@ label {
 .gallery-btn {
   background-color: rgba(30, 41, 59, 0.9);
   color: var(--primary-light);
+}
+
+.gallery-btn.full-width {
+  width: 100%;
+  justify-content: center;
 }
 
 .gallery-btn:hover {

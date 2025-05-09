@@ -169,6 +169,23 @@ app.post('/api/generate-image', async (req, res) => {
         }
       }
       
+      // Create metadata file with image details
+      const metadataPath = path.join(imagesDir, `${path.basename(filename, '.png')}.json`);
+      const metadata = {
+        prompt: prompt, // Store the original prompt without the variations
+        timestamp: new Date().toISOString(),
+        settings: {
+          size: size || "1024x1024",
+          quality: quality || "medium",
+          styleType: styleType || "standard",
+          stylePreset: stylePreset || "default"
+        },
+        filename
+      };
+      
+      fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+      console.log(`Metadata saved at: ${metadataPath}`);
+      
       generatedImages.push({
         image: imageUrl,
         filename: filename
@@ -347,8 +364,19 @@ app.get('/api/images', (req, res) => {
             createdAt: metadata.timestamp || imageData.createdAt,
             settings: metadata.settings || {}
           };
+          console.log(`Found metadata for ${filename}: prompt="${imageData.prompt.substring(0, 50)}..."`);
         } catch (err) {
           console.warn(`Error reading metadata for ${filename}:`, err.message);
+        }
+      } else {
+        // See if we can extract any prompt info from the filename
+        // Many generated image filenames start with a part of the prompt
+        if (filename.includes('_')) {
+          const possiblePrompt = filename.split('_')[0].replace(/-/g, ' ');
+          if (possiblePrompt && possiblePrompt.length > 5) {
+            imageData.prompt = possiblePrompt;
+            console.log(`Extracted prompt from filename: "${possiblePrompt}"`);
+          }
         }
       }
       
@@ -356,6 +384,9 @@ app.get('/api/images', (req, res) => {
     });
     
     console.log(`Found ${images.length} images`);
+    
+    // Sort images by creation date, newest first
+    images.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     
     res.json({
       success: true,

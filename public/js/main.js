@@ -97,12 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Event Listeners
   generateBtn.addEventListener('click', handleFormSubmit);
-  saveImageBtn.addEventListener('click', handleSaveImage);
-  
-  // Initially disable the save button
-  saveImageBtn.disabled = true;
-  saveImageBtn.style.opacity = '0.5';
-  saveImageBtn.style.cursor = 'not-allowed';
 
   // Form submission handler
   async function handleFormSubmit(e) {
@@ -160,21 +154,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // Display the images
         displayImages(currentImages);
         
-        // Disable save button for multi-image display to avoid confusion
-        // User can download individual images from the gallery instead
-        if (currentImages.length > 1) {
-          saveImageBtn.disabled = true;
-          saveImageBtn.style.opacity = '0.5';
-          saveImageBtn.style.cursor = 'not-allowed';
-          saveImageBtn.innerHTML = '<i class="ti ti-photo"></i> View in Gallery';
-          saveImageBtn.onclick = () => window.location.href = 'viewer.html';
-        } else {
-          saveImageBtn.disabled = false;
-          saveImageBtn.style.opacity = '1';
-          saveImageBtn.style.cursor = 'pointer';
-          saveImageBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Save Image';
-          saveImageBtn.onclick = handleSaveImage;
-        }
+        // Auto-download the images
+        currentImages.forEach((img, index) => {
+          if (img.filename) {
+            // Add slight delay between downloads to prevent browser throttling
+            setTimeout(() => {
+              console.log(`Auto-downloading image ${index + 1}: ${img.filename}`);
+              const downloadLink = document.createElement('a');
+              downloadLink.href = `/api/download/${img.filename}`;
+              downloadLink.download = img.filename;
+              downloadLink.style.display = 'none';
+              document.body.appendChild(downloadLink);
+              downloadLink.click();
+              document.body.removeChild(downloadLink);
+            }, index * 500); // Stagger downloads by 500ms
+          }
+        });
       } else {
         throw new Error('No images received in response');
       }
@@ -371,10 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isLoading) {
       loadingIndicator.classList.remove('hidden');
       generateBtn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Generating...';
-      // Disable save button during generation
-      saveImageBtn.disabled = true;
-      saveImageBtn.style.opacity = '0.5';
-      saveImageBtn.style.cursor = 'not-allowed';
     } else {
       loadingIndicator.classList.add('hidden');
       generateBtn.innerHTML = '<i class="ti ti-sparkles"></i> Generate';
