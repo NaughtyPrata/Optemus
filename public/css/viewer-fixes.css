@@ -1,97 +1,98 @@
-/* Additional CSS for viewer enhancements */
+/* Additional viewer-specific styles for neumorphism theme */
 
-/* Toast notifications */
-.error-toast, .success-toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #1e1e2d;
-  padding: 12px 20px;
-  border-radius: 6px;
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transform: translateY(100px);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
+/* Adjusted card styles for gallery view */
+.image-gallery.grid-view .image-card {
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
 }
 
-.error-toast {
-  color: var(--danger-color);
-}
-
-.success-toast {
-  color: var(--success-color);
-}
-
-.error-toast.show, .success-toast.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.error-toast i {
-  font-size: 20px;
-  color: var(--danger-color);
-}
-
-.success-toast i {
-  font-size: 20px;
-  color: var(--success-color);
-}
-
-/* Placeholder for failed images */
-.card-placeholder {
+.image-gallery.grid-view .card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #2c3e50;
-  color: var(--text-muted);
-}
-
-.card-placeholder i {
-  font-size: 2rem;
-}
-
-/* Modal image error styling */
-.modal-image-error {
-  width: 100%;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #2c3e50;
-  border-radius: 0.5rem;
-  gap: 1rem;
-}
-
-.modal-image-error i {
-  font-size: 3rem;
-  color: var(--text-muted);
-}
-
-.modal-image-error p {
-  color: var(--text-muted);
-  font-size: 1rem;
-}
-
-/* Make sure images in the gallery load properly */
-.image-card img {
   object-fit: cover;
-  width: 100%;
-  height: 100%;
 }
 
-/* Create a placeholder image for the gallery */
-.public/images/placeholder.png {
-  background-color: #2c3e50;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
+/* List view adjustments */
+.image-gallery.list-view .image-card {
+  margin-bottom: 15px;
+}
+
+.image-gallery.list-view .card-content {
+  flex: 1;
+}
+
+/* Modal adjustments */
+.modal-body {
+  background-color: var(--element-bg);
+}
+
+/* Empty state adjustments */
+.empty-state .btn {
+  margin-top: 20px;
+}
+
+/* Mobile fixes */
+@media (max-width: 768px) {
+  .viewer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .header-right {
+    align-self: flex-end;
+  }
+  
+  .toolbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .search-container {
+    width: 100%;
+  }
+  
+  .view-options {
+    align-self: flex-end;
+  }
+}
+
+/* Remove the background orbs from glassmorphism */
+.orb {
+  display: none;
+}
+
+/* Custom styles for card details visibility */
+.card-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: var(--element-bg);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+}
+
+.image-card:hover .card-details {
+  transform: translateY(0);
+}
+
+/* Custom shadow for viewer-specific elements */
+.toolbar-item {
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+  transition: var(--transition);
+}
+
+.toolbar-item:hover {
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+}
+
+.toolbar-item:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
 }
