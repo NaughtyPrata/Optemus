@@ -16,6 +16,49 @@
   --transition: all 0.3s ease;
 }
 
+/* Tooltip styles */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-container .tooltip {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--element-bg);
+  color: var(--text-color);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 100;
+}
+
+.tooltip-container .tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--element-bg) transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: var(--bg-color);
@@ -262,7 +305,6 @@ label {
 }
 
 .size-btn.active, .quality-btn.active, .style-type-btn.active, .style-preset-btn.active, .count-btn.active {
-  color: var(--primary-color);
   box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
   font-weight: 700;
 }
@@ -618,6 +660,10 @@ label {
   gap: 12px;
 }
 
+.view-options .tooltip-container {
+  display: flex;
+}
+
 .view-btn, .refresh-btn {
   display: flex;
   align-items: center;
@@ -635,7 +681,6 @@ label {
 
 .view-btn:hover, .refresh-btn:hover {
   box-shadow: var(--shadow-dark), var(--shadow-light);
-  color: var(--primary-color);
 }
 
 .view-btn:active, .refresh-btn:active {
@@ -643,7 +688,6 @@ label {
 }
 
 .view-btn.active {
-  color: var(--primary-color);
   box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
 }
 
@@ -692,6 +736,7 @@ label {
   width: 120px;
   height: 120px;
   flex-shrink: 0;
+  object-fit: cover;
 }
 
 .image-gallery.list-view .card-content {

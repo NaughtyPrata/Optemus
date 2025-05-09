@@ -386,7 +386,60 @@ app.get('/api/images', (req, res) => {
     console.log(`Found ${images.length} images`);
     
     // Sort images by creation date, newest first
-    images.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    images.sort((a, b) => {
+      // Parse dates safely with error handling
+      let dateA, dateB;
+      try {
+        dateA = new Date(a.createdAt);
+        if (isNaN(dateA.getTime())) {
+          // If invalid date, extract from filename if possible
+          const timestampMatch = a.filename.match(/_(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})/);
+          if (timestampMatch && timestampMatch[1]) {
+            const cleanTimestamp = timestampMatch[1].replace(/-/g, (i, idx) => idx <= 10 ? '-' : ':');
+            dateA = new Date(cleanTimestamp);
+          }
+        }
+      } catch (e) {
+        console.warn(`Invalid date format for ${a.filename}: ${a.createdAt}`);
+        dateA = new Date(0); // Default to epoch time if parsing fails
+      }
+      
+      try {
+        dateB = new Date(b.createdAt);
+        if (isNaN(dateB.getTime())) {
+          // If invalid date, extract from filename if possible
+          const timestampMatch = b.filename.match(/_(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})/);
+          if (timestampMatch && timestampMatch[1]) {
+            const cleanTimestamp = timestampMatch[1].replace(/-/g, (i, idx) => idx <= 10 ? '-' : ':');
+            dateB = new Date(cleanTimestamp);
+          }
+        }
+      } catch (e) {
+        console.warn(`Invalid date format for ${b.filename}: ${b.createdAt}`);
+        dateB = new Date(0); // Default to epoch time if parsing fails
+      }
+      
+      // Fall back to filesystem stats if dates are still invalid
+      if (isNaN(dateA.getTime())) {
+        try {
+          const statsA = fs.statSync(path.join(imagesDir, a.filename));
+          dateA = statsA.mtime;
+        } catch (e) {
+          dateA = new Date(0);
+        }
+      }
+      
+      if (isNaN(dateB.getTime())) {
+        try {
+          const statsB = fs.statSync(path.join(imagesDir, b.filename));
+          dateB = statsB.mtime;
+        } catch (e) {
+          dateB = new Date(0);
+        }
+      }
+      
+      return dateB.getTime() - dateA.getTime(); // Sort descending (newest first)
+    });
     
     res.json({
       success: true,

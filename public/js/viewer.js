@@ -29,9 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add event listeners
     searchInput.addEventListener('input', filterImages);
     
-    viewButtons.forEach(btn => {
+    // Need to handle button clicks after DOM changes with tooltip containers
+    document.querySelectorAll('.view-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const mode = btn.getAttribute('data-view');
+        console.log('Changing view mode to:', mode);
         changeViewMode(mode);
       });
     });
@@ -90,6 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.success) {
         images = data.images || [];
         console.log(`Loaded ${images.length} images from server`);
+        
+        // Ensure images are sorted by date (newest first)
+        images.sort((a, b) => {
+          const dateA = new Date(a.createdAt || 0);
+          const dateB = new Date(b.createdAt || 0);
+          return dateB - dateA; // Sort descending (newest first)
+        });
         
         // If no images returned from API, try scanning for images directly
         if (images.length === 0) {
@@ -189,6 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const card = document.createElement('div');
     card.className = 'image-card';
+    // Add a data attribute with the timestamp for debugging
+    card.setAttribute('data-timestamp', image.createdAt || '');
     card.addEventListener('click', () => showImageDetails(image));
     
     // For grid view, just show the image
@@ -246,7 +257,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const placeholder = document.createElement('div');
         placeholder.className = 'card-placeholder';
         placeholder.innerHTML = '<i class="ti ti-photo-off"></i>';
-        parent.appendChild(placeholder);
+        placeholder.style.width = '120px';
+        placeholder.style.height = '120px';
+        placeholder.style.display = 'flex';
+        placeholder.style.alignItems = 'center';
+        placeholder.style.justifyContent = 'center';
+        placeholder.style.backgroundColor = '#f5f5f5';
+        parent.insertBefore(placeholder, parent.firstChild);
       };
       
       img.onload = function() {
@@ -318,10 +335,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Change view mode (grid or list)
   function changeViewMode(mode) {
+    console.log(`Changing view mode from ${viewMode} to ${mode}`);
     viewMode = mode;
     
     // Update active button
-    viewButtons.forEach(btn => {
+    document.querySelectorAll('.view-btn').forEach(btn => {
       if (btn.getAttribute('data-view') === mode) {
         btn.classList.add('active');
       } else {
@@ -331,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Update gallery class
     imageGallery.className = `image-gallery ${mode}-view`;
+    console.log(`Set gallery class to: image-gallery ${mode}-view`);
     
     // Re-render gallery
     renderGallery();
@@ -455,14 +474,36 @@ document.addEventListener('DOMContentLoaded', () => {
   function formatDate(dateStr) {
     if (!dateStr) return 'Unknown date';
     
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    let date;
+    try {
+      // First try parsing the date string
+      date = new Date(dateStr);
+      
+      // Check if the date is valid
+      if (isNaN(date.getTime())) {
+        // Try to extract date from a filename format (e.g., "something_2023-05-20T12-30-45.png")
+        const match = dateStr.match(/_(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})/);
+        if (match && match[1]) {
+          // Replace hyphens in the time portion with colons
+          const formattedStr = match[1].replace(/-(\d{2})-(\d{2})-(\d{2})$/, 'T$1:$2:$3');
+          date = new Date(formattedStr);
+        } else {
+          return 'Unknown date';
+        }
+      }
+      
+      // Format the date nicely
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch (e) {
+      console.warn(`Error formatting date: ${dateStr}`, e);
+      return 'Unknown date';
+    }
   }
   
   // Show toast message
