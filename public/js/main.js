@@ -365,10 +365,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (isLoading) {
       loadingIndicator.classList.remove('hidden');
-      generateBtn.innerHTML = '<i class="ti ti-loader ti-spin"></i> Generating...';
+      // Don't change the fancy button's innerHTML, just disable it
+      generateBtn.style.opacity = '0.7';
+      generateBtn.style.pointerEvents = 'none';
     } else {
       loadingIndicator.classList.add('hidden');
-      generateBtn.innerHTML = '<i class="ti ti-sparkles"></i> Generate';
+      generateBtn.style.opacity = '1';
+      generateBtn.style.pointerEvents = 'auto';
     }
   }
 
@@ -444,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
     delay: anime.stagger(100),
     duration: 600
   }, '-=400').add({
-    targets: '.btn-primary',
+    targets: '.button',
     scale: [0.9, 1],
     opacity: [0, 1],
     duration: 600

@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Generator</title>
+  <title>Imaginator</title>
   
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/neumorphism.css">
+  <link rel="stylesheet" href="css/custom-buttons.css">
   
   <!-- CDN Resources -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=Fira+Mono:wght@400;500&family=Borel&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/@tabler/icons@latest/iconfont/tabler-icons.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
@@ -20,7 +21,7 @@
     <aside class="control-panel">
       <div class="app-title">
         <i class="ti ti-photo-ai icon"></i>
-        <h1>Image Generator</h1>
+        <h1>Imaginator</h1>
       </div>
       
       <form id="promptForm">
@@ -81,9 +82,18 @@
       </form>
       
       <div class="generate-btn-container">
-        <button id="generateBtn" type="button" class="btn btn-primary">
-          <i class="ti ti-sparkles"></i>
-          Generate
+        <button id="generateBtn" type="button" class="button">
+          <div class="bg"></div>
+          <div class="wrap">
+            <div class="content">
+              <div class="char state-1">
+                Generate
+              </div>
+              <div class="icon">
+                <div></div>
+              </div>
+            </div>
+          </div>
         </button>
       </div>
     </aside>
@@ -91,7 +101,7 @@
     <!-- Right Panel: Image Display -->
     <main class="image-container">
       <div class="image-top-controls">
-        <a href="viewer.html" class="gallery-btn full-width">
+        <a href="viewer.html" class="gallery-btn">
           <i class="ti ti-photo"></i>
           View Gallery
         </a>
