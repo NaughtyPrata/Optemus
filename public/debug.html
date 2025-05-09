@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery Debug</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+    
+    .debug-section {
+      margin-bottom: 30px;
+    }
+    
+    .image-test {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    
+    .image-test img {
+      max-width: 300px;
+      max-height: 200px;
+      display: block;
+      margin-top: 10px;
+    }
+    
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    #apiResponse {
+      margin-top: 15px;
+    }
+    
+    .success {
+      color: green;
+    }
+    
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Gallery Debug Page</h1>
+  
+  <div class="debug-section">
+    <h2>1. API Connection Test</h2>
+    <button id="testApiBtn">Test API Connection</button>
+    <div id="apiResponse"></div>
+  </div>
+  
+  <div class="debug-section">
+    <h2>2. Image Loading Test</h2>
+    <p>Direct image loading from known paths:</p>
+    
+    <div id="imagesContainer"></div>
+    
+    <button id="loadImagesBtn">Load Test Images</button>
+  </div>
+  
+  <div class="debug-section">
+    <h2>3. Directory Scan</h2>
+    <button id="scanDirBtn">Scan Images Directory</button>
+    <div id="dirScanResult"></div>
+  </div>
+  
+  <div class="debug-section">
+    <h2>4. Direct Image Testing</h2>
+    <p>These pages test direct image loading without complex JavaScript:</p>
+    <div>
+      <a href="/test-images" target="_blank">
+        <button>Server-Side Test</button>
+      </a>
+      <a href="/direct-image-test.html" target="_blank">
+        <button>Client-Side Test</button>
+      </a>
+    </div>
+  </div>
+  
+  <script>
+    // Test API connection
+    document.getElementById('testApiBtn').addEventListener('click', async () => {
+      const responseDiv = document.getElementById('apiResponse');
+      responseDiv.innerHTML = 'Testing API connection...';
+      
+      try {
+        const response = await fetch('/api/images');
+        const data = await response.json();
+        
+        if (data.success) {
+          responseDiv.innerHTML = `
+            <p class="success">API connection successful!</p>
+            <p>Found ${data.images ? data.images.length : 0} images in database.</p>
+            <pre>${JSON.stringify(data, null, 2).substring(0, 1000)}${data && JSON.stringify(data, null, 2).length > 1000 ? '...' : ''}</pre>
+          `;
+        } else {
+          responseDiv.innerHTML = `
+            <p class="error">API returned error:</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        }
+      } catch (error) {
+        responseDiv.innerHTML = `
+          <p class="error">Failed to connect to API:</p>
+          <pre>${error.toString()}</pre>
+        `;
+      }
+    });
+    
+    // Load test images
+    document.getElementById('loadImagesBtn').addEventListener('click', () => {
+      const imagesContainer = document.getElementById('imagesContainer');
+      imagesContainer.innerHTML = '';
+      
+      // Find all image files in the directory
+      const imagePaths = [
+        '/images/image_1746707539328.png',
+        '/images/image_1746708513886.png',
+        '/images/image_1746708650397.png',
+        '/images/image_1746709754968.png',
+        // Try a non-existent image to test error handling
+        '/images/non-existent.png'
+      ];
+      
+      imagePaths.forEach((path, index) => {
+        const imageTest = document.createElement('div');
+        imageTest.className = 'image-test';
+        imageTest.innerHTML = `
+          <p>Test ${index + 1}: <code>${path}</code></p>
+          <img src="${path}" alt="Test image ${index + 1}" onerror="this.parentNode.innerHTML += '<p class=\'error\'>Failed to load image</p>'">
+        `;
+        imagesContainer.appendChild(imageTest);
+      });
+    });
+    
+    // Scan directory
+    document.getElementById('scanDirBtn').addEventListener('click', async () => {
+      const dirScanResult = document.getElementById('dirScanResult');
+      dirScanResult.innerHTML = 'Scanning directory...';
+      
+      try {
+        // This is a simple test - in a real app, you'd want a specific API endpoint for this
+        const response = await fetch('/api/images?rescan=true');
+        const data = await response.json();
+        
+        dirScanResult.innerHTML = `
+          <p>Directory scan complete.</p>
+          <pre>${JSON.stringify(data, null, 2).substring(0, 1000)}${data && JSON.stringify(data, null, 2).length > 1000 ? '...' : ''}</pre>
+        `;
+      } catch (error) {
+        dirScanResult.innerHTML = `
+          <p class="error">Failed to scan directory:</p>
+          <pre>${error.toString()}</pre>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

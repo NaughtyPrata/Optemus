@@ -1,0 +1,1 @@
+, balanced composition, natural look

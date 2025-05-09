@@ -28,7 +28,12 @@
       
       <form id="promptForm">
         <div class="form-group">
-          <label for="prompt">What would you like to generate?</label>
+          <label for="prompt">
+            What would you like to generate?
+            <a href="prompt-styles.html" target="_blank" class="help-link" title="Learn about prompt styles">
+              <i class="ti ti-help-circle"></i>
+            </a>
+          </label>
           <textarea id="prompt" class="textarea font-secondary" placeholder="A breathtaking landscape with mountains and a serene lake under a sunset sky..."></textarea>
         </div>
         
@@ -36,8 +41,8 @@
           <label for="size">Image Size</label>
           <div class="size-selector">
             <button type="button" class="size-btn active" data-size="1024x1024" id="sizeSquare">Square</button>
-            <button type="button" class="size-btn" data-size="1536x1024" id="sizeLandscape">Landscape</button>
-            <button type="button" class="size-btn" data-size="1024x1536" id="sizePortrait">Portrait</button>
+            <button type="button" class="size-btn" data-size="1792x1024" id="sizeLandscape">Landscape</button>
+            <button type="button" class="size-btn" data-size="1024x1792" id="sizePortrait">Portrait</button>
           </div>
         </div>
         
@@ -79,6 +84,16 @@
     
     <!-- Right Panel: Image Display -->
     <main class="image-container">
+      <div class="image-top-controls">
+        <button id="saveImageBtn" class="save-img-btn" title="Saves image to the project folder">
+          <i class="ti ti-device-floppy"></i>
+          Save Image
+        </button>
+        <a href="viewer.html" class="gallery-btn">
+          <i class="ti ti-photo"></i>
+          View Gallery
+        </a>
+      </div>
       <div id="imageContainer" class="flex items-center justify-center w-full h-full">
         <div id="placeholder" class="placeholder">
           <i class="ti ti-photo"></i>

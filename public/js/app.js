@@ -32,11 +32,13 @@ async function handleFormSubmit(e) {
   setLoadingState(true);
   
   try {
-    // Get form data
+    // Get form data - Removing styleType and stylePreset to troubleshoot pattern matching error
     const formData = {
       prompt: prompt,
       size: sizeSelect.value,
-      quality: qualitySelect.value
+      quality: qualitySelect.value,
+      styleType: null,  // Setting to null to disable styles
+      stylePreset: null // Setting to null to disable styles
     };
     
     // Log generation attempt

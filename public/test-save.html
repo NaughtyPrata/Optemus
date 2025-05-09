@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Image Save</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background-color: #4338ca;
+    }
+    #imageResult {
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    #imageResult img {
+      max-width: 100%;
+      margin-top: 10px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Image Save Functionality</h1>
+  <p>This page tests if images are properly saved to the server.</p>
+  
+  <div>
+    <button id="generateBtn">Generate Test Image</button>
+    <button id="viewGalleryBtn">View Gallery</button>
+    <button id="viewDirectoryBtn">View Directory Contents</button>
+  </div>
+  
+  <div id="imageResult">
+    <p>Image will appear here when generated</p>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const generateBtn = document.getElementById('generateBtn');
+      const viewGalleryBtn = document.getElementById('viewGalleryBtn');
+      const viewDirectoryBtn = document.getElementById('viewDirectoryBtn');
+      const imageResult = document.getElementById('imageResult');
+      
+      // Generate test image
+      generateBtn.addEventListener('click', async () => {
+        generateBtn.disabled = true;
+        generateBtn.textContent = 'Generating...';
+        
+        try {
+          // Call API with a simple test prompt
+          const formData = {
+            prompt: 'Test image ' + new Date().toLocaleTimeString(),
+            size: '1024x1024',
+            quality: 'low',
+            styleType: 'dark',
+            stylePreset: 'internal'
+          };
+          
+          const response = await fetch('/api/generate-image', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Show the image and details
+            imageResult.innerHTML = `
+              <h3>Image Generated Successfully</h3>
+              <p><strong>Filename:</strong> ${data.filename}</p>
+              <p><strong>Local Path:</strong> ${data.localImage || 'N/A'}</p>
+              <img src="${data.image}" alt="Generated image" />
+              <h4>Raw Response:</h4>
+              <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+          } else {
+            imageResult.innerHTML = `
+              <h3>Error Generating Image</h3>
+              <p>${data.error || 'Unknown error'}</p>
+              <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+          }
+        } catch (error) {
+          imageResult.innerHTML = `
+            <h3>Error</h3>
+            <p>${error.message}</p>
+          `;
+        } finally {
+          generateBtn.disabled = false;
+          generateBtn.textContent = 'Generate Test Image';
+        }
+      });
+      
+      // View gallery
+      viewGalleryBtn.addEventListener('click', () => {
+        window.location.href = '/viewer.html';
+      });
+      
+      // View directory contents
+      viewDirectoryBtn.addEventListener('click', () => {
+        window.location.href = '/test-images';
+      });
+    });
+  </script>
+</body>
+</html>

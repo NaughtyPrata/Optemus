@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Styling System</title>
+  
+  <!-- Reset CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  
+  <!-- CDN Resources -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/@tabler/icons@latest/iconfont/tabler-icons.min.css" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    .doc-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    
+    ul li {
+      list-style-type: disc;
+      margin-bottom: 0.5rem;
+    }
+    
+    ol li {
+      list-style-type: decimal;
+      margin-bottom: 0.5rem;
+    }
+    
+    code {
+      font-family: 'Fira Mono', monospace;
+      background-color: rgba(0, 0, 0, 0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+    
+    pre {
+      background-color: #2c3e50;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+    }
+    
+    strong {
+      font-weight: 600;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+    
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 0.75rem;
+      text-align: left;
+    }
+    
+    th {
+      background-color: rgba(0, 0, 0, 0.1);
+      font-weight: 600;
+    }
+    
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--primary-color);
+      border-radius: 0.375rem;
+      color: var(--primary-light);
+      background-color: transparent;
+      font-weight: 500;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: all 0.2s;
+    }
+    
+    .back-btn:hover {
+      background-color: rgba(99, 102, 241, 0.1);
+    }
+    
+    .highlighted {
+      background-color: rgba(99, 102, 241, 0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-family: 'Fira Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="doc-container">
+    <a href="index.html" class="back-btn">
+      <i class="ti ti-arrow-left"></i>
+      Back to Generator
+    </a>
+    
+    <h1>Prompt Styling System</h1>
+    
+    <p>This document explains how prompts are constructed in the Image Generator based on your selected style presets and types.</p>
+    
+    <h2>How It Works</h2>
+    
+    <p>The final prompt sent to the AI image generator is a combination of:</p>
+    
+    <pre>User Prompt + Style Preset + Style Type = Final Output</pre>
+    
+    <p>Each style modifier is stored in a separate markdown file under <code>public/prompts/</code> and loaded dynamically when generating images.</p>
+    
+    <h2>Style Types</h2>
+    
+    <p>There are two style types available, each adding specific qualities to your image:</p>
+    
+    <h3>Dark</h3>
+    <ul>
+      <li>Adds: <strong class="highlighted">"dark mood, dark lighting, dramatic shadows"</strong></li>
+      <li>Best for: Creating moody, atmospheric images with contrast and depth</li>
+      <li>Works well with: Product photography, creative concepts, architectural shots</li>
+    </ul>
+    
+    <h3>Light</h3>
+    <ul>
+      <li>Adds: <strong class="highlighted">"bright lighting, soft light, well lit"</strong></li>
+      <li>Best for: Clean, clear imagery with good visibility of details</li>
+      <li>Works well with: Product displays, informational graphics, daytime scenes</li>
+    </ul>
+    
+    <h2>Style Presets</h2>
+    
+    <p>There are three style presets available, each tailored for different use cases:</p>
+    
+    <h3>General</h3>
+    <ul>
+      <li>Adds: <strong class="highlighted">"balanced composition, natural look"</strong></li>
+      <li>Purpose: All-purpose imagery with a balanced, realistic appearance</li>
+      <li>Best for: General use cases where a neutral, realistic style is needed</li>
+      <li>Examples: Documentation, reference images, general illustrations</li>
+    </ul>
+    
+    <h3>Internal</h3>
+    <ul>
+      <li>Adds: <strong class="highlighted">"professional corporate style, clean detailed look"</strong></li>
+      <li>Purpose: Professional-grade imagery for internal business communication</li>
+      <li>Best for: Presentations to colleagues, internal documentation, team resources</li>
+      <li>Examples: Meeting slides, internal documents, reporting graphics</li>
+    </ul>
+    
+    <h3>Proposals</h3>
+    <ul>
+      <li>Adds: <strong class="highlighted">"presentation quality, high detail, professional look"</strong></li>
+      <li>Purpose: High-quality imagery for client-facing or external communication</li>
+      <li>Best for: Client proposals, marketing materials, public-facing content</li>
+      <li>Examples: Sales decks, proposals, marketing imagery, portfolio pieces</li>
+    </ul>
+    
+    <h2>Example Combinations</h2>
+    
+    <p>Here are examples of how your prompts are transformed:</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>User Prompt</th>
+          <th>Style Preset</th>
+          <th>Style Type</th>
+          <th>Final Prompt Sent to AI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"mountain landscape"</td>
+          <td>General</td>
+          <td>Light</td>
+          <td>"mountain landscape, balanced composition, natural look, bright lighting, soft light, well lit"</td>
+        </tr>
+        <tr>
+          <td>"office desk with laptop"</td>
+          <td>Internal</td>
+          <td>Dark</td>
+          <td>"office desk with laptop, professional corporate style, clean detailed look, dark mood, dark lighting, dramatic shadows"</td>
+        </tr>
+        <tr>
+          <td>"product showcase for shoes"</td>
+          <td>Proposals</td>
+          <td>Light</td>
+          <td>"product showcase for shoes, presentation quality, high detail, professional look, bright lighting, soft light, well lit"</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h2>Tips for Best Results</h2>
+    
+    <ol>
+      <li><strong>Be specific in your base prompt</strong>: The more details you provide, the better the AI can understand what you want.</li>
+      <li><strong>Consider your use case</strong>: Choose style presets that match your intended audience and purpose.</li>
+      <li><strong>Match style type to mood</strong>: Use Dark for dramatic, moody images and Light for clean, clear visuals.</li>
+      <li><strong>Experiment</strong>: Try different combinations to find what works best for your specific needs.</li>
+    </ol>
+    
+    <h2>Technical Details</h2>
+    
+    <p>When you select options in the interface, the system automatically appends the style text to your prompt. You don't need to manually add these style terms yourself - the application handles this behind the scenes.</p>
+    
+    <h3>Quality Settings Mapping</h3>
+    <p>The application maps the UI quality options to DALL-E 3's supported parameters:</p>
+    <ul>
+      <li><strong>L (Low), Auto</strong> → mapped to <code>standard</code> quality in the API</li>
+      <li><strong>M (Medium), H (High)</strong> → mapped to <code>hd</code> quality in the API</li>
+    </ul>
+    <p>This mapping allows for a more intuitive interface while ensuring compatibility with the API requirements.</p>
+    
+    <h3>Markdown Files Structure</h3>
+    <p>The style modifiers are stored in separate markdown files:</p>
+    <ul>
+      <li><code>public/prompts/dark.md</code> - Dark style type modifier</li>
+      <li><code>public/prompts/light.md</code> - Light style type modifier</li>
+      <li><code>public/prompts/internal.md</code> - Internal style preset modifier</li>
+      <li><code>public/prompts/proposals.md</code> - Proposals style preset modifier</li>
+      <li><code>public/prompts/general.md</code> - General style preset modifier</li>
+    </ul>
+    <p>These files contain just the text to be appended to the prompt, making it easy to modify styles without changing the application code.</p>
+  </div>
+</body>
+</html> 

@@ -55,6 +55,7 @@ body {
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .app-title .icon {
@@ -262,13 +263,12 @@ label {
   to { opacity: 1; }
 }
 
-/* Error Toast */
-.error-toast {
+/* Toast notifications */
+.error-toast, .success-toast {
   position: fixed;
   bottom: 20px;
   right: 20px;
   background-color: #1e1e2d;
-  color: var(--danger-color);
   padding: 12px 20px;
   border-radius: 6px;
   box-shadow: var(--shadow-lg);
@@ -281,7 +281,15 @@ label {
   z-index: 1000;
 }
 
-.error-toast.show {
+.error-toast {
+  color: var(--danger-color);
+}
+
+.success-toast {
+  color: var(--success-color);
+}
+
+.error-toast.show, .success-toast.show {
   transform: translateY(0);
   opacity: 1;
 }
@@ -289,6 +297,11 @@ label {
 .error-toast i {
   font-size: 20px;
   color: var(--danger-color);
+}
+
+.success-toast i {
+  font-size: 20px;
+  color: var(--success-color);
 }
 
 /* Success indicator */
@@ -313,29 +326,54 @@ label {
   font-size: 30px;
 }
 
-/* Download button */
-.download-btn {
+/* Image top controls */
+.image-top-controls {
   position: absolute;
-  bottom: 15px;
+  top: 15px;
   right: 15px;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(30, 41, 59, 0.9);
-  border-radius: 50%;
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.save-img-btn, .gallery-btn {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--primary-light);
-  box-shadow: var(--shadow-md);
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 14px;
   transition: all 0.2s ease;
-  cursor: pointer;
-  opacity: 0.8;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
 }
 
-.download-btn:hover {
-  transform: scale(1.1);
-  opacity: 1;
+.save-img-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.save-img-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.gallery-btn {
+  background-color: rgba(30, 41, 59, 0.9);
+  color: var(--primary-light);
+}
+
+.gallery-btn:hover {
   background-color: rgba(30, 41, 59, 1);
+  transform: translateY(-2px);
+}
+
+.save-img-btn i, .gallery-btn i {
+  margin-right: 6px;
+  font-size: 18px;
 }
 
 .ti-spin {
@@ -518,4 +556,24 @@ label {
   right: 0;
   padding: 1rem 1.5rem;
   z-index: 11;
+}
+
+/* This style has been replaced by the image-top-controls style */
+
+/* Help link */
+.help-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  font-size: 18px;
+  margin-left: 6px;
+  transition: color 0.2s;
+  vertical-align: middle;
+}
+
+.help-link:hover {
+  color: var(--primary-light);
 }

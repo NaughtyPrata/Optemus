@@ -1,73 +1,67 @@
-# Image Generator
+# AI Image Generator
 
-A modern web application for generating AI images using OpenAI's API.
+A web application for generating and managing AI-generated images using the OpenAI DALL-E 3 API.
 
 ## Features
 
-- Clean, intuitive UI with a simple layout
-- Generates high-quality AI images based on text prompts
-- Allows customization of image size and quality
-- Automatically saves generated images
-- Download functionality for generated images
-- Responsive design
+- Generate high-quality images with customizable prompts
+- Choose from different size options: Square, Landscape, Portrait
+- Select quality levels: Low, Medium, High, or Auto
+- Apply style modifiers: Dark/Light and General/Internal/Proposals
+- View and manage generated images in a responsive gallery
+- Download generated images for use in other applications
 
-## Tech Stack
+## Installation and Setup
 
-- **Frontend**:
-  - HTML5
-  - CSS3 (with reset.css)
-  - JavaScript (vanilla)
-  - Tailwind CSS (via CDN)
-  - Anime.js for animations
-  - Tabler Icons
-
-- **Backend**:
-  - Node.js
-  - Express.js
-  - OpenAI API
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v14+ recommended)
-- OpenAI API key
-
-### Installation
-
-1. Clone this repository
-2. Create a `.env` file in the root directory with your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_api_key_here
-   ```
-3. Install dependencies:
+1. Clone the repository
+2. Install dependencies:
    ```
    npm install
    ```
+3. Create a `.env` file with your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_api_key_here
+   ```
 4. Start the server:
    ```
-   node server.js
+   npm start
    ```
-5. Open your browser and navigate to:
-   ```
-   http://localhost:4000
-   ```
+5. Open your browser and navigate to: `http://localhost:4001`
 
-## Usage
+## Using the Image Generator
 
 1. Enter a descriptive prompt in the text area
-2. Select desired image size and quality
-3. Click "Generate" button
-4. Wait for the image to be generated
-5. Download the image using the download button
+2. Select desired image size (Square, Landscape, Portrait)
+3. Choose quality level (higher quality uses more API tokens)
+4. Select style type (Dark or Light)
+5. Choose a style preset (General, Internal, or Proposals)
+6. Click "Generate" to create your image
+7. Once generated, you can download the image using the download button
+
+## Gallery View
+
+- Click "View Gallery" to see all your generated images
+- Use the search box to filter images by prompt text
+- Toggle between grid and list views using the view buttons
+- Click on any image to see its details, download it, or delete it
+
+## Project Structure
+
+- `/public`: Frontend assets and HTML
+  - `/css`: Stylesheets
+  - `/js`: Frontend JavaScript
+  - `/images`: Saved generated images
+  - `/prompts`: Style modifier text files
+- `/server.js`: Express server and API endpoints
+- `/test-api-call.js`: Test script for API connectivity
+- `/test-api-params.js`: Test script for prompt formatting
+
+## Troubleshooting
+
+- **Images not showing in gallery**: Make sure the server has write permissions to the `/public/images` directory
+- **API errors**: Check your OpenAI API key in the `.env` file and ensure you have available tokens
+- **Style modifiers not working**: Verify that the prompt files in `/public/prompts` directory are correctly formatted
 
 ## License
 
 MIT
-
-## Acknowledgements
-
-- OpenAI for the image generation API
-- Tailwind CSS for the utility-first CSS framework
-- Anime.js for the animation library
-- Tabler Icons for the icon set

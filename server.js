@@ -1,133 +1,408 @@
 import express from 'express';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import dotenv from 'dotenv';
-import OpenAI from 'openai';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import https from 'https';
+import { OpenAI } from 'openai';
+import dotenv from 'dotenv';
+import { randomUUID } from 'crypto';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
 
-const app = express();
-const PORT = 4001; // Changed port to 4001 since 4000 is in use
-
-// Get the directory name
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Middleware
-app.use(express.json());
-app.use(express.static('public'));
-
 // Initialize OpenAI
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-// API endpoint to generate an image
+const app = express();
+
+// Middleware to parse JSON and form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Ensure the images directory exists
+const imagesDir = path.join(__dirname, 'public/images');
+if (!fs.existsSync(imagesDir)) {
+  fs.mkdirSync(imagesDir, { recursive: true });
+  console.log(`Created images directory at ${imagesDir}`);
+}
+
+// Endpoint to save image (original endpoint)
+app.post('/save-image', (req, res) => {
+  const { imageData, imageName } = req.body;
+  const imagePath = path.join(__dirname, 'public/images', imageName);
+
+  // Decode base64 image data and save to file
+  const base64Data = imageData.replace(/^data:image\/png;base64,/, "");
+  fs.writeFile(imagePath, base64Data, 'base64', (err) => {
+    if (err) {
+      return res.status(500).send('Error saving image');
+    }
+    res.send('Image saved successfully');
+  });
+});
+
+// Generate image using OpenAI API with GPT-4o (gpt-image-1)
 app.post('/api/generate-image', async (req, res) => {
   try {
     const { prompt, size, quality, styleType, stylePreset } = req.body;
-    
-    console.log('Generating image with prompt:', prompt);
-    
-    // Convert quality values to match OpenAI's API requirements
-    let apiQuality = "high";
-    if (quality === "medium") {
-      apiQuality = "medium";
-    } else if (quality === "low") {
-      apiQuality = "low";
-    } else if (quality === "auto") {
-      apiQuality = "auto";
+
+    if (!prompt) {
+      return res.status(400).json({ success: false, error: 'Prompt is required' });
     }
-    
-    // Construct an enhanced prompt with style information
+
+    console.log(`Generating image with prompt: ${prompt}`);
+    console.log(`Settings: size=${size}, quality=${quality}, styleType=${styleType}, stylePreset=${stylePreset}`);
+
+    // Enhanced prompt based on style settings
     let enhancedPrompt = prompt;
     
-    // Add style type to prompt if provided
-    if (styleType === "dark") {
-      enhancedPrompt += ", dark mood, dark lighting, dramatic shadows";
-    } else if (styleType === "light") {
-      enhancedPrompt += ", bright lighting, soft light, well lit";
+    // Add style modifiers based on settings
+    if (styleType === 'dark') {
+      enhancedPrompt += " Use darker colors, shadows, and dramatic lighting.";
+    } else if (styleType === 'light') {
+      enhancedPrompt += " Use lighter colors, soft lighting, and a cheerful atmosphere.";
     }
     
-    // Add style preset to prompt if provided
-    if (stylePreset === "internal") {
-      enhancedPrompt += ", professional corporate style, clean detailed look";
-    } else if (stylePreset === "proposals") {
-      enhancedPrompt += ", presentation quality, high detail, professional look";
-    } else if (stylePreset === "general") {
-      enhancedPrompt += ", balanced composition, natural look";
+    if (stylePreset === 'internal') {
+      enhancedPrompt += " Use a corporate style, professional and clean.";
+    } else if (stylePreset === 'proposals') {
+      enhancedPrompt += " Make it bold, attention-grabbing, and visually striking.";
     }
-    
-    const result = await openai.images.generate({
+
+    // Request image from OpenAI using GPT-4o's image generation (gpt-image-1)
+    const response = await openai.images.generate({
       model: "gpt-image-1",
       prompt: enhancedPrompt,
       size: size || "1024x1024",
-      quality: apiQuality
+      // Using the correct quality parameters for gpt-image-1
+      quality: quality || "medium", // gpt-image-1 supports 'low', 'medium', 'high', and 'auto'
+      n: 1
     });
-    
-    console.log('Generation successful');
-    
-    // Check if response contains b64_json
-    if (result.data && result.data[0] && result.data[0].b64_json) {
-      // Ensure the images directory exists
-      if (!fs.existsSync(join(__dirname, 'public', 'images'))) {
-        fs.mkdirSync(join(__dirname, 'public', 'images'), { recursive: true });
-      }
-      
-      // Save the image to disk
-      const timestamp = Date.now();
-      const filename = `image_${timestamp}.png`;
-      const filePath = join(__dirname, 'public', 'images', filename);
-      
-      // Save base64 image to file
-      const imageBuffer = Buffer.from(result.data[0].b64_json, 'base64');
-      fs.writeFileSync(filePath, imageBuffer);
-      
-      // Return both the base64 data and local file path
-      res.json({
-        success: true,
-        image: `data:image/png;base64,${result.data[0].b64_json}`,
-        localImage: `/images/${filename}`,
-        filename
-      });
+
+    if (!response.data || response.data.length === 0) {
+      throw new Error('No image data received from OpenAI');
     }
-    // Check if response contains URL
-    else if (result.data && result.data[0] && result.data[0].url) {
-      // Ensure the images directory exists
-      if (!fs.existsSync(join(__dirname, 'public', 'images'))) {
-        fs.mkdirSync(join(__dirname, 'public', 'images'), { recursive: true });
+
+    // Get image data from response
+    // The response format for gpt-image-1 might be different
+    console.log('API Response:', JSON.stringify(response, null, 2));
+    
+    let imageUrl = '';
+    // Check different possible response formats and extract the image URL
+    if (response.data && response.data.length > 0) {
+      if (response.data[0].url) {
+        imageUrl = response.data[0].url;
+      } else if (response.data[0].b64_json) {
+        imageUrl = `data:image/png;base64,${response.data[0].b64_json}`;
       }
-      
-      // Return the URL directly
-      res.json({
-        success: true,
-        image: result.data[0].url,
-        filename: 'direct_url_image'
-      });
-    } 
-    else {
-      throw new Error('No image data in the OpenAI response');
     }
+    
+    console.log(`Image generated successfully${imageUrl ? ': ' + imageUrl.substring(0, 50) + '...' : ''}`);
+
+    // Generate a random filename
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const filename = `generated_${timestamp}_${randomUUID().substring(0, 8)}.png`;
+    const filePath = path.join(imagesDir, filename);
+    
+    // If we have a URL, download the image so it's available for direct download
+    if (imageUrl && imageUrl.startsWith('http')) {
+      try {
+        console.log(`Downloading image from URL to make it available locally: ${imageUrl.substring(0, 50)}...`);
+        await downloadImage(imageUrl, filePath);
+        console.log(`Image saved locally at: ${filePath}`);
+      } catch (downloadError) {
+        console.warn('Warning: Could not download image from URL:', downloadError.message);
+        // Continue anyway, as we still have the URL to display the image
+      }
+    }
+    // If we have base64 data, save it to disk
+    else if (imageUrl && imageUrl.startsWith('data:image')) {
+      try {
+        console.log('Saving base64 image data to file...');
+        const data = imageUrl.replace(/^data:image\/\w+;base64,/, '');
+        fs.writeFileSync(filePath, Buffer.from(data, 'base64'));
+        console.log(`Image saved locally at: ${filePath}`);
+      } catch (saveError) {
+        console.warn('Warning: Could not save base64 image data:', saveError.message);
+      }
+    }
+
+    // Return success with the image URL or data
+    res.json({
+      success: true,
+      image: imageUrl || '',
+      filename: filename,
+      // Include full response data for debugging
+      rawResponse: response
+    });
   } catch (error) {
     console.error('Error generating image:', error);
-    
-    // Check if it's a safety system rejection error
-    let errorMessage = error.message;
-    if (errorMessage && errorMessage.includes('Your request was rejected as a result of our safety system')) {
-      errorMessage = "Lol Nice try!";
-    }
-    
-    res.status(500).json({
-      success: false,
-      error: errorMessage
+    res.status(500).json({ 
+      success: false, 
+      error: error.message || 'Failed to generate image' 
     });
   }
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log('API Key is configured and ready to use');
+// Save image from URL or base64 data to file system
+app.post('/api/save-image', async (req, res) => {
+  try {
+    const { prompt, base64Data, imageUrl, settings } = req.body;
+    
+    if (!base64Data && !imageUrl) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Image data or URL is required' 
+      });
+    }
+
+    // Generate filename with timestamp and a portion of the prompt
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const promptSlug = prompt ? prompt.substring(0, 20).replace(/[^a-z0-9]/gi, '_').toLowerCase() : 'untitled';
+    const filename = `${promptSlug}_${timestamp}.png`;
+    const imagePath = path.join(imagesDir, filename);
+
+    console.log(`Saving image to: ${imagePath}`);
+
+    if (base64Data) {
+      // Save from base64 data
+      const data = base64Data.replace(/^data:image\/\w+;base64,/, '');
+      fs.writeFileSync(imagePath, Buffer.from(data, 'base64'));
+    } else if (imageUrl) {
+      // Save from URL
+      await downloadImage(imageUrl, imagePath);
+    }
+
+    // Create a metadata file with image details
+    const metadataPath = path.join(imagesDir, `${path.basename(filename, '.png')}.json`);
+    const metadata = {
+      prompt,
+      timestamp: new Date().toISOString(),
+      settings,
+      filename
+    };
+    
+    fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+
+    res.json({
+      success: true,
+      image: {
+        filename,
+        path: `/images/${filename}`,
+        fullPath: imagePath
+      }
+    });
+  } catch (error) {
+    console.error('Error saving image:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message || 'Failed to save image' 
+    });
+  }
 });
+
+// Debug endpoint to help diagnose image data issues
+app.post('/api/debug-image-data', (req, res) => {
+  try {
+    const data = req.body;
+    const debugInfo = {
+      receivedKeys: Object.keys(data),
+      hasBase64: !!data.base64Data,
+      hasUrl: !!data.imageUrl,
+      base64Length: data.base64Data ? data.base64Data.length : 0,
+      base64Preview: data.base64Data ? data.base64Data.substring(0, 50) + '...' : null,
+      urlPreview: data.imageUrl ? data.imageUrl.substring(0, 50) + '...' : null,
+      timestamp: new Date().toISOString()
+    };
+    res.json({ success: true, debug: debugInfo });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Endpoint to download generated images
+app.get('/api/download/:filename', (req, res) => {
+  try {
+    const { filename } = req.params;
+    const filePath = path.join(imagesDir, filename);
+    
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      console.error(`File not found: ${filePath}`);
+      return res.status(404).send('File not found');
+    }
+    
+    console.log(`Downloading file: ${filePath}`);
+    
+    // Set content disposition header for download
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    
+    // Set appropriate content type based on file extension
+    const ext = path.extname(filename).toLowerCase();
+    if (ext === '.png') {
+      res.setHeader('Content-Type', 'image/png');
+    } else if (ext === '.jpg' || ext === '.jpeg') {
+      res.setHeader('Content-Type', 'image/jpeg');
+    } else if (ext === '.svg') {
+      res.setHeader('Content-Type', 'image/svg+xml');
+    } else {
+      res.setHeader('Content-Type', 'application/octet-stream');
+    }
+    
+    // Stream the file to the response
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
+  } catch (error) {
+    console.error('Error downloading file:', error);
+    res.status(500).send('Error downloading file');
+  }
+});
+
+// Endpoint to list all images in the gallery
+app.get('/api/images', (req, res) => {
+  try {
+    const rescan = req.query.rescan === 'true';
+    console.log(`Getting images with rescan=${rescan}`);
+    
+    // Get all files in the images directory
+    const files = fs.readdirSync(imagesDir);
+    
+    // Filter for image files
+    const imageFiles = files.filter(file => {
+      const ext = path.extname(file).toLowerCase();
+      return ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.svg';
+    });
+    
+    // Create array of image metadata
+    const images = imageFiles.map(filename => {
+      // Check if there's a corresponding JSON metadata file
+      const baseName = path.basename(filename, path.extname(filename));
+      const metadataPath = path.join(imagesDir, `${baseName}.json`);
+      
+      // Default image data
+      let imageData = {
+        id: baseName,
+        filename,
+        localPath: `/images/${filename}`,
+        url: `/images/${filename}`,
+        createdAt: new Date().toISOString(),
+        prompt: 'No prompt available',
+        settings: {}
+      };
+      
+      // If metadata file exists, read it
+      if (fs.existsSync(metadataPath)) {
+        try {
+          const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
+          imageData = {
+            ...imageData,
+            prompt: metadata.prompt || imageData.prompt,
+            createdAt: metadata.timestamp || imageData.createdAt,
+            settings: metadata.settings || {}
+          };
+        } catch (err) {
+          console.warn(`Error reading metadata for ${filename}:`, err.message);
+        }
+      }
+      
+      return imageData;
+    });
+    
+    console.log(`Found ${images.length} images`);
+    
+    res.json({
+      success: true,
+      images: images
+    });
+  } catch (error) {
+    console.error('Error getting images:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Endpoint to delete an image
+app.delete('/api/images/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Look for image and metadata files
+    const imageExtensions = ['.png', '.jpg', '.jpeg', '.svg'];
+    let imageDeleted = false;
+    
+    // Try each possible extension
+    for (const ext of imageExtensions) {
+      const filePath = path.join(imagesDir, `${id}${ext}`);
+      if (fs.existsSync(filePath)) {
+        // Delete the image file
+        fs.unlinkSync(filePath);
+        imageDeleted = true;
+        console.log(`Deleted image: ${filePath}`);
+      }
+    }
+    
+    // Delete metadata file if it exists
+    const metadataPath = path.join(imagesDir, `${id}.json`);
+    if (fs.existsSync(metadataPath)) {
+      fs.unlinkSync(metadataPath);
+      console.log(`Deleted metadata: ${metadataPath}`);
+    }
+    
+    if (!imageDeleted) {
+      return res.status(404).json({
+        success: false,
+        error: 'Image not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      message: 'Image deleted successfully'
+    });
+  } catch (error) {
+    console.error('Error deleting image:', error);
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.listen(4001, () => {
+  console.log('Server running on http://localhost:4001');
+});
+
+// Helper function to download image from URL
+async function downloadImage(url, filepath) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (response) => {
+      if (response.statusCode !== 200) {
+        reject(new Error(`Failed to download image: ${response.statusCode}`));
+        return;
+      }
+
+      const file = fs.createWriteStream(filepath);
+      response.pipe(file);
+
+      file.on('finish', () => {
+        file.close();
+        resolve(filepath);
+      });
+
+      file.on('error', (err) => {
+        fs.unlink(filepath, () => {});
+        reject(err);
+      });
+    }).on('error', reject);
+  });
+}
