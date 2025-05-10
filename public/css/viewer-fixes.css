@@ -1,5 +1,13 @@
 /* Additional viewer-specific styles for neumorphism theme */
 
+/* Header left styles for back button below title */
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
 /* Adjusted card styles for gallery view */
 .image-gallery.grid-view .image-card {
   height: 0;
@@ -43,8 +51,8 @@
     gap: 15px;
   }
   
-  .header-right {
-    align-self: flex-end;
+  .header-left {
+    width: 100%;
   }
   
   .toolbar {

@@ -1,0 +1,50 @@
+/* Simple fixes for the viewer page */
+
+/* Fix for list view display */
+.image-gallery.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.list-view .image-card {
+  display: flex;
+  height: 120px;
+  padding: 0;
+}
+
+.list-view .card-image {
+  width: 150px;
+  min-width: 150px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.list-view .card-content {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.list-view .card-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Fix for image sorting - debug timestamp helper */
+.image-card::after {
+  content: attr(data-timestamp);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 8px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  padding: 2px;
+  opacity: 0.7;
+  pointer-events: none;
+  display: none; /* Hidden by default, enable for debugging */
+}
