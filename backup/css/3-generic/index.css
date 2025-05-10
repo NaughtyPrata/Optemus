@@ -1,0 +1,11 @@
+/**
+ * 3-generic
+ */
+
+/* Import all 3-generic files here */
+
+/* Normalize and reset */
+@import './reset.css';
+
+/* Migrated styles with specificity fixes */
+@import './migrated-generic.css';

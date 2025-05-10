@@ -1,0 +1,9 @@
+/**
+ * Migrated styles for components
+ * These styles were extracted from files with !important declarations
+ */
+
+.list-view .card-placeholder i {
+  font-size: 32px;
+}
+

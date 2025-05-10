@@ -1,0 +1,84 @@
+/* Image element styles */
+
+/* Image styles */
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.four-image-layout .image-wrapper img,
+.two-image-layout .image-wrapper img {
+  object-fit: cover;
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.02);
+}
+
+/* Card image */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Image preview */
+.image-preview {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+/* Image details */
+.image-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Download icon hover effect */
+.download-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 5;
+}
+
+.image-wrapper:hover .download-icon {
+  opacity: 1;
+}
+
+.download-icon i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  background-color: var(--element-bg);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}

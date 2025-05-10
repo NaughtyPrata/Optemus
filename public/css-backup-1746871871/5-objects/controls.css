@@ -1,0 +1,57 @@
+/* Top Controls Layout
+   Consolidated from top-controls-fix.css
+   No !important declarations needed
+*/
+
+/* High specificity selectors to ensure proper layout */
+body .image-top-controls,
+html body .image-top-controls,
+.app-container .image-top-controls {
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+/* Add spacing between buttons */
+body .image-top-controls .sound-toggle-btn,
+html body .image-top-controls .sound-toggle-btn,
+.app-container .image-top-controls .sound-toggle-btn {
+  margin-right: 10px;
+}
+
+/* Button styling for controls */
+.image-top-controls .sound-toggle-btn,
+.image-top-controls .gallery-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--element-bg);
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-muted);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+.image-top-controls .sound-toggle-btn:hover,
+.image-top-controls .gallery-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+}
+
+.image-top-controls .sound-toggle-btn:active,
+.image-top-controls .gallery-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+}
+
+.image-top-controls .sound-toggle-btn.muted i:before {
+  content: "\ec2d"; /* tabler icon for volume-off */
+}

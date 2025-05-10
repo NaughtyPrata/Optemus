@@ -1,0 +1,270 @@
+/* 
+ * Bubble Background Styles for Loading Animation
+ */
+
+/* Show class for bubbles */
+.bubble.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Background bubble styling */
+.bubble {
+  position: fixed; /* Fixed positioning for full screen coverage */
+  border-radius: 50%;
+  box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.25);
+  animation: animate_4010 8s ease-in-out infinite;
+  z-index: 1100; /* Higher z-index to appear above loading indicator (1000) */
+  opacity: 0; /* Initially hidden, will be shown via JS */
+  transform: scale(0.2); /* Start small */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smoother transition */
+  pointer-events: none; /* Allow clicks to pass through bubbles */
+}
+
+@keyframes animate_4010 {
+  0%,100% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+/* First bubble - extra large */
+#bubble1 {
+  width: 250px;
+  height: 250px;
+  top: 15%;
+  left: 15%;
+}
+
+/* Second bubble - medium */
+#bubble2 {
+  width: 180px;
+  height: 180px;
+  top: 40%;
+  right: 25%;
+  animation-delay: -4s;
+}
+
+/* Third bubble - small */
+#bubble3 {
+  width: 120px;
+  height: 120px;
+  bottom: 20%;
+  left: 30%;
+  animation-delay: -6s;
+}
+
+/* Fourth bubble - tiny */
+#bubble4 {
+  width: 80px;
+  height: 80px;
+  top: 10%;
+  right: 20%;
+  animation-delay: -3s;
+}
+
+/* Fifth bubble - large */
+#bubble5 {
+  width: 220px;
+  height: 220px;
+  bottom: 30%;
+  right: 10%;
+  animation-delay: -5s;
+}
+
+/* Sixth bubble - extra small */
+#bubble6 {
+  width: 60px;
+  height: 60px;
+  top: 35%;
+  left: 45%;
+  animation-delay: -2s;
+}
+
+/* Seventh bubble - medium-small */
+#bubble7 {
+  width: 100px;
+  height: 100px;
+  bottom: 15%;
+  right: 35%;
+  animation-delay: -7s;
+}
+
+/* Eighth bubble - medium-large */
+#bubble8 {
+  width: 200px;
+  height: 200px;
+  top: 60%;
+  left: 10%;
+  animation-delay: -1s;
+}
+
+/* Ninth bubble - small-medium */
+#bubble9 {
+  width: 140px;
+  height: 140px;
+  top: 25%;
+  right: 40%;
+  animation-delay: -3.5s;
+}
+
+/* Tenth bubble - tiny */
+#bubble10 {
+  width: 70px;
+  height: 70px;
+  bottom: 35%;
+  right: 15%;
+  animation-delay: -2.5s;
+}
+
+/* Eleventh bubble - extra small */
+#bubble11 {
+  width: 50px;
+  height: 50px;
+  top: 45%;
+  left: 20%;
+  animation-delay: -4.5s;
+}
+
+/* Twelfth bubble - medium-large */
+#bubble12 {
+  width: 190px;
+  height: 190px;
+  bottom: 10%;
+  right: 25%;
+  animation-delay: -6.5s;
+}
+
+/* Thirteenth bubble - small */
+#bubble13 {
+  width: 110px;
+  height: 110px;
+  top: 70%;
+  left: 35%;
+  animation-delay: -3.2s;
+}
+
+/* Fourteenth bubble - very small */
+#bubble14 {
+  width: 45px;
+  height: 45px;
+  top: 22%;
+  right: 33%;
+  animation-delay: -5.7s;
+}
+
+/* Fifteenth bubble - large */
+#bubble15 {
+  width: 230px;
+  height: 230px;
+  bottom: 25%;
+  left: 5%;
+  animation-delay: -2.3s;
+}
+
+/* General bubble styling */
+.bubble::before {
+  content: '';
+  position: absolute;
+  width: 15%;
+  height: 15%;
+  top: 25%;
+  left: 22.5%;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 10;
+  filter: blur(2px);
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  top: 40%;
+  left: 40%;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 10;
+  filter: blur(2px);
+}
+
+.bubble span {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bubble span:nth-child(1) {
+  inset: 10px;
+  border-left: 15px solid #0fb4ff;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(2) {
+  inset: 10px;
+  border-right: 15px solid #ff4484;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(3) {
+  inset: 10px;
+  border-top: 15px solid #ffeb3b;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(4) {
+  inset: 30px;
+  border-left: 15px solid #ff4484;
+  filter: blur(12px);
+}
+
+.bubble span:nth-child(5) {
+  inset: 10px;
+  border-bottom: 10px solid #fff;
+  filter: blur(8px);
+  transform: rotate(330deg);
+}
+
+/* Additional animation for larger bubbles */
+#bubble1, #bubble5, #bubble8, #bubble12, #bubble15 {
+  animation: animate_4010_large 10s ease-in-out infinite;
+}
+
+/* Additional animation for medium bubbles */
+#bubble2, #bubble7, #bubble9, #bubble13 {
+  animation: animate_4010_medium 9s ease-in-out infinite;
+}
+
+/* Additional animation for small bubbles */
+#bubble3, #bubble4, #bubble6, #bubble10, #bubble11, #bubble14 {
+  animation: animate_4010_small 7s ease-in-out infinite;
+}
+
+@keyframes animate_4010_large {
+  0%,100% {
+    transform: translateY(-30px);
+  }
+  50% {
+    transform: translateY(30px);
+  }
+}
+
+@keyframes animate_4010_medium {
+  0%,100% {
+    transform: translateY(-25px) translateX(10px);
+  }
+  50% {
+    transform: translateY(25px) translateX(-10px);
+  }
+}
+
+@keyframes animate_4010_small {
+  0%,100% {
+    transform: translateY(-15px) translateX(-8px);
+  }
+  50% {
+    transform: translateY(15px) translateX(8px);
+  }
+}

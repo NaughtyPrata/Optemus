@@ -1,0 +1,27 @@
+/**
+ * ITCSS Architecture
+ * -----------------
+ * This file imports all CSS following the Inverted Triangle CSS methodology
+ * https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+ */
+
+/* Settings - Variables and configuration */
+@import './1-settings/index.css';
+
+/* Tools - Mixins and functions */
+@import './2-tools/index.css';
+
+/* Generic - Reset and normalize */
+@import './3-generic/index.css';
+
+/* Elements - Bare HTML elements */
+@import './4-elements/index.css';
+
+/* Objects - Layout and structure classes */
+@import './5-objects/index.css';
+
+/* Components - UI components */
+@import './6-components/index.css';
+
+/* Utilities - Helper classes */
+@import './7-utilities/index.css';

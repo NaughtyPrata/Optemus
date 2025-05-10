@@ -1,0 +1,125 @@
+/* Documentation Components */
+
+.doc-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+.doc-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.doc-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.doc-container h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+}
+
+.doc-container p {
+  margin-bottom: 1rem;
+}
+
+.doc-container ul, 
+.doc-container ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.doc-container ul li {
+  list-style-type: disc;
+  margin-bottom: 0.5rem;
+}
+
+.doc-container ol li {
+  list-style-type: decimal;
+  margin-bottom: 0.5rem;
+}
+
+.doc-container code {
+  font-family: 'Fira Mono', monospace;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+.doc-container pre {
+  background-color: #2c3e50;
+  color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  font-family: 'Fira Mono', monospace;
+}
+
+.doc-container strong {
+  font-weight: 600;
+}
+
+.doc-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.doc-container th, 
+.doc-container td {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.doc-container th {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+}
+
+.doc-container tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.375rem;
+  color: var(--primary-color);
+  background-color: transparent;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background-color: rgba(126, 87, 194, 0.1);
+}
+
+.highlighted {
+  background-color: rgba(126, 87, 194, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'Fira Mono', monospace;
+  color: var(--primary-color);
+}

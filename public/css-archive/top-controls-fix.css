@@ -1,0 +1,22 @@
+/* Top Controls Positioning Fix 
+   This CSS resolves an alignment issue where the buttons in image-top-controls
+   were aligning to the left instead of the right.
+   
+   The fix targets a width constraint in neumorphism.css that was causing the issue.
+   We use CSS specificity to override the styles without !important tags.
+*/
+
+/* Override the width constraint in neumorphism.css */
+body .image-top-controls,
+.app-container .image-top-controls {
+  width: auto;
+  /* Ensure other critical properties are reinforced */
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Add spacing between buttons */
+body .image-top-controls .sound-toggle-btn,
+.app-container .image-top-controls .sound-toggle-btn {
+  margin-right: 10px;
+}

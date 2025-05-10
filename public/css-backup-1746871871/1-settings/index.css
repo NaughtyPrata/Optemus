@@ -1,0 +1,13 @@
+/**
+ * 1-settings
+ * Contains variables, themes, and configuration options
+ */
+
+/* Import all 1-settings files here */
+
+/* Theme variables - Only one theme should be active */
+/* @import './theme-dark.css'; */  /* Dark theme (commented out) */
+@import './theme-neumorphism.css';  /* Active light theme */
+
+/* Other variables if any */
+/* @import './variables.css'; */  /* Old variables not needed with dark theme */

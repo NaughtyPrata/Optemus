@@ -1,0 +1,89 @@
+/* View button styles with proper specificity management 
+   No !important declarations needed with proper selector specificity
+*/
+
+/* Base styles for view and refresh buttons */
+.viewer-content .toolbar .view-options .view-btn,
+.viewer-content .toolbar .view-options .refresh-btn {
+  background-color: var(--element-bg);
+  border: none;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover state */
+.viewer-content .toolbar .view-options .view-btn:hover,
+.viewer-content .toolbar .view-options .refresh-btn:hover {
+  background-color: var(--element-bg);
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+  transform: translateY(-2px);
+  color: var(--text-muted);
+  border: none;
+}
+
+/* Active state (when clicking) */
+.viewer-content .toolbar .view-options .view-btn:active,
+.viewer-content .toolbar .view-options .refresh-btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  transform: translateY(0);
+  background-color: var(--element-bg);
+  color: var(--text-muted);
+  border: none;
+}
+
+/* Selected state (active class) */
+.viewer-content .toolbar .view-options .view-btn.active {
+  background-color: var(--element-bg);
+  border: none;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  font-weight: 700;
+  transform: translateY(0);
+}
+
+/* Tooltip styles */
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--bg-panel);
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+}
+
+.tooltip:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--bg-panel) transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}

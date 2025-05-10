@@ -1,0 +1,122 @@
+/* Layout Objects */
+
+/* Main app container */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--bg-color);
+  overflow: hidden; /* Prevent scrolling of the app container */
+}
+
+/* Panel layout */
+.control-panel {
+  width: 350px;
+  height: 100vh;
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 100px; /* Space for the sticky generate button */
+}
+
+.control-panel form {
+  padding: 1.5rem 1.5rem 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.image-container {
+  flex: 1;
+  height: calc(100vh - 2rem); /* Exact height to prevent scrolling */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .control-panel {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .image-container {
+    height: 50vh;
+  }
+}
+
+/* Fixed positioned elements */
+.fixed {
+  position: fixed;
+  z-index: 100;
+}
+
+/* Viewer layouts */
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.viewer-content {
+  padding: 1.5rem;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* App title container */
+.app-title {
+  padding: 1.5rem 1.5rem 0.5rem;
+}
+
+/* Flex utilities */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}

@@ -1,0 +1,74 @@
+/* Fix for List View in the Viewer 
+   This CSS ensures the list view displays correctly
+*/
+
+/* List View Container */
+.image-gallery.list-view {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+}
+
+/* List View Cards */
+.list-view .image-card {
+  display: flex !important;
+  height: 120px !important;
+  width: 100% !important;
+  padding: 0 !important;
+  position: relative !important;
+}
+
+/* Image in List View */
+.list-view .image-card .card-image {
+  width: 120px !important;
+  height: 120px !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  object-fit: cover !important;
+}
+
+/* Content in List View */
+.list-view .image-card .card-content {
+  flex: 1 !important;
+  padding: 15px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  background-color: inherit !important;
+}
+
+/* Title in List View */
+.list-view .card-title {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  margin-bottom: 5px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Date in List View */
+.list-view .card-date {
+  font-size: 12px !important;
+  color: var(--text-muted, #94a3b8) !important;
+}
+
+/* Fix for empty state positioning in List View */
+.list-view .empty-state {
+  width: 100% !important;
+}
+
+/* Fix for card placeholder in list view */
+.list-view .card-placeholder {
+  width: 120px !important;
+  height: 120px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #2c3e50 !important;
+  color: #94a3b8 !important;
+}
+
+.list-view .card-placeholder i {
+  font-size: 32px !important;
+}

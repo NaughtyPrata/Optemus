@@ -5,132 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prompt Styling System</title>
   
-  <!-- Reset CSS -->
-  <link rel="stylesheet" href="css/reset.css">
+  <!-- Single CSS import with ITCSS architecture -->
+  <link rel="stylesheet" href="css/main.css">
   
   <!-- CDN Resources -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/@tabler/icons@latest/iconfont/tabler-icons.min.css" rel="stylesheet">
-  
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/styles.css">
-  
-  <style>
-    .doc-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-      line-height: 1.6;
-    }
-    
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-    
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-    
-    h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
-    }
-    
-    p {
-      margin-bottom: 1rem;
-    }
-    
-    ul, ol {
-      margin-bottom: 1rem;
-      padding-left: 1.5rem;
-    }
-    
-    ul li {
-      list-style-type: disc;
-      margin-bottom: 0.5rem;
-    }
-    
-    ol li {
-      list-style-type: decimal;
-      margin-bottom: 0.5rem;
-    }
-    
-    code {
-      font-family: 'Fira Mono', monospace;
-      background-color: rgba(0, 0, 0, 0.1);
-      padding: 0.2rem 0.4rem;
-      border-radius: 0.25rem;
-    }
-    
-    pre {
-      background-color: #2c3e50;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      overflow-x: auto;
-      margin-bottom: 1rem;
-    }
-    
-    strong {
-      font-weight: 600;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 1.5rem;
-    }
-    
-    th, td {
-      border: 1px solid var(--border-color);
-      padding: 0.75rem;
-      text-align: left;
-    }
-    
-    th {
-      background-color: rgba(0, 0, 0, 0.1);
-      font-weight: 600;
-    }
-    
-    tr:nth-child(even) {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-    
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--primary-color);
-      border-radius: 0.375rem;
-      color: var(--primary-light);
-      background-color: transparent;
-      font-weight: 500;
-      text-decoration: none;
-      margin-bottom: 2rem;
-      transition: all 0.2s;
-    }
-    
-    .back-btn:hover {
-      background-color: rgba(99, 102, 241, 0.1);
-    }
-    
-    .highlighted {
-      background-color: rgba(99, 102, 241, 0.1);
-      padding: 0.2rem 0.4rem;
-      border-radius: 0.25rem;
-      font-family: 'Fira Mono', monospace;
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons@1.119.0/iconfont/tabler-icons.min.css" rel="stylesheet">
 </head>
 <body>
   <div class="doc-container">
@@ -265,4 +145,4 @@
     <p>These files contain just the text to be appended to the prompt, making it easy to modify styles without changing the application code.</p>
   </div>
 </body>
-</html> 
+</html>

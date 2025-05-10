@@ -1,0 +1,41 @@
+/* Dark Theme Variables */
+:root {
+  /* Base Colors */
+  --bg-color: #121826;
+  --element-bg: #1e293b;
+  --text-color: #e2e8f0;
+  --text-muted: #94a3b8;
+  
+  /* Primary Colors */
+  --primary-color: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #8b92f8;
+  
+  /* Accent Colors */
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  
+  /* Shadows for dark theme */
+  --shadow-light: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  --shadow-dark: -3px -3px 6px rgba(255, 255, 255, 0.05);
+  --shadow-inset-light: inset 3px 3px 6px rgba(0, 0, 0, 0.2);
+  --shadow-inset-dark: inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+  
+  /* Border & UI */
+  --border-color: #334155;
+  --border-radius: 8px;
+  --btn-radius: 25px;
+  
+  /* Animations */
+  --transition: all 0.3s ease;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}

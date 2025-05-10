@@ -1,0 +1,16 @@
+/**
+ * Migrated styles for objects
+ * These styles were extracted from files with !important declarations
+ */
+
+/*
+ * Utilities Layer - Display
+ * -----------------------
+ * Display, visibility, and layout utility classes
+ */
+
+/* Display */
+.hidden {
+  display: none;
+}
+

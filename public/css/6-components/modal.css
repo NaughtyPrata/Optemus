@@ -1,0 +1,110 @@
+/* Modal Components */
+
+/* Base modal */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(230, 231, 238, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.image-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  background-color: var(--element-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.95);
+  transition: all 0.3s;
+}
+
+.image-modal.active .modal-content {
+  transform: scale(1);
+}
+
+/* Modal sections */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(195, 195, 195, 0.2);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(195, 195, 195, 0.2);
+}
+
+/* Image preview in modal */
+.image-preview {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+/* Image details in modal */
+.image-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Modal buttons */
+#downloadBtn, #deleteBtn {
+  padding: 8px 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modal-body {
+    flex-direction: column;
+  }
+}

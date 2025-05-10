@@ -1,0 +1,54 @@
+/* Fix for view-btn and refresh-btn states - matching main page style */
+
+/* Reset all view-btn and refresh-btn states */
+.view-btn,
+.refresh-btn,
+.toolbar .view-options .view-btn,
+.toolbar .view-options .refresh-btn,
+.viewer-content .toolbar .view-options .view-btn,
+.viewer-content .toolbar .view-options .refresh-btn {
+  background-color: var(--element-bg) !important;
+  border: none !important;
+  color: var(--text-muted) !important;
+  box-shadow: var(--shadow-light), var(--shadow-dark) !important;
+}
+
+/* Hover state */
+.view-btn:hover,
+.refresh-btn:hover,
+.toolbar .view-options .view-btn:hover,
+.toolbar .view-options .refresh-btn:hover,
+.viewer-content .toolbar .view-options .view-btn:hover,
+.viewer-content .toolbar .view-options .refresh-btn:hover {
+  background-color: var(--element-bg) !important;
+  box-shadow: var(--shadow-dark), var(--shadow-light) !important;
+  transform: translateY(-2px) !important;
+  color: var(--text-muted) !important;
+  border: none !important;
+}
+
+/* Active state (when clicking) */
+.view-btn:active,
+.refresh-btn:active,
+.toolbar .view-options .view-btn:active,
+.toolbar .view-options .refresh-btn:active,
+.viewer-content .toolbar .view-options .view-btn:active,
+.viewer-content .toolbar .view-options .refresh-btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark) !important;
+  transform: translateY(0) !important;
+  background-color: var(--element-bg) !important;
+  color: var(--text-muted) !important;
+  border: none !important;
+}
+
+/* Selected state (active class) */
+.view-btn.active,
+.toolbar .view-options .view-btn.active,
+.viewer-content .toolbar .view-options .view-btn.active {
+  background-color: var(--element-bg) !important;
+  border: none !important;
+  color: var(--text-muted) !important;
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark) !important;
+  font-weight: 700 !important;
+  transform: translateY(0) !important;
+}

@@ -1,0 +1,15 @@
+/**
+ * 6-components
+ * UI components and specific patterns
+ */
+
+/* Import all 6-components files here */
+@import './buttons.css';
+@import './cards.css';
+@import './forms.css';
+@import './feedback.css';
+@import './bubble-loader.css';
+@import './custom-loader.css';
+@import './custom-buttons.css';
+@import './branding.css';
+@import './migrated-components.css';

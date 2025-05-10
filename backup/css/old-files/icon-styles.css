@@ -1,0 +1,129 @@
+/* Icon Styles - No !important declarations necessary */
+
+/* Define base styles for Tabler Icons */
+body .ti,
+.app-container .ti {
+  font-family: 'tabler-icons';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure icon visibility in buttons */
+button i.ti, 
+a i.ti {
+  display: inline-block;
+  font-size: 1.25em;
+  vertical-align: middle;
+  line-height: 1;
+  margin-right: 0.25em;
+}
+
+/* Icon character definitions */
+.ti-help-circle:before {
+  content: "\ea5f";
+}
+
+.ti-layout-grid:before {
+  content: "\ea80";
+}
+
+.ti-layout-list:before {
+  content: "\ea84";
+}
+
+.ti-refresh:before {
+  content: "\eb96";
+}
+
+.ti-photo:before {
+  content: "\eb3c";
+}
+
+.ti-photo-ai:before {
+  content: "\eb3d";
+}
+
+.ti-download:before {
+  content: "\ea1e";
+}
+
+.ti-trash:before {
+  content: "\ec40";
+}
+
+.ti-search:before {
+  content: "\ebd1";
+}
+
+.ti-arrow-left:before {
+  content: "\ea64";
+}
+
+.ti-x:before {
+  content: "\ec2a";
+}
+
+.ti-photo-off:before {
+  content: "\eb3e";
+}
+
+.ti-volume:before {
+  content: "\ec72";
+}
+
+/* Styles for help link */
+.help-link {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.help-link:hover {
+  opacity: 1;
+}
+
+.help-link .ti {
+  font-size: 18px;
+}
+
+/* Styles for view options buttons */
+.view-options {
+  display: flex;
+  gap: 8px;
+}
+
+.view-btn, 
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: var(--element-bg, #2a3646);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-color, #e2e8f0);
+}
+
+.view-btn:hover, 
+.refresh-btn:hover {
+  background-color: var(--element-hover, #3a4656);
+}
+
+.view-btn.active {
+  background-color: var(--primary-color, #6366f1);
+  color: white;
+}
+
+.view-btn i, 
+.refresh-btn i {
+  font-size: 18px;
+  margin-right: 0;
+}

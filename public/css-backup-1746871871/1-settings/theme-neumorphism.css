@@ -1,0 +1,29 @@
+/* Neumorphism Theme Variables */
+:root {
+  --bg-color: #e6e7ee;
+  --element-bg: #e6e7ee;
+  --text-color: #44476a;
+  --text-muted: #7e84a3;
+  --primary-color: #7e57c2;
+  --primary-dark: #673ab7;
+  --primary-light: #b39ddb;
+  --shadow-light: 6px 6px 12px rgba(195, 195, 195, 0.5);
+  --shadow-dark: -6px -6px 12px rgba(255, 255, 255, 0.8);
+  --shadow-inset-light: inset 4px 4px 8px rgba(195, 195, 195, 0.5);
+  --shadow-inset-dark: inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  --border-radius: 12px;
+  --btn-radius: 25px;
+  --transition: all 0.3s ease;
+  
+  /* Animations */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}

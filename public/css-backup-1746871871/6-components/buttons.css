@@ -1,0 +1,188 @@
+/* Button Components */
+
+/* Button base styles */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.25rem;
+  font-weight: 600;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.btn:hover {
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+.btn i {
+  font-size: 1.25rem;
+}
+
+/* Primary button */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:active {
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+  background-color: var(--primary-dark);
+}
+
+/* Outline button */
+.btn-outline {
+  background-color: var(--element-bg);
+  color: var(--primary-color);
+  border: none;
+}
+
+.btn-outline:hover {
+  color: var(--primary-dark);
+}
+
+.btn-outline:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+}
+
+/* View and refresh buttons */
+.view-btn, .refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--element-bg);
+  color: var(--text-muted);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+.view-btn:hover, .refresh-btn:hover {
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+}
+
+.view-btn:active, .refresh-btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+}
+
+.view-btn.active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  font-weight: 700;
+}
+
+/* Size, quality, and style buttons */
+.size-btn, .quality-btn, .style-type-btn, .style-preset-btn, .count-btn {
+  flex: 1;
+  padding: 10px 12px;
+  background-color: var(--element-bg);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+  min-width: 30%;
+}
+
+.size-btn:hover, .quality-btn:hover, .style-type-btn:hover, .style-preset-btn:hover, .count-btn:hover {
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+  transform: translateY(-2px);
+}
+
+.size-btn:active, .quality-btn:active, .style-type-btn:active, .style-preset-btn:active, .count-btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  transform: translateY(0);
+}
+
+.size-btn.active, .quality-btn.active, .style-type-btn.active, .style-preset-btn.active, .count-btn.active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  font-weight: 700;
+}
+
+/* Close button */
+.close-btn {
+  background-color: var(--element-bg);
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: var(--transition);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+.close-btn:hover {
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+  color: var(--primary-color);
+}
+
+.close-btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+}
+
+/* Gallery button */
+.gallery-btn {
+  background-color: var(--element-bg);
+  color: var(--primary-color);
+  border-radius: var(--btn-radius);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+  padding: 10px 16px;
+  transition: var(--transition);
+}
+
+.gallery-btn:hover {
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+  transform: translateY(-2px);
+}
+
+.gallery-btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  transform: translateY(0);
+}
+
+.gallery-btn.full-width {
+  width: 100%;
+}
+
+.gallery-btn i {
+  margin-right: 6px;
+}

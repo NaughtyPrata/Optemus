@@ -1,0 +1,70 @@
+/* 
+ * Settings Layer - CSS Variables
+ * ---------------------------
+ * Global CSS variables extracted from existing files
+ * These replace hard-coded values throughout the application
+ */
+
+:root {
+  /* Color Palette */
+  --primary-color: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #8b92f8;
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  
+  /* Text Colors */
+  --text-dark: #e2e8f0;
+  --text-muted: #94a3b8;
+  
+  /* Background Colors */
+  --bg-dark: #121826;
+  --bg-panel: #1e293b;
+  --bg-input: #2c3e50;
+  --element-bg: var(--bg-input);
+  
+  /* Border Colors */
+  --border-color: #334155;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  
+  /* Neumorphic shadows */
+  --shadow-light: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  --shadow-dark: -3px -3px 6px rgba(255, 255, 255, 0.05);
+  --shadow-inset-light: inset 3px 3px 6px rgba(0, 0, 0, 0.2);
+  --shadow-inset-dark: inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+  
+  /* Typography */
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Open Sans', sans-serif;
+  --font-mono: 'Fira Mono', monospace;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  
+  /* Z-index Layers */
+  --z-base: 1;
+  --z-elevated: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-overlay: 400;
+  --z-tooltip: 500;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}

@@ -1,0 +1,85 @@
+/* Form Elements */
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+}
+
+.input, .select, .textarea {
+  width: 100%;
+  padding: 0.875rem;
+  font-family: 'Open Sans', sans-serif;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  transition: var(--transition);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);
+}
+
+/* Search Input */
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 18px;
+}
+
+/* Generate Button Container - Forms related */
+.generate-btn-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 350px; /* Match the control panel width */
+  padding: 1.5rem;
+  z-index: 11;
+  background-color: var(--element-bg);
+  box-shadow: 0 -4px 12px rgba(195, 195, 195, 0.2);
+}
+
+/* Make the generate button container responsive */
+@media (max-width: 768px) {
+  .generate-btn-container {
+    width: 100%;
+  }
+}

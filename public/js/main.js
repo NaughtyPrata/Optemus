@@ -331,23 +331,26 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Display multiple images
   function displayImages(images) {
-    // Hide placeholder
-    placeholder.classList.add('hidden');
-    
-    // Remove any existing image wrappers
-    const existingWrappers = document.querySelectorAll('.image-wrapper');
-    existingWrappers.forEach(wrapper => wrapper.remove());
+    // Clear the image container first
+    imageContainer.innerHTML = '';
     
     // If there are no images, show placeholder
     if (!images || images.length === 0) {
-      placeholder.classList.remove('hidden');
+      const newPlaceholder = document.createElement('div');
+      newPlaceholder.id = 'placeholder';
+      newPlaceholder.className = 'placeholder';
+      newPlaceholder.innerHTML = `
+        <img src="assets/laundry.svg" alt="Laundry" class="placeholder-icon">
+        <p>Your generated image will appear here</p>
+      `;
+      imageContainer.appendChild(newPlaceholder);
       return;
     }
     
     // Set the appropriate layout
     updateImageContainerLayout(images.length.toString());
     
-    // Create a wrapper for all images
+    // Create a wrapper for all images with the correct count class
     const galleryWrapper = document.createElement('div');
     galleryWrapper.className = `gallery-wrapper count-${images.length}`;
     imageContainer.appendChild(galleryWrapper);
@@ -361,17 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
       img.className = 'result-image';
       img.alt = `Generated image ${index + 1}`;
       img.src = imageData.image;
-      
-      // DOWNLOAD FEATURE TEMPORARILY DISABLED
-      // Uncomment the code below to re-enable image download on click
-      /*
-      // Add click event to show image details or download
-      img.addEventListener('click', () => {
-        console.log(`Image ${index + 1} clicked: ${imageData.filename}`);
-        // Open image download link
-        window.open(`/api/download/${imageData.filename}`, '_blank');
-      });
-      */
       
       imgWrapper.appendChild(img);
       galleryWrapper.appendChild(imgWrapper);
@@ -590,4 +582,4 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Call the initAudio function to prepare audio playback
   initAudio();
-}); 
+});

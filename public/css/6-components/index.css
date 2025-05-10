@@ -1,0 +1,15 @@
+/**
+ * 6-components
+ * Specific UI components with their own styles
+ */
+
+@import './buttons.css';
+@import './forms.css';
+@import './cards.css';
+@import './modal.css';
+@import './images.css';
+@import './loaders.css';
+@import './custom-loader.css';  /* Make sure this gets loaded */
+@import './bubble-bg.css';
+@import './documentation.css';
+@import './custom-buttons.css';

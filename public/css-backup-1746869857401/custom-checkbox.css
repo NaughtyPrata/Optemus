@@ -1,0 +1,95 @@
+/* Neumorphic Checkbox */
+.custom-checkbox-container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+  margin: 10px 0;
+}
+
+/* Hide the default checkbox */
+.custom-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 1.3em;
+  width: 1.3em;
+  background-color: #e0e8ef;
+  border-radius: 100%;
+  box-shadow: 3px 3px 5px #c5c5c5,
+              -3px -3px 5px #ffffff;
+  transition-duration: 0.3s;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.custom-checkbox-container input:checked ~ .checkmark {
+  box-shadow: inset 3px 3px 5px #c5c5c5,
+              inset -3px -3px 5px #ffffff;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.custom-checkbox-container input:checked ~ .checkmark:after {
+  opacity: 1;
+}
+
+.custom-checkbox-container .checkmark:after {
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid #7e97b8;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+}
+
+/* Label text */
+.checkbox-label {
+  margin-left: 15px;
+  font-size: 0.8em;
+  font-weight: 500;
+  color: #5e6e82;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Smaller variant */
+.custom-checkbox-container.small {
+  font-size: 16px;
+}
+
+.custom-checkbox-container.small .checkmark {
+  height: 1.2em;
+  width: 1.2em;
+}
+
+.custom-checkbox-container.small .checkmark:after {
+  left: 0.4em;
+  top: 0.2em;
+  width: 0.2em;
+  height: 0.4em;
+}

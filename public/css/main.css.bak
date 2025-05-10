@@ -1,0 +1,39 @@
+/*
+ * Main CSS file
+ * ------------
+ * Imports all CSS files in the correct ITCSS order
+ */
+
+/* 1. Settings - CSS custom properties, config */
+@import url('1-settings/variables.css');
+
+/* 2. Generic - Reset, normalize */
+@import url('2-generic/reset.css');
+
+/* 3. Elements - Base HTML element styling */
+@import url('3-elements/typography.css');
+@import url('3-elements/base.css');
+
+/* 4. Objects - Layout structures */
+@import url('4-objects/layout.css');
+@import url('4-objects/neumorphism.css');
+@import url('4-objects/top-controls.css');
+
+/* 5. Components - UI components */
+@import url('5-components/buttons.css');
+@import url('5-components/forms.css');
+@import url('5-components/cards.css');
+@import url('5-components/images.css');
+@import url('5-components/modals.css');
+@import url('5-components/loaders.css');
+@import url('5-components/icons.css');
+@import url('5-components/notifications.css');
+
+/* 6. Utilities - Utility classes */
+@import url('6-utilities/display.css');
+@import url('6-utilities/spacing.css');
+@import url('6-utilities/animations.css');
+
+/* External Dependencies */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=Fira+Mono:wght@400;500&family=Borel&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@tabler/icons@1.119.0/iconfont/tabler-icons.min.css');

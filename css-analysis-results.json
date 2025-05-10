@@ -1,0 +1,3381 @@
+{
+  "fileStats": {
+    "variables.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "reset.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "base.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "typography.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "layout.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "neumorphism.css": {
+      "count": 1,
+      "declarations": [
+        {
+          "selector": "/* Utils */\n.hidden",
+          "properties": [
+            {
+              "property": "display",
+              "value": "none"
+            }
+          ]
+        }
+      ]
+    },
+    "top-controls.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "buttons.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "cards.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "forms.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "icons.css": {
+      "count": 1,
+      "declarations": [
+        {
+          "selector": "/*\n * Components Layer - Icons\n * ----------------------\n * Styles for icons and icon elements\n */\n\n/* Base icon styling */\n.ti",
+          "properties": [
+            {
+              "property": "font-family",
+              "value": "'tabler-icons'"
+            }
+          ]
+        }
+      ]
+    },
+    "images.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "loaders.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "modals.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "notifications.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "animations.css": {
+      "count": 4,
+      "declarations": [
+        {
+          "selector": "}\n\n/* Transition utilities */\n.transition-fast",
+          "properties": [
+            {
+              "property": "transition",
+              "value": "all var(--transition-fast)"
+            }
+          ]
+        },
+        {
+          "selector": ".transition-normal",
+          "properties": [
+            {
+              "property": "transition",
+              "value": "all var(--transition-normal)"
+            }
+          ]
+        },
+        {
+          "selector": ".transition-slow",
+          "properties": [
+            {
+              "property": "transition",
+              "value": "all var(--transition-slow)"
+            }
+          ]
+        },
+        {
+          "selector": ".transition-none",
+          "properties": [
+            {
+              "property": "transition",
+              "value": "none"
+            }
+          ]
+        }
+      ]
+    },
+    "display.css": {
+      "count": 45,
+      "declarations": [
+        {
+          "selector": "/*\n * Utilities Layer - Display\n * -----------------------\n * Display, visibility, and layout utility classes\n */\n\n/* Display */\n.hidden",
+          "properties": [
+            {
+              "property": "display",
+              "value": "none"
+            }
+          ]
+        },
+        {
+          "selector": ".block",
+          "properties": [
+            {
+              "property": "display",
+              "value": "block"
+            }
+          ]
+        },
+        {
+          "selector": ".inline-block",
+          "properties": [
+            {
+              "property": "display",
+              "value": "inline-block"
+            }
+          ]
+        },
+        {
+          "selector": ".inline",
+          "properties": [
+            {
+              "property": "display",
+              "value": "inline"
+            }
+          ]
+        },
+        {
+          "selector": "/* Flexbox */\n.flex",
+          "properties": [
+            {
+              "property": "display",
+              "value": "flex"
+            }
+          ]
+        },
+        {
+          "selector": ".inline-flex",
+          "properties": [
+            {
+              "property": "display",
+              "value": "inline-flex"
+            }
+          ]
+        },
+        {
+          "selector": ".flex-row",
+          "properties": [
+            {
+              "property": "flex-direction",
+              "value": "row"
+            }
+          ]
+        },
+        {
+          "selector": ".flex-col",
+          "properties": [
+            {
+              "property": "flex-direction",
+              "value": "column"
+            }
+          ]
+        },
+        {
+          "selector": ".flex-wrap",
+          "properties": [
+            {
+              "property": "flex-wrap",
+              "value": "wrap"
+            }
+          ]
+        },
+        {
+          "selector": ".flex-nowrap",
+          "properties": [
+            {
+              "property": "flex-wrap",
+              "value": "nowrap"
+            }
+          ]
+        },
+        {
+          "selector": ".justify-start",
+          "properties": [
+            {
+              "property": "justify-content",
+              "value": "flex-start"
+            }
+          ]
+        },
+        {
+          "selector": ".justify-end",
+          "properties": [
+            {
+              "property": "justify-content",
+              "value": "flex-end"
+            }
+          ]
+        },
+        {
+          "selector": ".justify-center",
+          "properties": [
+            {
+              "property": "justify-content",
+              "value": "center"
+            }
+          ]
+        },
+        {
+          "selector": ".justify-between",
+          "properties": [
+            {
+              "property": "justify-content",
+              "value": "space-between"
+            }
+          ]
+        },
+        {
+          "selector": ".justify-around",
+          "properties": [
+            {
+              "property": "justify-content",
+              "value": "space-around"
+            }
+          ]
+        },
+        {
+          "selector": ".items-start",
+          "properties": [
+            {
+              "property": "align-items",
+              "value": "flex-start"
+            }
+          ]
+        },
+        {
+          "selector": ".items-end",
+          "properties": [
+            {
+              "property": "align-items",
+              "value": "flex-end"
+            }
+          ]
+        },
+        {
+          "selector": ".items-center",
+          "properties": [
+            {
+              "property": "align-items",
+              "value": "center"
+            }
+          ]
+        },
+        {
+          "selector": ".items-baseline",
+          "properties": [
+            {
+              "property": "align-items",
+              "value": "baseline"
+            }
+          ]
+        },
+        {
+          "selector": ".items-stretch",
+          "properties": [
+            {
+              "property": "align-items",
+              "value": "stretch"
+            }
+          ]
+        },
+        {
+          "selector": ".flex-grow",
+          "properties": [
+            {
+              "property": "flex-grow",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "selector": ".flex-shrink",
+          "properties": [
+            {
+              "property": "flex-shrink",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "selector": ".flex-no-grow",
+          "properties": [
+            {
+              "property": "flex-grow",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".flex-no-shrink",
+          "properties": [
+            {
+              "property": "flex-shrink",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": "/* Positioning */\n.relative",
+          "properties": [
+            {
+              "property": "position",
+              "value": "relative"
+            }
+          ]
+        },
+        {
+          "selector": ".absolute",
+          "properties": [
+            {
+              "property": "position",
+              "value": "absolute"
+            }
+          ]
+        },
+        {
+          "selector": ".fixed",
+          "properties": [
+            {
+              "property": "position",
+              "value": "fixed"
+            }
+          ]
+        },
+        {
+          "selector": ".sticky",
+          "properties": [
+            {
+              "property": "position",
+              "value": "sticky"
+            },
+            {
+              "property": ";\n  top",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": "/* Width/Height */\n.w-full",
+          "properties": [
+            {
+              "property": "width",
+              "value": "100%"
+            }
+          ]
+        },
+        {
+          "selector": ".h-full",
+          "properties": [
+            {
+              "property": "height",
+              "value": "100%"
+            }
+          ]
+        },
+        {
+          "selector": ".min-h-screen",
+          "properties": [
+            {
+              "property": "min-height",
+              "value": "100vh"
+            }
+          ]
+        },
+        {
+          "selector": ".max-w-full",
+          "properties": [
+            {
+              "property": "max-width",
+              "value": "100%"
+            }
+          ]
+        },
+        {
+          "selector": "/* Overflow */\n.overflow-hidden",
+          "properties": [
+            {
+              "property": "overflow",
+              "value": "hidden"
+            }
+          ]
+        },
+        {
+          "selector": ".overflow-auto",
+          "properties": [
+            {
+              "property": "overflow",
+              "value": "auto"
+            }
+          ]
+        },
+        {
+          "selector": ".overflow-scroll",
+          "properties": [
+            {
+              "property": "overflow",
+              "value": "scroll"
+            }
+          ]
+        },
+        {
+          "selector": ".overflow-y-auto",
+          "properties": [
+            {
+              "property": "overflow-y",
+              "value": "auto"
+            }
+          ]
+        },
+        {
+          "selector": ".overflow-x-auto",
+          "properties": [
+            {
+              "property": "overflow-x",
+              "value": "auto"
+            }
+          ]
+        },
+        {
+          "selector": "/* Z-index */\n.z-0",
+          "properties": [
+            {
+              "property": "z-index",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".z-10",
+          "properties": [
+            {
+              "property": "z-index",
+              "value": "10"
+            }
+          ]
+        },
+        {
+          "selector": ".z-20",
+          "properties": [
+            {
+              "property": "z-index",
+              "value": "20"
+            }
+          ]
+        },
+        {
+          "selector": ".z-30",
+          "properties": [
+            {
+              "property": "z-index",
+              "value": "30"
+            }
+          ]
+        },
+        {
+          "selector": ".z-40",
+          "properties": [
+            {
+              "property": "z-index",
+              "value": "40"
+            }
+          ]
+        },
+        {
+          "selector": ".z-50",
+          "properties": [
+            {
+              "property": "z-index",
+              "value": "50"
+            }
+          ]
+        },
+        {
+          "selector": ".z-auto",
+          "properties": [
+            {
+              "property": "z-index",
+              "value": "auto"
+            }
+          ]
+        }
+      ]
+    },
+    "spacing.css": {
+      "count": 116,
+      "declarations": [
+        {
+          "selector": "/*\n * Utilities Layer - Spacing\n * -----------------------\n * Margin and padding utility classes\n */\n\n/* Margin utilities */\n.m-0",
+          "properties": [
+            {
+              "property": "margin",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".m-1",
+          "properties": [
+            {
+              "property": "margin",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".m-2",
+          "properties": [
+            {
+              "property": "margin",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".m-3",
+          "properties": [
+            {
+              "property": "margin",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".m-4",
+          "properties": [
+            {
+              "property": "margin",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".m-5",
+          "properties": [
+            {
+              "property": "margin",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Margin horizontal */\n.mx-0",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "0"
+            },
+            {
+              "property": ";\n  margin-right",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".mx-1",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-xs)"
+            },
+            {
+              "property": ";\n  margin-right",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".mx-2",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-sm)"
+            },
+            {
+              "property": ";\n  margin-right",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".mx-3",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-md)"
+            },
+            {
+              "property": ";\n  margin-right",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".mx-4",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-lg)"
+            },
+            {
+              "property": ";\n  margin-right",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".mx-5",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-xl)"
+            },
+            {
+              "property": ";\n  margin-right",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": ".mx-auto",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "auto"
+            },
+            {
+              "property": ";\n  margin-right",
+              "value": "auto"
+            }
+          ]
+        },
+        {
+          "selector": "/* Margin vertical */\n.my-0",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "0"
+            },
+            {
+              "property": ";\n  margin-bottom",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".my-1",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-xs)"
+            },
+            {
+              "property": ";\n  margin-bottom",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".my-2",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-sm)"
+            },
+            {
+              "property": ";\n  margin-bottom",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".my-3",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-md)"
+            },
+            {
+              "property": ";\n  margin-bottom",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".my-4",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-lg)"
+            },
+            {
+              "property": ";\n  margin-bottom",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".my-5",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-xl)"
+            },
+            {
+              "property": ";\n  margin-bottom",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Margin top */\n.mt-0",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".mt-1",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".mt-2",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".mt-3",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".mt-4",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".mt-5",
+          "properties": [
+            {
+              "property": "margin-top",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Margin right */\n.mr-0",
+          "properties": [
+            {
+              "property": "margin-right",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".mr-1",
+          "properties": [
+            {
+              "property": "margin-right",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".mr-2",
+          "properties": [
+            {
+              "property": "margin-right",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".mr-3",
+          "properties": [
+            {
+              "property": "margin-right",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".mr-4",
+          "properties": [
+            {
+              "property": "margin-right",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".mr-5",
+          "properties": [
+            {
+              "property": "margin-right",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Margin bottom */\n.mb-0",
+          "properties": [
+            {
+              "property": "margin-bottom",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".mb-1",
+          "properties": [
+            {
+              "property": "margin-bottom",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".mb-2",
+          "properties": [
+            {
+              "property": "margin-bottom",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".mb-3",
+          "properties": [
+            {
+              "property": "margin-bottom",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".mb-4",
+          "properties": [
+            {
+              "property": "margin-bottom",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".mb-5",
+          "properties": [
+            {
+              "property": "margin-bottom",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Margin left */\n.ml-0",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".ml-1",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".ml-2",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".ml-3",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".ml-4",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".ml-5",
+          "properties": [
+            {
+              "property": "margin-left",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Padding utilities */\n.p-0",
+          "properties": [
+            {
+              "property": "padding",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".p-1",
+          "properties": [
+            {
+              "property": "padding",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".p-2",
+          "properties": [
+            {
+              "property": "padding",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".p-3",
+          "properties": [
+            {
+              "property": "padding",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".p-4",
+          "properties": [
+            {
+              "property": "padding",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".p-5",
+          "properties": [
+            {
+              "property": "padding",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Padding horizontal */\n.px-0",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "0"
+            },
+            {
+              "property": ";\n  padding-right",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".px-1",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-xs)"
+            },
+            {
+              "property": ";\n  padding-right",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".px-2",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-sm)"
+            },
+            {
+              "property": ";\n  padding-right",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".px-3",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-md)"
+            },
+            {
+              "property": ";\n  padding-right",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".px-4",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-lg)"
+            },
+            {
+              "property": ";\n  padding-right",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".px-5",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-xl)"
+            },
+            {
+              "property": ";\n  padding-right",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Padding vertical */\n.py-0",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "0"
+            },
+            {
+              "property": ";\n  padding-bottom",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".py-1",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-xs)"
+            },
+            {
+              "property": ";\n  padding-bottom",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".py-2",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-sm)"
+            },
+            {
+              "property": ";\n  padding-bottom",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".py-3",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-md)"
+            },
+            {
+              "property": ";\n  padding-bottom",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".py-4",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-lg)"
+            },
+            {
+              "property": ";\n  padding-bottom",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".py-5",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-xl)"
+            },
+            {
+              "property": ";\n  padding-bottom",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Padding top */\n.pt-0",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".pt-1",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".pt-2",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".pt-3",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".pt-4",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".pt-5",
+          "properties": [
+            {
+              "property": "padding-top",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Padding right */\n.pr-0",
+          "properties": [
+            {
+              "property": "padding-right",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".pr-1",
+          "properties": [
+            {
+              "property": "padding-right",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".pr-2",
+          "properties": [
+            {
+              "property": "padding-right",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".pr-3",
+          "properties": [
+            {
+              "property": "padding-right",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".pr-4",
+          "properties": [
+            {
+              "property": "padding-right",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".pr-5",
+          "properties": [
+            {
+              "property": "padding-right",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Padding bottom */\n.pb-0",
+          "properties": [
+            {
+              "property": "padding-bottom",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".pb-1",
+          "properties": [
+            {
+              "property": "padding-bottom",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".pb-2",
+          "properties": [
+            {
+              "property": "padding-bottom",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".pb-3",
+          "properties": [
+            {
+              "property": "padding-bottom",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".pb-4",
+          "properties": [
+            {
+              "property": "padding-bottom",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".pb-5",
+          "properties": [
+            {
+              "property": "padding-bottom",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Padding left */\n.pl-0",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".pl-1",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".pl-2",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".pl-3",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".pl-4",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".pl-5",
+          "properties": [
+            {
+              "property": "padding-left",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Gap */\n.gap-0",
+          "properties": [
+            {
+              "property": "gap",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "selector": ".gap-1",
+          "properties": [
+            {
+              "property": "gap",
+              "value": "var(--spacing-xs)"
+            }
+          ]
+        },
+        {
+          "selector": ".gap-2",
+          "properties": [
+            {
+              "property": "gap",
+              "value": "var(--spacing-sm)"
+            }
+          ]
+        },
+        {
+          "selector": ".gap-3",
+          "properties": [
+            {
+              "property": "gap",
+              "value": "var(--spacing-md)"
+            }
+          ]
+        },
+        {
+          "selector": ".gap-4",
+          "properties": [
+            {
+              "property": "gap",
+              "value": "var(--spacing-lg)"
+            }
+          ]
+        },
+        {
+          "selector": ".gap-5",
+          "properties": [
+            {
+              "property": "gap",
+              "value": "var(--spacing-xl)"
+            }
+          ]
+        }
+      ]
+    },
+    "bubble-bg.css": {
+      "count": 1,
+      "declarations": [
+        {
+          "selector": "/* \n * Bubble Background Styles - Only changes the background \n * Preserves the existing washing machine animation\n */\n\n#loadingIndicator",
+          "properties": [
+            {
+              "property": "background",
+              "value": "linear-gradient(to bottom, #e6f7ff, #b3e0ff)"
+            }
+          ]
+        }
+      ]
+    },
+    "bubble-loader.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "custom-buttons.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "custom-checkbox.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "custom-loader.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "glassmorphism.css": {
+      "count": 1,
+      "declarations": [
+        {
+          "selector": "}\n\n/* Utils */\n.hidden",
+          "properties": [
+            {
+              "property": "display",
+              "value": "none"
+            }
+          ]
+        }
+      ]
+    },
+    "icon-fixes.css": {
+      "count": 1,
+      "declarations": [
+        {
+          "selector": "/* Icon Fixes */\n.ti",
+          "properties": [
+            {
+              "property": "font-family",
+              "value": "'tabler-icons'"
+            }
+          ]
+        }
+      ]
+    },
+    "icon-styles.css": {
+      "count": 1,
+      "declarations": []
+    },
+    "list-view-fix.css": {
+      "count": 36,
+      "declarations": [
+        {
+          "selector": "/* Fix for List View in the Viewer \n   This CSS ensures the list view displays correctly\n*/\n\n/* List View Container */\n.image-gallery.list-view",
+          "properties": [
+            {
+              "property": "display",
+              "value": "flex"
+            },
+            {
+              "property": ";\n  flex-direction",
+              "value": "column"
+            },
+            {
+              "property": ";\n  gap",
+              "value": "15px"
+            }
+          ]
+        },
+        {
+          "selector": "/* List View Cards */\n.list-view .image-card",
+          "properties": [
+            {
+              "property": "display",
+              "value": "flex"
+            },
+            {
+              "property": ";\n  height",
+              "value": "120px"
+            },
+            {
+              "property": ";\n  width",
+              "value": "100%"
+            },
+            {
+              "property": ";\n  padding",
+              "value": "0"
+            },
+            {
+              "property": ";\n  position",
+              "value": "relative"
+            }
+          ]
+        },
+        {
+          "selector": "/* Image in List View */\n.list-view .image-card .card-image",
+          "properties": [
+            {
+              "property": "width",
+              "value": "120px"
+            },
+            {
+              "property": ";\n  height",
+              "value": "120px"
+            },
+            {
+              "property": ";\n  flex-shrink",
+              "value": "0"
+            },
+            {
+              "property": ";\n  position",
+              "value": "relative"
+            },
+            {
+              "property": ";\n  object-fit",
+              "value": "cover"
+            }
+          ]
+        },
+        {
+          "selector": "/* Content in List View */\n.list-view .image-card .card-content",
+          "properties": [
+            {
+              "property": "flex",
+              "value": "1"
+            },
+            {
+              "property": ";\n  padding",
+              "value": "15px"
+            },
+            {
+              "property": ";\n  display",
+              "value": "flex"
+            },
+            {
+              "property": ";\n  flex-direction",
+              "value": "column"
+            },
+            {
+              "property": ";\n  justify-content",
+              "value": "space-between"
+            },
+            {
+              "property": ";\n  background-color",
+              "value": "inherit"
+            }
+          ]
+        },
+        {
+          "selector": "/* Title in List View */\n.list-view .card-title",
+          "properties": [
+            {
+              "property": "font-size",
+              "value": "14px"
+            },
+            {
+              "property": ";\n  font-weight",
+              "value": "500"
+            },
+            {
+              "property": ";\n  margin-bottom",
+              "value": "5px"
+            },
+            {
+              "property": ";\n  overflow",
+              "value": "hidden"
+            },
+            {
+              "property": ";\n  text-overflow",
+              "value": "ellipsis"
+            },
+            {
+              "property": ";\n  white-space",
+              "value": "nowrap"
+            }
+          ]
+        },
+        {
+          "selector": "/* Date in List View */\n.list-view .card-date",
+          "properties": [
+            {
+              "property": "font-size",
+              "value": "12px"
+            },
+            {
+              "property": ";\n  color",
+              "value": "var(--text-muted, #94a3b8)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Fix for empty state positioning in List View */\n.list-view .empty-state",
+          "properties": [
+            {
+              "property": "width",
+              "value": "100%"
+            }
+          ]
+        },
+        {
+          "selector": "/* Fix for card placeholder in list view */\n.list-view .card-placeholder",
+          "properties": [
+            {
+              "property": "width",
+              "value": "120px"
+            },
+            {
+              "property": ";\n  height",
+              "value": "120px"
+            },
+            {
+              "property": ";\n  display",
+              "value": "flex"
+            },
+            {
+              "property": ";\n  align-items",
+              "value": "center"
+            },
+            {
+              "property": ";\n  justify-content",
+              "value": "center"
+            },
+            {
+              "property": ";\n  background-color",
+              "value": "#2c3e50"
+            },
+            {
+              "property": ";\n  color",
+              "value": "#94a3b8"
+            }
+          ]
+        },
+        {
+          "selector": ".list-view .card-placeholder i",
+          "properties": [
+            {
+              "property": "font-size",
+              "value": "32px"
+            }
+          ]
+        }
+      ]
+    },
+    "list-view.css": {
+      "count": 1,
+      "declarations": []
+    },
+    "loading-background.css": {
+      "count": 2,
+      "declarations": [
+        {
+          "selector": "/* \n * Loading Screen Background Styles\n * Only modifying the background, preserving the existing washing machine animation \n */\n\n/* Creating a light blue background with animated bubbles */\n#loadingIndicator",
+          "properties": [
+            {
+              "property": "/* Override the background only */\n  background-color",
+              "value": "rgba(173, 216, 230, 0.9)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Update text color to be readable on light blue background */\n#loadingIndicator p",
+          "properties": [
+            {
+              "property": "color",
+              "value": "#2c3e50"
+            }
+          ]
+        }
+      ]
+    },
+    "main.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "modal-layout.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "modal.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "simple-fixes.css": {
+      "count": 0,
+      "declarations": []
+    },
+    "styles.css": {
+      "count": 1,
+      "declarations": [
+        {
+          "selector": "}\n\n/* Utility classes */\n.hidden",
+          "properties": [
+            {
+              "property": "display",
+              "value": "none"
+            }
+          ]
+        }
+      ]
+    },
+    "top-controls-fix.css": {
+      "count": 1,
+      "declarations": []
+    },
+    "view-btn-fix.css": {
+      "count": 20,
+      "declarations": [
+        {
+          "selector": "/* Fix for view-btn and refresh-btn states - matching main page style */\n\n/* Reset all view-btn and refresh-btn states */\n.view-btn,\n.refresh-btn,\n.toolbar .view-options .view-btn,\n.toolbar .view-options .refresh-btn,\n.viewer-content .toolbar .view-options .view-btn,\n.viewer-content .toolbar .view-options .refresh-btn",
+          "properties": [
+            {
+              "property": "background-color",
+              "value": "var(--element-bg)"
+            },
+            {
+              "property": ";\n  border",
+              "value": "none"
+            },
+            {
+              "property": ";\n  color",
+              "value": "var(--text-muted)"
+            },
+            {
+              "property": ";\n  box-shadow",
+              "value": "var(--shadow-light), var(--shadow-dark)"
+            }
+          ]
+        },
+        {
+          "selector": "/* Hover state */\n.view-btn:hover,\n.refresh-btn:hover,\n.toolbar .view-options .view-btn:hover,\n.toolbar .view-options .refresh-btn:hover,\n.viewer-content .toolbar .view-options .view-btn:hover,\n.viewer-content .toolbar .view-options .refresh-btn:hover",
+          "properties": [
+            {
+              "property": "background-color",
+              "value": "var(--element-bg)"
+            },
+            {
+              "property": ";\n  box-shadow",
+              "value": "var(--shadow-dark), var(--shadow-light)"
+            },
+            {
+              "property": ";\n  transform",
+              "value": "translateY(-2px)"
+            },
+            {
+              "property": ";\n  color",
+              "value": "var(--text-muted)"
+            },
+            {
+              "property": ";\n  border",
+              "value": "none"
+            }
+          ]
+        },
+        {
+          "selector": "/* Active state (when clicking) */\n.view-btn:active,\n.refresh-btn:active,\n.toolbar .view-options .view-btn:active,\n.toolbar .view-options .refresh-btn:active,\n.viewer-content .toolbar .view-options .view-btn:active,\n.viewer-content .toolbar .view-options .refresh-btn:active",
+          "properties": [
+            {
+              "property": "box-shadow",
+              "value": "var(--shadow-inset-light), var(--shadow-inset-dark)"
+            },
+            {
+              "property": ";\n  transform",
+              "value": "translateY(0)"
+            },
+            {
+              "property": ";\n  background-color",
+              "value": "var(--element-bg)"
+            },
+            {
+              "property": ";\n  color",
+              "value": "var(--text-muted)"
+            },
+            {
+              "property": ";\n  border",
+              "value": "none"
+            }
+          ]
+        },
+        {
+          "selector": "/* Selected state (active class) */\n.view-btn.active,\n.toolbar .view-options .view-btn.active,\n.viewer-content .toolbar .view-options .view-btn.active",
+          "properties": [
+            {
+              "property": "background-color",
+              "value": "var(--element-bg)"
+            },
+            {
+              "property": ";\n  border",
+              "value": "none"
+            },
+            {
+              "property": ";\n  color",
+              "value": "var(--text-muted)"
+            },
+            {
+              "property": ";\n  box-shadow",
+              "value": "var(--shadow-inset-light), var(--shadow-inset-dark)"
+            },
+            {
+              "property": ";\n  font-weight",
+              "value": "700"
+            },
+            {
+              "property": ";\n  transform",
+              "value": "translateY(0)"
+            }
+          ]
+        }
+      ]
+    },
+    "view-buttons.css": {
+      "count": 1,
+      "declarations": []
+    },
+    "viewer-fixes.css": {
+      "count": 0,
+      "declarations": []
+    }
+  },
+  "totalImportant": 233,
+  "selectors": {
+    "/*\n * Components Layer - Icons\n * ----------------------\n * Styles for icons and icon elements\n */\n\n/* Base icon styling */\n.ti": 1,
+    "}\n\n/* Transition utilities */\n.transition-fast": 1,
+    ".transition-normal": 1,
+    ".transition-slow": 1,
+    ".transition-none": 1,
+    "/*\n * Utilities Layer - Display\n * -----------------------\n * Display, visibility, and layout utility classes\n */\n\n/* Display */\n.hidden": 1,
+    ".block": 1,
+    ".inline-block": 1,
+    ".inline": 1,
+    "/* Flexbox */\n.flex": 1,
+    ".inline-flex": 1,
+    ".flex-row": 1,
+    ".flex-col": 1,
+    ".flex-wrap": 1,
+    ".flex-nowrap": 1,
+    ".justify-start": 1,
+    ".justify-end": 1,
+    ".justify-center": 1,
+    ".justify-between": 1,
+    ".justify-around": 1,
+    ".items-start": 1,
+    ".items-end": 1,
+    ".items-center": 1,
+    ".items-baseline": 1,
+    ".items-stretch": 1,
+    ".flex-grow": 1,
+    ".flex-shrink": 1,
+    ".flex-no-grow": 1,
+    ".flex-no-shrink": 1,
+    "/* Positioning */\n.relative": 1,
+    ".absolute": 1,
+    ".fixed": 1,
+    ".sticky": 2,
+    "/* Width/Height */\n.w-full": 1,
+    ".h-full": 1,
+    ".min-h-screen": 1,
+    ".max-w-full": 1,
+    "/* Overflow */\n.overflow-hidden": 1,
+    ".overflow-auto": 1,
+    ".overflow-scroll": 1,
+    ".overflow-y-auto": 1,
+    ".overflow-x-auto": 1,
+    "/* Z-index */\n.z-0": 1,
+    ".z-10": 1,
+    ".z-20": 1,
+    ".z-30": 1,
+    ".z-40": 1,
+    ".z-50": 1,
+    ".z-auto": 1,
+    "/*\n * Utilities Layer - Spacing\n * -----------------------\n * Margin and padding utility classes\n */\n\n/* Margin utilities */\n.m-0": 1,
+    ".m-1": 1,
+    ".m-2": 1,
+    ".m-3": 1,
+    ".m-4": 1,
+    ".m-5": 1,
+    "/* Margin horizontal */\n.mx-0": 2,
+    ".mx-1": 2,
+    ".mx-2": 2,
+    ".mx-3": 2,
+    ".mx-4": 2,
+    ".mx-5": 2,
+    ".mx-auto": 2,
+    "/* Margin vertical */\n.my-0": 2,
+    ".my-1": 2,
+    ".my-2": 2,
+    ".my-3": 2,
+    ".my-4": 2,
+    ".my-5": 2,
+    "/* Margin top */\n.mt-0": 1,
+    ".mt-1": 1,
+    ".mt-2": 1,
+    ".mt-3": 1,
+    ".mt-4": 1,
+    ".mt-5": 1,
+    "/* Margin right */\n.mr-0": 1,
+    ".mr-1": 1,
+    ".mr-2": 1,
+    ".mr-3": 1,
+    ".mr-4": 1,
+    ".mr-5": 1,
+    "/* Margin bottom */\n.mb-0": 1,
+    ".mb-1": 1,
+    ".mb-2": 1,
+    ".mb-3": 1,
+    ".mb-4": 1,
+    ".mb-5": 1,
+    "/* Margin left */\n.ml-0": 1,
+    ".ml-1": 1,
+    ".ml-2": 1,
+    ".ml-3": 1,
+    ".ml-4": 1,
+    ".ml-5": 1,
+    "/* Padding utilities */\n.p-0": 1,
+    ".p-1": 1,
+    ".p-2": 1,
+    ".p-3": 1,
+    ".p-4": 1,
+    ".p-5": 1,
+    "/* Padding horizontal */\n.px-0": 2,
+    ".px-1": 2,
+    ".px-2": 2,
+    ".px-3": 2,
+    ".px-4": 2,
+    ".px-5": 2,
+    "/* Padding vertical */\n.py-0": 2,
+    ".py-1": 2,
+    ".py-2": 2,
+    ".py-3": 2,
+    ".py-4": 2,
+    ".py-5": 2,
+    "/* Padding top */\n.pt-0": 1,
+    ".pt-1": 1,
+    ".pt-2": 1,
+    ".pt-3": 1,
+    ".pt-4": 1,
+    ".pt-5": 1,
+    "/* Padding right */\n.pr-0": 1,
+    ".pr-1": 1,
+    ".pr-2": 1,
+    ".pr-3": 1,
+    ".pr-4": 1,
+    ".pr-5": 1,
+    "/* Padding bottom */\n.pb-0": 1,
+    ".pb-1": 1,
+    ".pb-2": 1,
+    ".pb-3": 1,
+    ".pb-4": 1,
+    ".pb-5": 1,
+    "/* Padding left */\n.pl-0": 1,
+    ".pl-1": 1,
+    ".pl-2": 1,
+    ".pl-3": 1,
+    ".pl-4": 1,
+    ".pl-5": 1,
+    "/* Gap */\n.gap-0": 1,
+    ".gap-1": 1,
+    ".gap-2": 1,
+    ".gap-3": 1,
+    ".gap-4": 1,
+    ".gap-5": 1,
+    "/* \n * Bubble Background Styles - Only changes the background \n * Preserves the existing washing machine animation\n */\n\n#loadingIndicator": 1,
+    "}\n\n/* Utils */\n.hidden": 1,
+    "/* Icon Fixes */\n.ti": 1,
+    "/* Fix for List View in the Viewer \n   This CSS ensures the list view displays correctly\n*/\n\n/* List View Container */\n.image-gallery.list-view": 3,
+    "/* List View Cards */\n.list-view .image-card": 5,
+    "/* Image in List View */\n.list-view .image-card .card-image": 5,
+    "/* Content in List View */\n.list-view .image-card .card-content": 6,
+    "/* Title in List View */\n.list-view .card-title": 6,
+    "/* Date in List View */\n.list-view .card-date": 2,
+    "/* Fix for empty state positioning in List View */\n.list-view .empty-state": 1,
+    "/* Fix for card placeholder in list view */\n.list-view .card-placeholder": 7,
+    ".list-view .card-placeholder i": 1,
+    "/* \n * Loading Screen Background Styles\n * Only modifying the background, preserving the existing washing machine animation \n */\n\n/* Creating a light blue background with animated bubbles */\n#loadingIndicator": 1,
+    "/* Update text color to be readable on light blue background */\n#loadingIndicator p": 1,
+    "/* Utils */\n.hidden": 1,
+    "}\n\n/* Utility classes */\n.hidden": 1,
+    "/* Fix for view-btn and refresh-btn states - matching main page style */\n\n/* Reset all view-btn and refresh-btn states */\n.view-btn,\n.refresh-btn,\n.toolbar .view-options .view-btn,\n.toolbar .view-options .refresh-btn,\n.viewer-content .toolbar .view-options .view-btn,\n.viewer-content .toolbar .view-options .refresh-btn": 4,
+    "/* Hover state */\n.view-btn:hover,\n.refresh-btn:hover,\n.toolbar .view-options .view-btn:hover,\n.toolbar .view-options .refresh-btn:hover,\n.viewer-content .toolbar .view-options .view-btn:hover,\n.viewer-content .toolbar .view-options .refresh-btn:hover": 5,
+    "/* Active state (when clicking) */\n.view-btn:active,\n.refresh-btn:active,\n.toolbar .view-options .view-btn:active,\n.toolbar .view-options .refresh-btn:active,\n.viewer-content .toolbar .view-options .view-btn:active,\n.viewer-content .toolbar .view-options .refresh-btn:active": 5,
+    "/* Selected state (active class) */\n.view-btn.active,\n.toolbar .view-options .view-btn.active,\n.viewer-content .toolbar .view-options .view-btn.active": 6
+  },
+  "properties": {
+    "/*\n * Components Layer - Icons\n * ----------------------\n * Styles for icons and icon elements\n */\n\n/* Base icon styling */\n.ti {\n  font-family": 1,
+    "/*\n * Utilities Layer - Animations\n * --------------------------\n * Animations and transitions utility classes\n */\n\n/* Basic animations */\n.fade-in {\n  animation": 1,
+    ";\n}\n\n.transition-normal {\n  transition": 1,
+    ";\n}\n\n.transition-slow {\n  transition": 1,
+    ";\n}\n\n.transition-none {\n  transition": 1,
+    "/*\n * Utilities Layer - Display\n * -----------------------\n * Display, visibility, and layout utility classes\n */\n\n/* Display */\n.hidden {\n  display": 1,
+    ";\n}\n\n.block {\n  display": 1,
+    ";\n}\n\n.inline-block {\n  display": 1,
+    ";\n}\n\n.inline {\n  display": 1,
+    ";\n}\n\n/* Flexbox */\n.flex {\n  display": 1,
+    ";\n}\n\n.inline-flex {\n  display": 1,
+    ";\n}\n\n.flex-row {\n  flex-direction": 1,
+    ";\n}\n\n.flex-col {\n  flex-direction": 1,
+    ";\n}\n\n.flex-wrap {\n  flex-wrap": 1,
+    ";\n}\n\n.flex-nowrap {\n  flex-wrap": 1,
+    ";\n}\n\n.justify-start {\n  justify-content": 1,
+    ";\n}\n\n.justify-end {\n  justify-content": 1,
+    ";\n}\n\n.justify-center {\n  justify-content": 1,
+    ";\n}\n\n.justify-between {\n  justify-content": 1,
+    ";\n}\n\n.justify-around {\n  justify-content": 1,
+    ";\n}\n\n.items-start {\n  align-items": 1,
+    ";\n}\n\n.items-end {\n  align-items": 1,
+    ";\n}\n\n.items-center {\n  align-items": 1,
+    ";\n}\n\n.items-baseline {\n  align-items": 1,
+    ";\n}\n\n.items-stretch {\n  align-items": 1,
+    ";\n}\n\n.flex-grow {\n  flex-grow": 1,
+    ";\n}\n\n.flex-shrink {\n  flex-shrink": 1,
+    ";\n}\n\n.flex-no-grow {\n  flex-grow": 1,
+    ";\n}\n\n.flex-no-shrink {\n  flex-shrink": 1,
+    ";\n}\n\n/* Positioning */\n.relative {\n  position": 1,
+    ";\n}\n\n.absolute {\n  position": 1,
+    ";\n}\n\n.fixed {\n  position": 1,
+    ";\n}\n\n.sticky {\n  position": 1,
+    ";\n  top": 1,
+    ";\n}\n\n/* Width/Height */\n.w-full {\n  width": 1,
+    ";\n}\n\n.h-full {\n  height": 1,
+    ";\n}\n\n.min-h-screen {\n  min-height": 1,
+    ";\n}\n\n.max-w-full {\n  max-width": 1,
+    ";\n}\n\n/* Overflow */\n.overflow-hidden {\n  overflow": 1,
+    ";\n}\n\n.overflow-auto {\n  overflow": 1,
+    ";\n}\n\n.overflow-scroll {\n  overflow": 1,
+    ";\n}\n\n.overflow-y-auto {\n  overflow-y": 1,
+    ";\n}\n\n.overflow-x-auto {\n  overflow-x": 1,
+    ";\n}\n\n/* Z-index */\n.z-0 {\n  z-index": 1,
+    ";\n}\n\n.z-10 {\n  z-index": 1,
+    ";\n}\n\n.z-20 {\n  z-index": 1,
+    ";\n}\n\n.z-30 {\n  z-index": 1,
+    ";\n}\n\n.z-40 {\n  z-index": 1,
+    ";\n}\n\n.z-50 {\n  z-index": 1,
+    ";\n}\n\n.z-auto {\n  z-index": 1,
+    "/*\n * Utilities Layer - Spacing\n * -----------------------\n * Margin and padding utility classes\n */\n\n/* Margin utilities */\n.m-0 {\n  margin": 1,
+    ";\n}\n\n.m-1 {\n  margin": 1,
+    ";\n}\n\n.m-2 {\n  margin": 1,
+    ";\n}\n\n.m-3 {\n  margin": 1,
+    ";\n}\n\n.m-4 {\n  margin": 1,
+    ";\n}\n\n.m-5 {\n  margin": 1,
+    ";\n}\n\n/* Margin horizontal */\n.mx-0 {\n  margin-left": 1,
+    ";\n  margin-right": 7,
+    ";\n}\n\n.mx-1 {\n  margin-left": 1,
+    ";\n}\n\n.mx-2 {\n  margin-left": 1,
+    ";\n}\n\n.mx-3 {\n  margin-left": 1,
+    ";\n}\n\n.mx-4 {\n  margin-left": 1,
+    ";\n}\n\n.mx-5 {\n  margin-left": 1,
+    ";\n}\n\n.mx-auto {\n  margin-left": 1,
+    ";\n}\n\n/* Margin vertical */\n.my-0 {\n  margin-top": 1,
+    ";\n  margin-bottom": 7,
+    ";\n}\n\n.my-1 {\n  margin-top": 1,
+    ";\n}\n\n.my-2 {\n  margin-top": 1,
+    ";\n}\n\n.my-3 {\n  margin-top": 1,
+    ";\n}\n\n.my-4 {\n  margin-top": 1,
+    ";\n}\n\n.my-5 {\n  margin-top": 1,
+    ";\n}\n\n/* Margin top */\n.mt-0 {\n  margin-top": 1,
+    ";\n}\n\n.mt-1 {\n  margin-top": 1,
+    ";\n}\n\n.mt-2 {\n  margin-top": 1,
+    ";\n}\n\n.mt-3 {\n  margin-top": 1,
+    ";\n}\n\n.mt-4 {\n  margin-top": 1,
+    ";\n}\n\n.mt-5 {\n  margin-top": 1,
+    ";\n}\n\n/* Margin right */\n.mr-0 {\n  margin-right": 1,
+    ";\n}\n\n.mr-1 {\n  margin-right": 1,
+    ";\n}\n\n.mr-2 {\n  margin-right": 1,
+    ";\n}\n\n.mr-3 {\n  margin-right": 1,
+    ";\n}\n\n.mr-4 {\n  margin-right": 1,
+    ";\n}\n\n.mr-5 {\n  margin-right": 1,
+    ";\n}\n\n/* Margin bottom */\n.mb-0 {\n  margin-bottom": 1,
+    ";\n}\n\n.mb-1 {\n  margin-bottom": 1,
+    ";\n}\n\n.mb-2 {\n  margin-bottom": 1,
+    ";\n}\n\n.mb-3 {\n  margin-bottom": 1,
+    ";\n}\n\n.mb-4 {\n  margin-bottom": 1,
+    ";\n}\n\n.mb-5 {\n  margin-bottom": 1,
+    ";\n}\n\n/* Margin left */\n.ml-0 {\n  margin-left": 1,
+    ";\n}\n\n.ml-1 {\n  margin-left": 1,
+    ";\n}\n\n.ml-2 {\n  margin-left": 1,
+    ";\n}\n\n.ml-3 {\n  margin-left": 1,
+    ";\n}\n\n.ml-4 {\n  margin-left": 1,
+    ";\n}\n\n.ml-5 {\n  margin-left": 1,
+    ";\n}\n\n/* Padding utilities */\n.p-0 {\n  padding": 1,
+    ";\n}\n\n.p-1 {\n  padding": 1,
+    ";\n}\n\n.p-2 {\n  padding": 1,
+    ";\n}\n\n.p-3 {\n  padding": 1,
+    ";\n}\n\n.p-4 {\n  padding": 1,
+    ";\n}\n\n.p-5 {\n  padding": 1,
+    ";\n}\n\n/* Padding horizontal */\n.px-0 {\n  padding-left": 1,
+    ";\n  padding-right": 6,
+    ";\n}\n\n.px-1 {\n  padding-left": 1,
+    ";\n}\n\n.px-2 {\n  padding-left": 1,
+    ";\n}\n\n.px-3 {\n  padding-left": 1,
+    ";\n}\n\n.px-4 {\n  padding-left": 1,
+    ";\n}\n\n.px-5 {\n  padding-left": 1,
+    ";\n}\n\n/* Padding vertical */\n.py-0 {\n  padding-top": 1,
+    ";\n  padding-bottom": 6,
+    ";\n}\n\n.py-1 {\n  padding-top": 1,
+    ";\n}\n\n.py-2 {\n  padding-top": 1,
+    ";\n}\n\n.py-3 {\n  padding-top": 1,
+    ";\n}\n\n.py-4 {\n  padding-top": 1,
+    ";\n}\n\n.py-5 {\n  padding-top": 1,
+    ";\n}\n\n/* Padding top */\n.pt-0 {\n  padding-top": 1,
+    ";\n}\n\n.pt-1 {\n  padding-top": 1,
+    ";\n}\n\n.pt-2 {\n  padding-top": 1,
+    ";\n}\n\n.pt-3 {\n  padding-top": 1,
+    ";\n}\n\n.pt-4 {\n  padding-top": 1,
+    ";\n}\n\n.pt-5 {\n  padding-top": 1,
+    ";\n}\n\n/* Padding right */\n.pr-0 {\n  padding-right": 1,
+    ";\n}\n\n.pr-1 {\n  padding-right": 1,
+    ";\n}\n\n.pr-2 {\n  padding-right": 1,
+    ";\n}\n\n.pr-3 {\n  padding-right": 1,
+    ";\n}\n\n.pr-4 {\n  padding-right": 1,
+    ";\n}\n\n.pr-5 {\n  padding-right": 1,
+    ";\n}\n\n/* Padding bottom */\n.pb-0 {\n  padding-bottom": 1,
+    ";\n}\n\n.pb-1 {\n  padding-bottom": 1,
+    ";\n}\n\n.pb-2 {\n  padding-bottom": 1,
+    ";\n}\n\n.pb-3 {\n  padding-bottom": 1,
+    ";\n}\n\n.pb-4 {\n  padding-bottom": 1,
+    ";\n}\n\n.pb-5 {\n  padding-bottom": 1,
+    ";\n}\n\n/* Padding left */\n.pl-0 {\n  padding-left": 1,
+    ";\n}\n\n.pl-1 {\n  padding-left": 1,
+    ";\n}\n\n.pl-2 {\n  padding-left": 1,
+    ";\n}\n\n.pl-3 {\n  padding-left": 1,
+    ";\n}\n\n.pl-4 {\n  padding-left": 1,
+    ";\n}\n\n.pl-5 {\n  padding-left": 1,
+    ";\n}\n\n/* Gap */\n.gap-0 {\n  gap": 1,
+    ";\n}\n\n.gap-1 {\n  gap": 1,
+    ";\n}\n\n.gap-2 {\n  gap": 1,
+    ";\n}\n\n.gap-3 {\n  gap": 1,
+    ";\n}\n\n.gap-4 {\n  gap": 1,
+    ";\n}\n\n.gap-5 {\n  gap": 1,
+    "/* \n * Bubble Background Styles - Only changes the background \n * Preserves the existing washing machine animation\n */\n\n#loadingIndicator {\n  background": 1,
+    "/* Glassmorphism Theme CSS */": 1,
+    "/* Icon Fixes */\n.ti {\n  font-family": 1,
+    "/* Fix for List View in the Viewer \n   This CSS ensures the list view displays correctly\n*/\n\n/* List View Container */\n.image-gallery.list-view {\n  display": 1,
+    ";\n  flex-direction": 2,
+    ";\n  gap": 1,
+    ";\n}\n\n/* List View Cards */\n.list-view .image-card {\n  display": 1,
+    ";\n  height": 3,
+    ";\n  width": 1,
+    ";\n  padding": 2,
+    ";\n  position": 2,
+    ";\n}\n\n/* Image in List View */\n.list-view .image-card .card-image {\n  width": 1,
+    ";\n  flex-shrink": 1,
+    ";\n  object-fit": 1,
+    ";\n}\n\n/* Content in List View */\n.list-view .image-card .card-content {\n  flex": 1,
+    ";\n  display": 2,
+    ";\n  justify-content": 2,
+    ";\n  background-color": 3,
+    ";\n}\n\n/* Title in List View */\n.list-view .card-title {\n  font-size": 1,
+    ";\n  font-weight": 2,
+    ";\n  overflow": 1,
+    ";\n  text-overflow": 1,
+    ";\n  white-space": 1,
+    ";\n}\n\n/* Date in List View */\n.list-view .card-date {\n  font-size": 1,
+    ";\n  color": 6,
+    ";\n}\n\n/* Fix for empty state positioning in List View */\n.list-view .empty-state {\n  width": 1,
+    ";\n}\n\n/* Fix for card placeholder in list view */\n.list-view .card-placeholder {\n  width": 1,
+    ";\n  align-items": 1,
+    ";\n}\n\n.list-view .card-placeholder i {\n  font-size": 1,
+    "/* \n * Loading Screen Background Styles\n * Only modifying the background, preserving the existing washing machine animation \n */\n\n/* Creating a light blue background with animated bubbles */\n#loadingIndicator {\n  /* Override the background only */\n  background-color": 1,
+    "; /* Light blue with transparency */\n  position": 1,
+    "/* Neumorphism Theme CSS */": 1,
+    "/* Base Styles - Applied after reset.css */": 1,
+    "/* Fix for view-btn and refresh-btn states - matching main page style */\n\n/* Reset all view-btn and refresh-btn states */\n.view-btn,\n.refresh-btn,\n.toolbar .view-options .view-btn,\n.toolbar .view-options .refresh-btn,\n.viewer-content .toolbar .view-options .view-btn,\n.viewer-content .toolbar .view-options .refresh-btn {\n  background-color": 1,
+    ";\n  border": 4,
+    ";\n  box-shadow": 3,
+    ";\n}\n\n/* Hover state */\n.view-btn": 1,
+    ";\n  transform": 3,
+    ";\n}\n\n/* Active state (when clicking) */\n.view-btn": 1,
+    ";\n}\n\n/* Selected state (active class) */\n.view-btn.active,\n.toolbar .view-options .view-btn.active,\n.viewer-content .toolbar .view-options .view-btn.active {\n  background-color": 1
+  },
+  "importantDeclarations": [
+    {
+      "file": "icons.css",
+      "property": "/*\n * Components Layer - Icons\n * ----------------------\n * Styles for icons and icon elements\n */\n\n/* Base icon styling */\n.ti {\n  font-family",
+      "value": "'tabler-icons'"
+    },
+    {
+      "file": "animations.css",
+      "property": "/*\n * Utilities Layer - Animations\n * --------------------------\n * Animations and transitions utility classes\n */\n\n/* Basic animations */\n.fade-in {\n  animation",
+      "value": "fadeIn 0.5s ease forwards;\n}\n\n.fade-out {\n  animation: fadeOut 0.5s ease forwards;\n}\n\n.slide-up {\n  animation: slideUp 0.5s ease forwards;\n}\n\n.slide-down {\n  animation: slideDown 0.5s ease forwards;\n}\n\n.scale-in {\n  animation: scaleIn 0.5s ease forwards;\n}\n\n.scale-out {\n  animation: scaleOut 0.5s ease forwards;\n}\n\n.rotate-360 {\n  animation: rotate360 1s linear infinite;\n}\n\n.shake {\n  animation: shake 0.5s ease-in-out;\n}\n\n.pulse {\n  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;\n}\n\n/* Animation keyframes */\n@keyframes fadeIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n\n@keyframes fadeOut {\n  from { opacity: 1; }\n  to { opacity: 0; }\n}\n\n@keyframes slideUp {\n  from { transform: translateY(20px); opacity: 0; }\n  to { transform: translateY(0); opacity: 1; }\n}\n\n@keyframes slideDown {\n  from { transform: translateY(-20px); opacity: 0; }\n  to { transform: translateY(0); opacity: 1; }\n}\n\n@keyframes scaleIn {\n  from { transform: scale(0.9); opacity: 0; }\n  to { transform: scale(1); opacity: 1; }\n}\n\n@keyframes scaleOut {\n  from { transform: scale(1); opacity: 1; }\n  to { transform: scale(0.9); opacity: 0; }\n}\n\n@keyframes rotate360 {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\n\n@keyframes shake {\n  0%, 100% { transform: translateX(0); }\n  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }\n  20%, 40%, 60%, 80% { transform: translateX(5px); }\n}\n\n@keyframes pulse {\n  0%, 100% { opacity: 1; }\n  50% { opacity: 0.5; }\n}\n\n/* Transition utilities */\n.transition-fast {\n  transition: all var(--transition-fast)"
+    },
+    {
+      "file": "animations.css",
+      "property": ";\n}\n\n.transition-normal {\n  transition",
+      "value": "all var(--transition-normal)"
+    },
+    {
+      "file": "animations.css",
+      "property": ";\n}\n\n.transition-slow {\n  transition",
+      "value": "all var(--transition-slow)"
+    },
+    {
+      "file": "animations.css",
+      "property": ";\n}\n\n.transition-none {\n  transition",
+      "value": "none"
+    },
+    {
+      "file": "display.css",
+      "property": "/*\n * Utilities Layer - Display\n * -----------------------\n * Display, visibility, and layout utility classes\n */\n\n/* Display */\n.hidden {\n  display",
+      "value": "none"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.block {\n  display",
+      "value": "block"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.inline-block {\n  display",
+      "value": "inline-block"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.inline {\n  display",
+      "value": "inline"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n/* Flexbox */\n.flex {\n  display",
+      "value": "flex"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.inline-flex {\n  display",
+      "value": "inline-flex"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.flex-row {\n  flex-direction",
+      "value": "row"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.flex-col {\n  flex-direction",
+      "value": "column"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.flex-wrap {\n  flex-wrap",
+      "value": "wrap"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.flex-nowrap {\n  flex-wrap",
+      "value": "nowrap"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.justify-start {\n  justify-content",
+      "value": "flex-start"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.justify-end {\n  justify-content",
+      "value": "flex-end"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.justify-center {\n  justify-content",
+      "value": "center"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.justify-between {\n  justify-content",
+      "value": "space-between"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.justify-around {\n  justify-content",
+      "value": "space-around"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.items-start {\n  align-items",
+      "value": "flex-start"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.items-end {\n  align-items",
+      "value": "flex-end"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.items-center {\n  align-items",
+      "value": "center"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.items-baseline {\n  align-items",
+      "value": "baseline"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.items-stretch {\n  align-items",
+      "value": "stretch"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.flex-grow {\n  flex-grow",
+      "value": "1"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.flex-shrink {\n  flex-shrink",
+      "value": "1"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.flex-no-grow {\n  flex-grow",
+      "value": "0"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.flex-no-shrink {\n  flex-shrink",
+      "value": "0"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n/* Positioning */\n.relative {\n  position",
+      "value": "relative"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.absolute {\n  position",
+      "value": "absolute"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.fixed {\n  position",
+      "value": "fixed"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.sticky {\n  position",
+      "value": "sticky"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n  top",
+      "value": "0"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n/* Width/Height */\n.w-full {\n  width",
+      "value": "100%"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.h-full {\n  height",
+      "value": "100%"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.min-h-screen {\n  min-height",
+      "value": "100vh"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.max-w-full {\n  max-width",
+      "value": "100%"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n/* Overflow */\n.overflow-hidden {\n  overflow",
+      "value": "hidden"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.overflow-auto {\n  overflow",
+      "value": "auto"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.overflow-scroll {\n  overflow",
+      "value": "scroll"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.overflow-y-auto {\n  overflow-y",
+      "value": "auto"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.overflow-x-auto {\n  overflow-x",
+      "value": "auto"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n/* Z-index */\n.z-0 {\n  z-index",
+      "value": "0"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.z-10 {\n  z-index",
+      "value": "10"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.z-20 {\n  z-index",
+      "value": "20"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.z-30 {\n  z-index",
+      "value": "30"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.z-40 {\n  z-index",
+      "value": "40"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.z-50 {\n  z-index",
+      "value": "50"
+    },
+    {
+      "file": "display.css",
+      "property": ";\n}\n\n.z-auto {\n  z-index",
+      "value": "auto"
+    },
+    {
+      "file": "spacing.css",
+      "property": "/*\n * Utilities Layer - Spacing\n * -----------------------\n * Margin and padding utility classes\n */\n\n/* Margin utilities */\n.m-0 {\n  margin",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.m-1 {\n  margin",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.m-2 {\n  margin",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.m-3 {\n  margin",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.m-4 {\n  margin",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.m-5 {\n  margin",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Margin horizontal */\n.mx-0 {\n  margin-left",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-right",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mx-1 {\n  margin-left",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-right",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mx-2 {\n  margin-left",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-right",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mx-3 {\n  margin-left",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-right",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mx-4 {\n  margin-left",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-right",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mx-5 {\n  margin-left",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-right",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mx-auto {\n  margin-left",
+      "value": "auto"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-right",
+      "value": "auto"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Margin vertical */\n.my-0 {\n  margin-top",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-bottom",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.my-1 {\n  margin-top",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-bottom",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.my-2 {\n  margin-top",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-bottom",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.my-3 {\n  margin-top",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-bottom",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.my-4 {\n  margin-top",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-bottom",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.my-5 {\n  margin-top",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  margin-bottom",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Margin top */\n.mt-0 {\n  margin-top",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mt-1 {\n  margin-top",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mt-2 {\n  margin-top",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mt-3 {\n  margin-top",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mt-4 {\n  margin-top",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mt-5 {\n  margin-top",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Margin right */\n.mr-0 {\n  margin-right",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mr-1 {\n  margin-right",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mr-2 {\n  margin-right",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mr-3 {\n  margin-right",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mr-4 {\n  margin-right",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mr-5 {\n  margin-right",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Margin bottom */\n.mb-0 {\n  margin-bottom",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mb-1 {\n  margin-bottom",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mb-2 {\n  margin-bottom",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mb-3 {\n  margin-bottom",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mb-4 {\n  margin-bottom",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.mb-5 {\n  margin-bottom",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Margin left */\n.ml-0 {\n  margin-left",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.ml-1 {\n  margin-left",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.ml-2 {\n  margin-left",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.ml-3 {\n  margin-left",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.ml-4 {\n  margin-left",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.ml-5 {\n  margin-left",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Padding utilities */\n.p-0 {\n  padding",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.p-1 {\n  padding",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.p-2 {\n  padding",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.p-3 {\n  padding",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.p-4 {\n  padding",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.p-5 {\n  padding",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Padding horizontal */\n.px-0 {\n  padding-left",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-right",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.px-1 {\n  padding-left",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-right",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.px-2 {\n  padding-left",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-right",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.px-3 {\n  padding-left",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-right",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.px-4 {\n  padding-left",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-right",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.px-5 {\n  padding-left",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-right",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Padding vertical */\n.py-0 {\n  padding-top",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-bottom",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.py-1 {\n  padding-top",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-bottom",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.py-2 {\n  padding-top",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-bottom",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.py-3 {\n  padding-top",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-bottom",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.py-4 {\n  padding-top",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-bottom",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.py-5 {\n  padding-top",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n  padding-bottom",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Padding top */\n.pt-0 {\n  padding-top",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pt-1 {\n  padding-top",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pt-2 {\n  padding-top",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pt-3 {\n  padding-top",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pt-4 {\n  padding-top",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pt-5 {\n  padding-top",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Padding right */\n.pr-0 {\n  padding-right",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pr-1 {\n  padding-right",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pr-2 {\n  padding-right",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pr-3 {\n  padding-right",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pr-4 {\n  padding-right",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pr-5 {\n  padding-right",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Padding bottom */\n.pb-0 {\n  padding-bottom",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pb-1 {\n  padding-bottom",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pb-2 {\n  padding-bottom",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pb-3 {\n  padding-bottom",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pb-4 {\n  padding-bottom",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pb-5 {\n  padding-bottom",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Padding left */\n.pl-0 {\n  padding-left",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pl-1 {\n  padding-left",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pl-2 {\n  padding-left",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pl-3 {\n  padding-left",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pl-4 {\n  padding-left",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.pl-5 {\n  padding-left",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n/* Gap */\n.gap-0 {\n  gap",
+      "value": "0"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.gap-1 {\n  gap",
+      "value": "var(--spacing-xs)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.gap-2 {\n  gap",
+      "value": "var(--spacing-sm)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.gap-3 {\n  gap",
+      "value": "var(--spacing-md)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.gap-4 {\n  gap",
+      "value": "var(--spacing-lg)"
+    },
+    {
+      "file": "spacing.css",
+      "property": ";\n}\n\n.gap-5 {\n  gap",
+      "value": "var(--spacing-xl)"
+    },
+    {
+      "file": "bubble-bg.css",
+      "property": "/* \n * Bubble Background Styles - Only changes the background \n * Preserves the existing washing machine animation\n */\n\n#loadingIndicator {\n  background",
+      "value": "linear-gradient(to bottom, #e6f7ff, #b3e0ff)"
+    },
+    {
+      "file": "glassmorphism.css",
+      "property": "/* Glassmorphism Theme CSS */",
+      "value": "root {\n  --glass-bg-primary: rgba(255, 255, 255, 0.1);\n  --glass-bg-card: rgba(255, 255, 255, 0.08);\n  --glass-border: rgba(255, 255, 255, 0.12);\n  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);\n  --glass-blur: blur(10px);\n  --primary-color: #ff3a7c;\n  --primary-light: #ff7eac;\n  --primary-dark: #d62f68;\n  --text-color: #f8f9fa;\n  --text-muted: rgba(255, 255, 255, 0.6);\n  --accent-purple: #6c5ce7;\n  --accent-blue: #56b3ff;\n  --gradient-primary: linear-gradient(135deg, #ff3a7c 0%, #6c5ce7 100%);\n  --gradient-bg: linear-gradient(135deg, #30108f 0%, #8019b0 50%, #3a1288 100%);\n}\n\nbody {\n  font-family: 'Montserrat', sans-serif;\n  background: var(--gradient-bg);\n  color: var(--text-color);\n  line-height: 1.5;\n  min-height: 100vh;\n  overflow-x: hidden;\n  position: relative;\n}\n\nbody::before {\n  content: '';\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  background-image: \n    radial-gradient(circle at 20% 20%, rgba(255, 58, 124, 0.2) 0%, transparent 25%),\n    radial-gradient(circle at 80% 80%, rgba(108, 92, 231, 0.2) 0%, transparent 25%),\n    radial-gradient(circle at 50% 50%, rgba(86, 179, 255, 0.1) 0%, transparent 50%);\n  z-index: -1;\n}\n\n/* Glassmorphism card styles */\n.glass-card {\n  background: var(--glass-bg-card);\n  border-radius: 16px;\n  box-shadow: var(--glass-shadow);\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  border: 1px solid var(--glass-border);\n  padding: 20px;\n  transition: all 0.3s ease;\n}\n\n.glass-card:hover {\n  transform: translateY(-3px);\n  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);\n  border: 1px solid rgba(255, 255, 255, 0.18);\n}\n\n/* Control panel glassmorphism */\n.control-panel {\n  width: 360px;\n  background: rgba(25, 20, 65, 0.7);\n  box-shadow: var(--glass-shadow);\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  border-right: 1px solid var(--glass-border);\n  padding: 1.5rem 1.5rem 80px;\n  display: flex;\n  flex-direction: column;\n  overflow-y: auto;\n  z-index: 10;\n  position: relative;\n}\n\n.app-title {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n  margin-bottom: 2rem;\n  flex-wrap: wrap;\n}\n\n.app-title .icon {\n  font-size: 2rem;\n  background: var(--gradient-primary);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n\n.app-title h1 {\n  font-size: 1.5rem;\n  font-weight: 700;\n  letter-spacing: -0.5px;\n  color: var(--text-color);\n  margin: 0;\n}\n\n/* Form elements */\n.form-group {\n  margin-bottom: 1.25rem;\n}\n\nlabel {\n  display: block;\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin-bottom: 0.5rem;\n  color: var(--text-color);\n}\n\n.textarea {\n  width: 100%;\n  padding: 0.75rem;\n  font-family: 'Open Sans', sans-serif;\n  border: 1px solid var(--glass-border);\n  border-radius: 12px;\n  background: rgba(255, 255, 255, 0.05);\n  color: var(--text-color);\n  transition: all 0.2s;\n  resize: vertical;\n  min-height: 100px;\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n}\n\n.textarea:focus {\n  outline: none;\n  border-color: var(--primary-color);\n  box-shadow: 0 0 0 3px rgba(255, 58, 124, 0.3);\n}\n\n/* Button styles */\n.btn {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 0.75rem 1.25rem;\n  font-weight: 600;\n  border-radius: 12px;\n  cursor: pointer;\n  transition: all 0.3s;\n  border: none;\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  text-decoration: none;\n}\n\n.btn-primary {\n  background: var(--gradient-primary);\n  color: white;\n  box-shadow: 0 4px 15px rgba(255, 58, 124, 0.4);\n  width: 100%;\n}\n\n.btn-primary:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 6px 20px rgba(255, 58, 124, 0.5);\n}\n\n.btn-primary:active {\n  transform: translateY(0);\n}\n\n.btn-outline {\n  background: rgba(255, 255, 255, 0.1);\n  color: var(--text-color);\n  border: 1px solid var(--glass-border);\n}\n\n.btn-outline:hover {\n  background: rgba(255, 255, 255, 0.15);\n  border-color: rgba(255, 255, 255, 0.25);\n}\n\n.btn i {\n  font-size: 1.25rem;\n}\n\n/* Size, quality, and style buttons */\n.size-btn, .quality-btn, .style-type-btn, .style-preset-btn, .count-btn {\n  flex: 1;\n  padding: 10px 12px;\n  background: rgba(255, 255, 255, 0.05);\n  border: 1px solid var(--glass-border);\n  border-radius: 12px;\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  cursor: pointer;\n  transition: all 0.2s;\n  text-align: center;\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n}\n\n.size-btn:hover, .quality-btn:hover, .style-type-btn:hover, .style-preset-btn:hover, .count-btn:hover {\n  background: rgba(255, 255, 255, 0.1);\n}\n\n.size-btn.active, .quality-btn.active, .style-type-btn.active, .style-preset-btn.active, .count-btn.active {\n  background: linear-gradient(135deg, rgba(255, 58, 124, 0.2) 0%, rgba(108, 92, 231, 0.2) 100%);\n  border-color: var(--primary-color);\n  color: var(--text-color);\n  box-shadow: 0 2px 10px rgba(255, 58, 124, 0.2);\n}\n\n/* Image container */\n.image-container {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: rgba(25, 20, 65, 0.3);\n  position: relative;\n  overflow: hidden;\n  transition: all 0.3s;\n}\n\n/* Placeholder */\n.placeholder {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  color: rgba(255, 255, 255, 0.3);\n  text-align: center;\n  padding: 2rem;\n}\n\n.placeholder i {\n  font-size: 5rem;\n  margin-bottom: 1rem;\n}\n\n.placeholder p {\n  font-size: 1.25rem;\n  font-weight: 500;\n}\n\n/* Gallery layout styles */\n.single-image-layout .gallery-wrapper {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 90%;\n}\n\n.single-image-layout .image-wrapper {\n  max-width: 90%;\n  max-height: 90%;\n  position: relative;\n  cursor: pointer;\n  border-radius: 16px;\n  overflow: hidden;\n  box-shadow: var(--glass-shadow);\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n}\n\n.two-image-layout .gallery-wrapper {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 20px;\n  width: 100%;\n  height: 90%;\n  justify-content: center;\n  align-items: center;\n}\n\n.two-image-layout .image-wrapper {\n  flex: 0 0 calc(45% - 10px);\n  max-height: 80%;\n  position: relative;\n  border-radius: 16px;\n  overflow: hidden;\n  box-shadow: var(--glass-shadow);\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  cursor: pointer;\n}\n\n.four-image-layout .gallery-wrapper {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-rows: repeat(2, 1fr);\n  gap: 16px;\n  width: 90%;\n  height: 90%;\n  margin: auto;\n}\n\n.four-image-layout .image-wrapper {\n  position: relative;\n  border-radius: 16px;\n  overflow: hidden;\n  box-shadow: var(--glass-shadow);\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  height: 100%;\n  width: 100%;\n  cursor: pointer;\n}\n\n/* Image hover effects */\n.image-wrapper::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));\n  opacity: 0;\n  transition: opacity 0.3s ease;\n  z-index: 1;\n}\n\n.image-wrapper:hover::before {\n  opacity: 1;\n}\n\n.download-icon {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.3);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  transition: opacity 0.3s;\n  z-index: 5;\n  border-radius: 16px;\n}\n\n.image-wrapper:hover .download-icon {\n  opacity: 1;\n}\n\n.download-icon i {\n  font-size: 2rem;\n  color: white;\n  background: rgba(255, 255, 255, 0.2);\n  padding: 15px;\n  border-radius: 50%;\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n}\n\n/* Loading indicator */\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(15, 10, 45, 0.8);\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  z-index: 20;\n}\n\n.loading-spinner {\n  width: 48px;\n  height: 48px;\n  border: 4px solid var(--primary-light);\n  border-radius: 50%;\n  border-top-color: var(--primary-color);\n  animation: spin 1s linear infinite;\n  margin-bottom: 1rem;\n}\n\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}\n\n/* Gallery styling */\n.gallery-btn {\n  background: rgba(255, 255, 255, 0.1);\n  color: var(--text-color);\n  border: 1px solid var(--glass-border);\n  border-radius: 12px;\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  padding: 10px 16px;\n  transition: all 0.3s;\n}\n\n.gallery-btn:hover {\n  background: rgba(255, 255, 255, 0.15);\n  transform: translateY(-2px);\n}\n\n.gallery-btn.full-width {\n  width: 100%;\n}\n\n.gallery-btn i {\n  margin-right: 6px;\n}\n\n/* Image gallery */\n.image-gallery {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n  gap: 16px;\n  padding: 16px;\n  width: 100%;\n  overflow-y: auto;\n}\n\n.image-card {\n  background: rgba(255, 255, 255, 0.08);\n  border-radius: 16px;\n  overflow: hidden;\n  box-shadow: var(--glass-shadow);\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  border: 1px solid var(--glass-border);\n  transition: all 0.3s;\n  cursor: pointer;\n  position: relative;\n  aspect-ratio: 1 / 1;\n}\n\n.image-card:hover {\n  transform: translateY(-5px);\n  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);\n  border-color: var(--primary-color);\n}\n\n.card-image {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}\n\n/* Floating orbs background decoration */\n.orb {\n  position: absolute;\n  border-radius: 50%;\n  filter: blur(60px);\n  opacity: 0.4;\n  animation: float 10s ease-in-out infinite alternate;\n}\n\n.orb-1 {\n  width: 300px;\n  height: 300px;\n  background: rgba(255, 58, 124, 0.3);\n  top: -150px;\n  right: 10%;\n  animation-delay: 0s;\n}\n\n.orb-2 {\n  width: 250px;\n  height: 250px;\n  background: rgba(108, 92, 231, 0.3);\n  bottom: -100px;\n  left: 10%;\n  animation-delay: 2s;\n}\n\n.orb-3 {\n  width: 200px;\n  height: 200px;\n  background: rgba(86, 179, 255, 0.3);\n  top: 40%;\n  right: -50px;\n  animation-delay: 4s;\n}\n\n@keyframes float {\n  0% {\n    transform: translateY(0) scale(1);\n  }\n  50% {\n    transform: translateY(-20px) scale(1.05) rotate(5deg);\n  }\n  100% {\n    transform: translateY(20px) scale(0.95) rotate(-5deg);\n  }\n}\n\n/* Modal */\n.image-modal {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(15, 10, 45, 0.85);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 1000;\n  opacity: 0;\n  visibility: hidden;\n  transition: all 0.3s;\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n}\n\n.image-modal.active {\n  opacity: 1;\n  visibility: visible;\n}\n\n.modal-content {\n  width: 90%;\n  max-width: 900px;\n  max-height: 90vh;\n  background: rgba(30, 25, 75, 0.85);\n  border-radius: 16px;\n  overflow: hidden;\n  box-shadow: var(--glass-shadow);\n  backdrop-filter: var(--glass-blur);\n  -webkit-backdrop-filter: var(--glass-blur);\n  border: 1px solid var(--glass-border);\n  display: flex;\n  flex-direction: column;\n  transform: scale(0.95);\n  transition: all 0.3s;\n}\n\n.image-modal.active .modal-content {\n  transform: scale(1);\n}\n\n.modal-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 16px 20px;\n  border-bottom: 1px solid var(--glass-border);\n}\n\n.modal-header h3 {\n  margin: 0;\n  color: var(--text-color);\n  font-size: 1.2rem;\n}\n\n.close-btn {\n  background: none;\n  border: none;\n  color: var(--text-color);\n  font-size: 1.5rem;\n  cursor: pointer;\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 32px;\n  height: 32px;\n  border-radius: 50%;\n  transition: all 0.2s;\n}\n\n.close-btn:hover {\n  background: rgba(255, 255, 255, 0.1);\n}\n\n.modal-body {\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n  padding: 20px;\n  overflow-y: auto;\n}\n\n.image-preview {\n  flex: 0 0 auto;\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  position: relative;\n  border-radius: 12px;\n  overflow: hidden;\n}\n\n.image-preview img {\n  max-width: 100%;\n  max-height: 60vh;\n  object-fit: contain;\n  border-radius: 12px;\n}\n\n.image-details {\n  display: flex;\n  flex-direction: column;\n  gap: 16px;\n}\n\n.detail-item {\n  background: rgba(255, 255, 255, 0.05);\n  padding: 16px;\n  border-radius: 12px;\n  border: 1px solid var(--glass-border);\n}\n\n.detail-item h4 {\n  margin: 0 0 8px;\n  color: var(--text-muted);\n  font-size: 0.9rem;\n  font-weight: 600;\n}\n\n.detail-item p {\n  margin: 0;\n  color: var(--text-color);\n  font-family: 'Open Sans', sans-serif;\n  line-height: 1.4;\n}\n\n.modal-footer {\n  display: flex;\n  justify-content: flex-end;\n  gap: 12px;\n  padding: 16px 20px;\n  border-top: 1px solid var(--glass-border);\n}\n\n/* Media queries for responsive design */\n@media (max-width: 768px) {\n  .app-container {\n    flex-direction: column;\n  }\n  \n  .control-panel {\n    width: 100%;\n    height: auto;\n    max-height: 50vh;\n  }\n  \n  .image-container {\n    height: 50vh;\n  }\n  \n  .modal-body {\n    flex-direction: column;\n  }\n}\n\n/* Utils */\n.hidden {\n  display: none"
+    },
+    {
+      "file": "icon-fixes.css",
+      "property": "/* Icon Fixes */\n.ti {\n  font-family",
+      "value": "'tabler-icons'"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": "/* Fix for List View in the Viewer \n   This CSS ensures the list view displays correctly\n*/\n\n/* List View Container */\n.image-gallery.list-view {\n  display",
+      "value": "flex"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  flex-direction",
+      "value": "column"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  gap",
+      "value": "15px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n}\n\n/* List View Cards */\n.list-view .image-card {\n  display",
+      "value": "flex"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  height",
+      "value": "120px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  width",
+      "value": "100%"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  padding",
+      "value": "0"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  position",
+      "value": "relative"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n}\n\n/* Image in List View */\n.list-view .image-card .card-image {\n  width",
+      "value": "120px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  height",
+      "value": "120px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  flex-shrink",
+      "value": "0"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  position",
+      "value": "relative"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  object-fit",
+      "value": "cover"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n}\n\n/* Content in List View */\n.list-view .image-card .card-content {\n  flex",
+      "value": "1"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  padding",
+      "value": "15px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  display",
+      "value": "flex"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  flex-direction",
+      "value": "column"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  justify-content",
+      "value": "space-between"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  background-color",
+      "value": "inherit"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n}\n\n/* Title in List View */\n.list-view .card-title {\n  font-size",
+      "value": "14px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  font-weight",
+      "value": "500"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  margin-bottom",
+      "value": "5px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  overflow",
+      "value": "hidden"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  text-overflow",
+      "value": "ellipsis"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  white-space",
+      "value": "nowrap"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n}\n\n/* Date in List View */\n.list-view .card-date {\n  font-size",
+      "value": "12px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  color",
+      "value": "var(--text-muted, #94a3b8)"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n}\n\n/* Fix for empty state positioning in List View */\n.list-view .empty-state {\n  width",
+      "value": "100%"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n}\n\n/* Fix for card placeholder in list view */\n.list-view .card-placeholder {\n  width",
+      "value": "120px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  height",
+      "value": "120px"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  display",
+      "value": "flex"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  align-items",
+      "value": "center"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  justify-content",
+      "value": "center"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  background-color",
+      "value": "#2c3e50"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n  color",
+      "value": "#94a3b8"
+    },
+    {
+      "file": "list-view-fix.css",
+      "property": ";\n}\n\n.list-view .card-placeholder i {\n  font-size",
+      "value": "32px"
+    },
+    {
+      "file": "loading-background.css",
+      "property": "/* \n * Loading Screen Background Styles\n * Only modifying the background, preserving the existing washing machine animation \n */\n\n/* Creating a light blue background with animated bubbles */\n#loadingIndicator {\n  /* Override the background only */\n  background-color",
+      "value": "rgba(173, 216, 230, 0.9)"
+    },
+    {
+      "file": "loading-background.css",
+      "property": "; /* Light blue with transparency */\n  position",
+      "value": "relative;\n  overflow: hidden; /* Keep bubbles contained */\n}\n\n/* Update text color to be readable on light blue background */\n#loadingIndicator p {\n  color: #2c3e50"
+    },
+    {
+      "file": "neumorphism.css",
+      "property": "/* Neumorphism Theme CSS */",
+      "value": "root {\n  --bg-color: #e6e7ee;\n  --element-bg: #e6e7ee;\n  --text-color: #44476a;\n  --text-muted: #7e84a3;\n  --primary-color: #7e57c2;\n  --primary-dark: #673ab7;\n  --primary-light: #b39ddb;\n  --shadow-light: 6px 6px 12px rgba(195, 195, 195, 0.5);\n  --shadow-dark: -6px -6px 12px rgba(255, 255, 255, 0.8);\n  --shadow-inset-light: inset 4px 4px 8px rgba(195, 195, 195, 0.5);\n  --shadow-inset-dark: inset -4px -4px 8px rgba(255, 255, 255, 0.8);\n  --border-radius: 12px;\n  --btn-radius: 25px;\n  --transition: all 0.3s ease;\n}\n\n/* Tooltip styles */\n.tooltip-container {\n  position: relative;\n  display: inline-block;\n}\n\n.tooltip-container .tooltip {\n  position: absolute;\n  bottom: 120%;\n  left: 50%;\n  transform: translateX(-50%);\n  background: var(--element-bg);\n  color: var(--text-color);\n  padding: 8px 12px;\n  border-radius: 8px;\n  font-size: 12px;\n  font-weight: 500;\n  text-align: center;\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n  white-space: nowrap;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity 0.3s ease, transform 0.3s ease;\n  z-index: 100;\n}\n\n.tooltip-container .tooltip::after {\n  content: \"\";\n  position: absolute;\n  top: 100%;\n  left: 50%;\n  transform: translateX(-50%);\n  border-width: 6px;\n  border-style: solid;\n  border-color: var(--element-bg) transparent transparent transparent;\n}\n\n.tooltip-container:hover .tooltip {\n  visibility: visible;\n  opacity: 1;\n  transform: translateX(-50%) translateY(-5px);\n}\n\nbody {\n  font-family: 'Montserrat', sans-serif;\n  background-color: var(--bg-color);\n  color: var(--text-color);\n  line-height: 1.5;\n  min-height: 100vh;\n  overflow-x: hidden;\n  position: relative;\n}\n\n/* Neumorphic card styles */\n.neuro-card {\n  background-color: var(--element-bg);\n  border-radius: var(--border-radius);\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n  padding: 20px;\n  transition: var(--transition);\n  border: none;\n}\n\n.neuro-card:hover {\n  box-shadow: var(--shadow-dark), var(--shadow-light);\n}\n\n/* Control panel */\n.control-panel {\n  width: 360px;\n  background-color: var(--element-bg);\n  box-shadow: var(--shadow-light);\n  padding: 1rem 1.5rem 100px;\n  display: flex;\n  flex-direction: column;\n  overflow-y: auto;\n  z-index: 10;\n  position: relative;\n}\n\n.app-title {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n  margin-bottom: 0.75rem;\n  flex-wrap: wrap;\n}\n\n.app-title .icon {\n  font-size: 2rem;\n  color: var(--primary-color);\n}\n\n.app-title h1 {\n  font-size: 1.5rem;\n  font-weight: 700;\n  letter-spacing: -0.5px;\n  color: var(--text-color);\n  margin: 0;\n}\n\n/* Form elements */\n.form-group {\n  margin-bottom: 1rem;\n}\n\nlabel {\n  display: block;\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin-bottom: 0.75rem;\n  color: var(--text-color);\n}\n\n.input, .select, .textarea {\n  width: 100%;\n  padding: 0.875rem;\n  font-family: 'Open Sans', sans-serif;\n  border: none;\n  border-radius: var(--border-radius);\n  background-color: var(--element-bg);\n  color: var(--text-color);\n  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);\n  transition: var(--transition);\n}\n\n.textarea {\n  resize: vertical;\n  min-height: 80px;\n}\n\n.input:focus, .select:focus, .textarea:focus {\n  outline: none;\n  box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);\n}\n\n/* Button styles */\n.btn {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 0.875rem 1.25rem;\n  font-weight: 600;\n  border-radius: var(--btn-radius);\n  cursor: pointer;\n  transition: var(--transition);\n  border: none;\n  background-color: var(--element-bg);\n  color: var(--text-color);\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n  text-decoration: none;\n  font-size: 0.95rem;\n}\n\n.btn:hover {\n  box-shadow: var(--shadow-dark), var(--shadow-light);\n  transform: translateY(-2px);\n}\n\n.btn:active {\n  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);\n  transform: translateY(0);\n}\n\n.btn:disabled {\n  opacity: 0.6;\n  cursor: not-allowed;\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n}\n\n.btn-primary {\n  background-color: var(--primary-color);\n  color: white;\n  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.1);\n  width: 100%;\n}\n\n.btn-primary:hover {\n  background-color: var(--primary-dark);\n  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.25), -6px -6px 12px rgba(255, 255, 255, 0.1);\n}\n\n.btn-primary:active {\n  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(255, 255, 255, 0.1);\n  background-color: var(--primary-dark);\n}\n\n.btn-outline {\n  background-color: var(--element-bg);\n  color: var(--primary-color);\n  border: none;\n}\n\n.btn-outline:hover {\n  color: var(--primary-dark);\n}\n\n.btn-outline:active {\n  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);\n}\n\n.btn i {\n  font-size: 1.25rem;\n}\n\n/* Image container */\n.image-container {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: var(--bg-color);\n  position: relative;\n  overflow: hidden;\n  transition: var(--transition);\n  border-radius: var(--border-radius);\n  margin: 1rem;\n  box-shadow: inset var(--shadow-light), inset var(--shadow-dark);\n}\n\n/* Placeholder */\n.placeholder {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  color: var(--text-muted);\n  text-align: center;\n  padding: 2rem;\n}\n\n.placeholder i {\n  font-size: 5rem;\n  margin-bottom: 1rem;\n}\n\n.placeholder p {\n  font-size: 1.25rem;\n  font-weight: 500;\n}\n\n/* Size, quality, and style buttons */\n.size-selector, .quality-selector, .style-type-selector, .style-preset-selector, .count-selector {\n  display: flex;\n  gap: 8px;\n  width: 100%;\n  flex-wrap: wrap;\n}\n\n/* Ensure equal width for quality buttons */\n.quality-selector {\n  justify-content: space-between;\n}\n\n.quality-selector .quality-btn {\n  flex: 1;\n  padding: 10px 0;\n  min-width: 0;\n  width: calc(25% - 6px); /* Equal width accounting for gap */\n}\n\n.size-btn, .quality-btn, .style-type-btn, .style-preset-btn, .count-btn {\n  flex: 1;\n  padding: 10px 12px;\n  background-color: var(--element-bg);\n  border: none;\n  border-radius: var(--border-radius);\n  font-size: 0.875rem;\n  font-weight: 600;\n  color: var(--text-muted);\n  cursor: pointer;\n  transition: var(--transition);\n  text-align: center;\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n  min-width: 30%;\n}\n\n.size-btn:hover, .quality-btn:hover, .style-type-btn:hover, .style-preset-btn:hover, .count-btn:hover {\n  box-shadow: var(--shadow-dark), var(--shadow-light);\n  transform: translateY(-2px);\n}\n\n.size-btn:active, .quality-btn:active, .style-type-btn:active, .style-preset-btn:active, .count-btn:active {\n  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);\n  transform: translateY(0);\n}\n\n.size-btn.active, .quality-btn.active, .style-type-btn.active, .style-preset-btn.active, .count-btn.active {\n  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);\n  font-weight: 700;\n}\n\n/* Image layout styles */\n.single-image-layout .gallery-wrapper {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 90%;\n}\n\n.single-image-layout .image-wrapper {\n  max-width: 90%;\n  max-height: 90%;\n  position: relative;\n  cursor: pointer;\n  border-radius: var(--border-radius);\n  overflow: hidden;\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n}\n\n.two-image-layout .gallery-wrapper {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 20px;\n  width: 100%;\n  height: 90%;\n  justify-content: center;\n  align-items: center;\n}\n\n.two-image-layout .image-wrapper {\n  flex: 0 0 calc(45% - 10px);\n  max-height: 80%;\n  position: relative;\n  border-radius: var(--border-radius);\n  overflow: hidden;\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n  cursor: pointer;\n}\n\n.four-image-layout .gallery-wrapper {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-rows: repeat(2, 1fr);\n  gap: 16px;\n  width: 90%;\n  height: 90%;\n  margin: auto;\n}\n\n.four-image-layout .image-wrapper {\n  position: relative;\n  border-radius: var(--border-radius);\n  overflow: hidden;\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n  height: 100%;\n  width: 100%;\n  cursor: pointer;\n}\n\n/* Image styles */\n.image-wrapper img {\n  width: 100%;\n  height: 100%;\n  object-fit: contain;\n  transition: transform 0.3s ease;\n}\n\n.four-image-layout .image-wrapper img,\n.two-image-layout .image-wrapper img {\n  object-fit: cover;\n}\n\n.image-wrapper:hover img {\n  transform: scale(1.02);\n}\n\n/* Download icon hover effect */\n.download-icon {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(255, 255, 255, 0.85);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  transition: opacity 0.3s;\n  z-index: 5;\n}\n\n.image-wrapper:hover .download-icon {\n  opacity: 1;\n}\n\n.download-icon i {\n  font-size: 2rem;\n  color: var(--primary-color);\n  background-color: var(--element-bg);\n  width: 60px;\n  height: 60px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  border-radius: 50%;\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n}\n\n/* Loading indicator */\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(230, 231, 238, 0.9);\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  z-index: 20;\n}\n\n.loading-spinner {\n  width: 48px;\n  height: 48px;\n  border: 4px solid var(--primary-light);\n  border-radius: 50%;\n  border-top-color: var(--primary-color);\n  animation: spin 1s linear infinite;\n  margin-bottom: 1rem;\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n}\n\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}\n\n/* Gallery button */\n.gallery-btn {\n  background-color: var(--element-bg);\n  color: var(--primary-color);\n  border-radius: var(--btn-radius);\n  box-shadow: var(--shadow-light), var(--shadow-dark);\n  padding: 10px 16px;\n  transition: var(--transition);\n}\n\n.gallery-btn:hover {\n  box-shadow: var(--shadow-dark), var(--shadow-light);\n  transform: translateY(-2px);\n}\n\n.gallery-btn:active {\n  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);\n  transform: translateY(0);\n}\n\n.gallery-btn.full-width {\n  width: 100%;\n}\n\n.gallery-btn i {\n  margin-right: 6px;\n}\n\n/* Image top controls */\n.image-top-controls {\n  position: absolute;\n  top: 15px;\n  right: 15px;\n  display: flex;\n  gap: 10px;\n  z-index: 20;\n  /* Remove the width constraint that was causing the issue */\n}\n\n/* Utils */\n.hidden {\n  display: none"
+    },
+    {
+      "file": "styles.css",
+      "property": "/* Base Styles - Applied after reset.css */",
+      "value": "root {\n  --primary-color: #6366f1;\n  --primary-dark: #4f46e5;\n  --primary-light: #8b92f8;\n  --success-color: #10b981;\n  --danger-color: #ef4444;\n  --text-dark: #e2e8f0;\n  --text-muted: #94a3b8;\n  --bg-dark: #121826;\n  --bg-panel: #1e293b;\n  --border-color: #334155;\n  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);\n  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);\n  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);\n}\n\nbody {\n  font-family: 'Montserrat', sans-serif;\n  color: var(--text-dark);\n  background-color: var(--bg-dark);\n  line-height: 1.5;\n}\n\n.font-secondary {\n  font-family: 'Open Sans', sans-serif;\n}\n\n.font-mono {\n  font-family: 'Fira Mono', monospace;\n}\n\n/* Layout */\n.app-container {\n  display: flex;\n  height: 100vh;\n  overflow: hidden;\n}\n\n/* Left panel */\n.control-panel {\n  width: 360px;\n  background-color: var(--bg-panel);\n  box-shadow: var(--shadow-lg);\n  padding: 1.5rem 1.5rem 80px;\n  display: flex;\n  flex-direction: column;\n  overflow-y: auto;\n  z-index: 10;\n  position: relative;\n}\n\n.app-title {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n  margin-bottom: 2rem;\n  flex-wrap: wrap;\n}\n\n.app-title .icon {\n  font-size: 2rem;\n  color: var(--primary-color);\n}\n\n.app-title h1 {\n  font-size: 1.5rem;\n  font-weight: 700;\n  letter-spacing: -0.5px;\n  color: var(--text-dark);\n  margin: 0;\n}\n\n.centered-heading {\n  width: 100%;\n  text-align: center;\n}\n\n/* Form elements */\n.form-group {\n  margin-bottom: 1.25rem;\n}\n\nlabel {\n  display: block;\n  font-size: 0.875rem;\n  font-weight: 600;\n  margin-bottom: 0.5rem;\n  color: var(--text-dark);\n}\n\n.input, .select, .textarea {\n  width: 100%;\n  padding: 0.625rem;\n  font-family: 'Open Sans', sans-serif;\n  border: 1px solid var(--border-color);\n  border-radius: 0.375rem;\n  background-color: #2c3e50;\n  color: var(--text-dark);\n  transition: all 0.2s;\n}\n\n.textarea {\n  resize: vertical;\n  min-height: 100px;\n}\n\n.input:focus, .select:focus, .textarea:focus {\n  outline: none;\n  border-color: var(--primary-color);\n  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);\n}\n\n/* Button styles */\n.btn {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  gap: 0.5rem;\n  padding: 0.75rem 1rem;\n  font-weight: 600;\n  border-radius: 0.375rem;\n  cursor: pointer;\n  transition: all 0.2s;\n  border: none;\n}\n\n.btn-primary {\n  background-color: var(--primary-color);\n  color: white;\n  width: 100%;\n}\n\n.btn-primary:hover {\n  background-color: var(--primary-dark);\n  transform: translateY(-1px);\n  box-shadow: var(--shadow-md);\n}\n\n.btn-primary:active {\n  transform: translateY(0);\n}\n\n.btn:disabled {\n  opacity: 0.7;\n  cursor: not-allowed;\n}\n\n.btn i {\n  font-size: 1.25rem;\n}\n\n/* Image container */\n.image-container {\n  flex: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: radial-gradient(circle, #111827 0%, #0f172a 100%);\n  position: relative;\n  overflow: hidden;\n  transition: all 0.3s;\n}\n\n.placeholder {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  color: #475569;\n  text-align: center;\n  padding: 2rem;\n}\n\n.placeholder i {\n  font-size: 5rem;\n  margin-bottom: 1rem;\n}\n\n.placeholder-icon {\n  width: 80px;\n  height: 80px;\n  margin-bottom: 1rem;\n  filter: brightness(0) saturate(100%) invert(39%) sepia(9%) saturate(822%) hue-rotate(182deg) brightness(88%) contrast(84%);\n  opacity: 0.5;\n}\n\n.placeholder p {\n  font-size: 1.25rem;\n  font-weight: 500;\n}\n\n/* Image layout styles */\n.single-image-layout .gallery-wrapper {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100%;\n  height: 90%;\n}\n\n.single-image-layout .image-wrapper {\n  max-width: 90%;\n  max-height: 90%;\n  position: relative;\n  cursor: pointer;\n}\n\n.two-image-layout .gallery-wrapper {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  gap: 20px;\n  width: 100%;\n  height: 90%;\n  justify-content: center;\n  align-items: center;\n}\n\n.two-image-layout .image-wrapper {\n  flex: 0 0 calc(45% - 10px);\n  max-height: 80%;\n  position: relative;\n  border-radius: 8px;\n  overflow: hidden;\n  box-shadow: var(--shadow-md);\n  cursor: pointer;\n}\n\n.four-image-layout .gallery-wrapper {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  grid-template-rows: repeat(2, 1fr);\n  gap: 16px;\n  width: 90%;\n  height: 90%;\n  margin: auto;\n}\n\n.four-image-layout .image-wrapper {\n  position: relative;\n  border-radius: 8px;\n  overflow: hidden;\n  box-shadow: var(--shadow-md);\n  height: 100%;\n  width: 100%;\n  cursor: pointer;\n}\n\n/* Image styles for all layouts */\n.image-wrapper img {\n  width: 100%;\n  height: 100%;\n  object-fit: contain;\n  border-radius: 4px;\n}\n\n.four-image-layout .image-wrapper img,\n.two-image-layout .image-wrapper img {\n  object-fit: cover;\n}\n\n/* Download icon hover effect */\n.download-icon {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  opacity: 0;\n  transition: opacity 0.3s;\n  z-index: 5;\n  border-radius: 4px;\n}\n\n.image-wrapper:hover .download-icon {\n  opacity: 1;\n}\n\n.download-icon i {\n  font-size: 2rem;\n  color: white;\n}\n\n/* Loading indicator */\n.loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: rgba(15, 23, 42, 0.8);\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  z-index: 20;\n}\n\n.loading-spinner {\n  width: 48px;\n  height: 48px;\n  border: 4px solid var(--primary-light);\n  border-radius: 50%;\n  border-top-color: var(--primary-color);\n  animation: spin 1s linear infinite;\n  margin-bottom: 1rem;\n}\n\n@keyframes spin {\n  to { transform: rotate(360deg); }\n}\n\n/* Footer */\n.footer {\n  margin-top: auto;\n  font-size: 0.75rem;\n  color: var(--text-muted);\n  padding-top: 1rem;\n}\n\n/* Responsive adjustments */\n@media (max-width: 768px) {\n  .app-container {\n    flex-direction: column;\n  }\n  \n  .control-panel {\n    width: 100%;\n    height: auto;\n    max-height: 50vh;\n  }\n  \n  .image-container {\n    height: 50vh;\n  }\n}\n\n/* Utility classes */\n.hidden {\n  display: none"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": "/* Fix for view-btn and refresh-btn states - matching main page style */\n\n/* Reset all view-btn and refresh-btn states */\n.view-btn,\n.refresh-btn,\n.toolbar .view-options .view-btn,\n.toolbar .view-options .refresh-btn,\n.viewer-content .toolbar .view-options .view-btn,\n.viewer-content .toolbar .view-options .refresh-btn {\n  background-color",
+      "value": "var(--element-bg)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  border",
+      "value": "none"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  color",
+      "value": "var(--text-muted)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  box-shadow",
+      "value": "var(--shadow-light), var(--shadow-dark)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n}\n\n/* Hover state */\n.view-btn",
+      "value": "hover,\n.refresh-btn:hover,\n.toolbar .view-options .view-btn:hover,\n.toolbar .view-options .refresh-btn:hover,\n.viewer-content .toolbar .view-options .view-btn:hover,\n.viewer-content .toolbar .view-options .refresh-btn:hover {\n  background-color: var(--element-bg)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  box-shadow",
+      "value": "var(--shadow-dark), var(--shadow-light)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  transform",
+      "value": "translateY(-2px)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  color",
+      "value": "var(--text-muted)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  border",
+      "value": "none"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n}\n\n/* Active state (when clicking) */\n.view-btn",
+      "value": "active,\n.refresh-btn:active,\n.toolbar .view-options .view-btn:active,\n.toolbar .view-options .refresh-btn:active,\n.viewer-content .toolbar .view-options .view-btn:active,\n.viewer-content .toolbar .view-options .refresh-btn:active {\n  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  transform",
+      "value": "translateY(0)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  background-color",
+      "value": "var(--element-bg)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  color",
+      "value": "var(--text-muted)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  border",
+      "value": "none"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n}\n\n/* Selected state (active class) */\n.view-btn.active,\n.toolbar .view-options .view-btn.active,\n.viewer-content .toolbar .view-options .view-btn.active {\n  background-color",
+      "value": "var(--element-bg)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  border",
+      "value": "none"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  color",
+      "value": "var(--text-muted)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  box-shadow",
+      "value": "var(--shadow-inset-light), var(--shadow-inset-dark)"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  font-weight",
+      "value": "700"
+    },
+    {
+      "file": "view-btn-fix.css",
+      "property": ";\n  transform",
+      "value": "translateY(0)"
+    }
+  ]
+}

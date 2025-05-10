@@ -1,0 +1,9 @@
+/**
+ * 1-settings
+ * Contains variables, themes, and configuration options
+ */
+
+/* Import theme variables - Only one theme should be active */
+@import './theme-light.css';  /* Light theme (neumorphism) */
+
+/* Additional variables if needed can be imported here */

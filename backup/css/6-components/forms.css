@@ -1,0 +1,110 @@
+/* Form Components */
+
+/* Form group */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+}
+
+/* Text inputs, select, textarea */
+.input, .select, .textarea {
+  width: 100%;
+  padding: 0.875rem;
+  font-family: 'Open Sans', sans-serif;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  transition: var(--transition);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);
+}
+
+/* Search container */
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: var(--shadow-inset-dark), var(--shadow-inset-light);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 18px;
+}
+
+/* Size selector, quality selector, etc. */
+.size-selector, .quality-selector, .style-type-selector, .style-preset-selector, .count-selector {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Ensure equal width for quality buttons */
+.quality-selector {
+  justify-content: space-between;
+}
+
+.quality-selector .quality-btn {
+  flex: 1;
+  padding: 10px 0;
+  min-width: 0;
+  width: calc(25% - 6px); /* Equal width accounting for gap */
+}
+
+/* Help link */
+.help-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--text-muted);
+  font-size: 18px;
+  margin-left: 6px;
+  transition: color 0.2s;
+  vertical-align: middle;
+  background-color: var(--element-bg);
+  border-radius: 50%;
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+.help-link:hover {
+  color: var(--primary-color);
+}

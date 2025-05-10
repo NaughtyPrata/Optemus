@@ -1,0 +1,43 @@
+/* 
+ * Loading Screen Background Styles
+ * Only modifying the background, preserving the existing washing machine animation 
+ */
+
+/* Creating a light blue background with animated bubbles */
+#loadingIndicator {
+  /* Override the background only */
+  background-color: rgba(173, 216, 230, 0.9) !important; /* Light blue with transparency */
+  position: relative;
+  overflow: hidden; /* Keep bubbles contained */
+}
+
+/* Update text color to be readable on light blue background */
+#loadingIndicator p {
+  color: #2c3e50 !important; /* Dark blue text */
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+  position: relative;
+  z-index: 10; /* Ensure text is above bubbles */
+}
+
+/* Create container for background bubbles */
+.background-bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Individual bubble styling */
+.bg-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  z-index: 1;
+}
+</function_parameters>
+</invoke>

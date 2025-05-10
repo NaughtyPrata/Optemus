@@ -1,0 +1,8 @@
+/**
+ * 4-elements
+ * Styling for bare HTML elements
+ */
+
+/* Import all 4-elements files here */
+@import './base.css';
+@import './images.css';

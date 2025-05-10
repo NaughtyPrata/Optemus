@@ -1,0 +1,547 @@
+Processing file: neumorphism.css (1 !important declarations)
+  - Migrated: "/* Utils */
+.hidden" { display: none; } to 3-generic
+Processing file: icons.css (1 !important declarations)
+  - Migrated: "/*
+ * Components Layer - Icons
+ * ----------------------
+ * Styles for icons and icon elements
+ */
+
+/* Base icon styling */
+.ti" { font-family: 'tabler-icons'; } to 3-generic
+Processing file: animations.css (4 !important declarations)
+  - Migrated: "}
+
+/* Transition utilities */
+.transition-fast" { transition: all var(--transition-fast); } to 3-generic
+  - Migrated: ".transition-normal" { transition: all var(--transition-normal); } to 7-utilities
+  - Migrated: ".transition-slow" { transition: all var(--transition-slow); } to 7-utilities
+  - Migrated: ".transition-none" { transition: none; } to 7-utilities
+Processing file: display.css (45 !important declarations)
+  - Migrated: "/*
+ * Utilities Layer - Display
+ * -----------------------
+ * Display, visibility, and layout utility classes
+ */
+
+/* Display */
+.hidden" { display: none; } to 5-objects
+  - Migrated: ".block" { display: block; } to 7-utilities
+  - Migrated: ".inline-block" { display: inline-block; } to 7-utilities
+  - Migrated: ".inline" { display: inline; } to 7-utilities
+  - Migrated: "/* Flexbox */
+.flex" { display: flex; } to 3-generic
+  - Migrated: ".inline-flex" { display: inline-flex; } to 7-utilities
+  - Migrated: ".flex-row" { flex-direction: row; } to 7-utilities
+  - Migrated: ".flex-col" { flex-direction: column; } to 7-utilities
+  - Migrated: ".flex-wrap" { flex-wrap: wrap; } to 7-utilities
+  - Migrated: ".flex-nowrap" { flex-wrap: nowrap; } to 7-utilities
+  - Migrated: ".justify-start" { justify-content: flex-start; } to 7-utilities
+  - Migrated: ".justify-end" { justify-content: flex-end; } to 7-utilities
+  - Migrated: ".justify-center" { justify-content: center; } to 7-utilities
+  - Migrated: ".justify-between" { justify-content: space-between; } to 7-utilities
+  - Migrated: ".justify-around" { justify-content: space-around; } to 7-utilities
+  - Migrated: ".items-start" { align-items: flex-start; } to 7-utilities
+  - Migrated: ".items-end" { align-items: flex-end; } to 7-utilities
+  - Migrated: ".items-center" { align-items: center; } to 7-utilities
+  - Migrated: ".items-baseline" { align-items: baseline; } to 7-utilities
+  - Migrated: ".items-stretch" { align-items: stretch; } to 7-utilities
+  - Migrated: ".flex-grow" { flex-grow: 1; } to 7-utilities
+  - Migrated: ".flex-shrink" { flex-shrink: 1; } to 7-utilities
+  - Migrated: ".flex-no-grow" { flex-grow: 0; } to 7-utilities
+  - Migrated: ".flex-no-shrink" { flex-shrink: 0; } to 7-utilities
+  - Migrated: "/* Positioning */
+.relative" { position: relative; } to 3-generic
+  - Migrated: ".absolute" { position: absolute; } to 7-utilities
+  - Migrated: ".fixed" { position: fixed; } to 7-utilities
+  - Migrated: ".sticky" { position: sticky; } to 7-utilities
+  - Migrated: ".sticky" { ;
+  top: 0; } to 7-utilities
+  - Migrated: "/* Width/Height */
+.w-full" { width: 100%; } to 3-generic
+  - Migrated: ".h-full" { height: 100%; } to 7-utilities
+  - Migrated: ".min-h-screen" { min-height: 100vh; } to 7-utilities
+  - Migrated: ".max-w-full" { max-width: 100%; } to 7-utilities
+  - Migrated: "/* Overflow */
+.overflow-hidden" { overflow: hidden; } to 3-generic
+  - Migrated: ".overflow-auto" { overflow: auto; } to 7-utilities
+  - Migrated: ".overflow-scroll" { overflow: scroll; } to 7-utilities
+  - Migrated: ".overflow-y-auto" { overflow-y: auto; } to 7-utilities
+  - Migrated: ".overflow-x-auto" { overflow-x: auto; } to 7-utilities
+  - Migrated: "/* Z-index */
+.z-0" { z-index: 0; } to 3-generic
+  - Migrated: ".z-10" { z-index: 10; } to 7-utilities
+  - Migrated: ".z-20" { z-index: 20; } to 7-utilities
+  - Migrated: ".z-30" { z-index: 30; } to 7-utilities
+  - Migrated: ".z-40" { z-index: 40; } to 7-utilities
+  - Migrated: ".z-50" { z-index: 50; } to 7-utilities
+  - Migrated: ".z-auto" { z-index: auto; } to 7-utilities
+Processing file: spacing.css (116 !important declarations)
+  - Migrated: "/*
+ * Utilities Layer - Spacing
+ * -----------------------
+ * Margin and padding utility classes
+ */
+
+/* Margin utilities */
+.m-0" { margin: 0; } to 3-generic
+  - Migrated: ".m-1" { margin: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".m-2" { margin: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".m-3" { margin: var(--spacing-md); } to 7-utilities
+  - Migrated: ".m-4" { margin: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".m-5" { margin: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Margin horizontal */
+.mx-0" { margin-left: 0; } to 3-generic
+  - Migrated: "/* Margin horizontal */
+.mx-0" { ;
+  margin-right: 0; } to 3-generic
+  - Migrated: ".mx-1" { margin-left: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".mx-1" { ;
+  margin-right: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".mx-2" { margin-left: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".mx-2" { ;
+  margin-right: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".mx-3" { margin-left: var(--spacing-md); } to 7-utilities
+  - Migrated: ".mx-3" { ;
+  margin-right: var(--spacing-md); } to 7-utilities
+  - Migrated: ".mx-4" { margin-left: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".mx-4" { ;
+  margin-right: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".mx-5" { margin-left: var(--spacing-xl); } to 7-utilities
+  - Migrated: ".mx-5" { ;
+  margin-right: var(--spacing-xl); } to 7-utilities
+  - Migrated: ".mx-auto" { margin-left: auto; } to 7-utilities
+  - Migrated: ".mx-auto" { ;
+  margin-right: auto; } to 7-utilities
+  - Migrated: "/* Margin vertical */
+.my-0" { margin-top: 0; } to 3-generic
+  - Migrated: "/* Margin vertical */
+.my-0" { ;
+  margin-bottom: 0; } to 3-generic
+  - Migrated: ".my-1" { margin-top: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".my-1" { ;
+  margin-bottom: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".my-2" { margin-top: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".my-2" { ;
+  margin-bottom: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".my-3" { margin-top: var(--spacing-md); } to 7-utilities
+  - Migrated: ".my-3" { ;
+  margin-bottom: var(--spacing-md); } to 7-utilities
+  - Migrated: ".my-4" { margin-top: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".my-4" { ;
+  margin-bottom: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".my-5" { margin-top: var(--spacing-xl); } to 7-utilities
+  - Migrated: ".my-5" { ;
+  margin-bottom: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Margin top */
+.mt-0" { margin-top: 0; } to 3-generic
+  - Migrated: ".mt-1" { margin-top: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".mt-2" { margin-top: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".mt-3" { margin-top: var(--spacing-md); } to 7-utilities
+  - Migrated: ".mt-4" { margin-top: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".mt-5" { margin-top: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Margin right */
+.mr-0" { margin-right: 0; } to 3-generic
+  - Migrated: ".mr-1" { margin-right: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".mr-2" { margin-right: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".mr-3" { margin-right: var(--spacing-md); } to 7-utilities
+  - Migrated: ".mr-4" { margin-right: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".mr-5" { margin-right: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Margin bottom */
+.mb-0" { margin-bottom: 0; } to 3-generic
+  - Migrated: ".mb-1" { margin-bottom: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".mb-2" { margin-bottom: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".mb-3" { margin-bottom: var(--spacing-md); } to 7-utilities
+  - Migrated: ".mb-4" { margin-bottom: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".mb-5" { margin-bottom: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Margin left */
+.ml-0" { margin-left: 0; } to 3-generic
+  - Migrated: ".ml-1" { margin-left: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".ml-2" { margin-left: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".ml-3" { margin-left: var(--spacing-md); } to 7-utilities
+  - Migrated: ".ml-4" { margin-left: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".ml-5" { margin-left: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Padding utilities */
+.p-0" { padding: 0; } to 3-generic
+  - Migrated: ".p-1" { padding: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".p-2" { padding: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".p-3" { padding: var(--spacing-md); } to 7-utilities
+  - Migrated: ".p-4" { padding: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".p-5" { padding: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Padding horizontal */
+.px-0" { padding-left: 0; } to 3-generic
+  - Migrated: "/* Padding horizontal */
+.px-0" { ;
+  padding-right: 0; } to 3-generic
+  - Migrated: ".px-1" { padding-left: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".px-1" { ;
+  padding-right: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".px-2" { padding-left: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".px-2" { ;
+  padding-right: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".px-3" { padding-left: var(--spacing-md); } to 7-utilities
+  - Migrated: ".px-3" { ;
+  padding-right: var(--spacing-md); } to 7-utilities
+  - Migrated: ".px-4" { padding-left: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".px-4" { ;
+  padding-right: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".px-5" { padding-left: var(--spacing-xl); } to 7-utilities
+  - Migrated: ".px-5" { ;
+  padding-right: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Padding vertical */
+.py-0" { padding-top: 0; } to 3-generic
+  - Migrated: "/* Padding vertical */
+.py-0" { ;
+  padding-bottom: 0; } to 3-generic
+  - Migrated: ".py-1" { padding-top: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".py-1" { ;
+  padding-bottom: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".py-2" { padding-top: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".py-2" { ;
+  padding-bottom: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".py-3" { padding-top: var(--spacing-md); } to 7-utilities
+  - Migrated: ".py-3" { ;
+  padding-bottom: var(--spacing-md); } to 7-utilities
+  - Migrated: ".py-4" { padding-top: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".py-4" { ;
+  padding-bottom: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".py-5" { padding-top: var(--spacing-xl); } to 7-utilities
+  - Migrated: ".py-5" { ;
+  padding-bottom: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Padding top */
+.pt-0" { padding-top: 0; } to 3-generic
+  - Migrated: ".pt-1" { padding-top: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".pt-2" { padding-top: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".pt-3" { padding-top: var(--spacing-md); } to 7-utilities
+  - Migrated: ".pt-4" { padding-top: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".pt-5" { padding-top: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Padding right */
+.pr-0" { padding-right: 0; } to 3-generic
+  - Migrated: ".pr-1" { padding-right: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".pr-2" { padding-right: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".pr-3" { padding-right: var(--spacing-md); } to 7-utilities
+  - Migrated: ".pr-4" { padding-right: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".pr-5" { padding-right: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Padding bottom */
+.pb-0" { padding-bottom: 0; } to 3-generic
+  - Migrated: ".pb-1" { padding-bottom: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".pb-2" { padding-bottom: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".pb-3" { padding-bottom: var(--spacing-md); } to 7-utilities
+  - Migrated: ".pb-4" { padding-bottom: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".pb-5" { padding-bottom: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Padding left */
+.pl-0" { padding-left: 0; } to 3-generic
+  - Migrated: ".pl-1" { padding-left: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".pl-2" { padding-left: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".pl-3" { padding-left: var(--spacing-md); } to 7-utilities
+  - Migrated: ".pl-4" { padding-left: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".pl-5" { padding-left: var(--spacing-xl); } to 7-utilities
+  - Migrated: "/* Gap */
+.gap-0" { gap: 0; } to 3-generic
+  - Migrated: ".gap-1" { gap: var(--spacing-xs); } to 7-utilities
+  - Migrated: ".gap-2" { gap: var(--spacing-sm); } to 7-utilities
+  - Migrated: ".gap-3" { gap: var(--spacing-md); } to 7-utilities
+  - Migrated: ".gap-4" { gap: var(--spacing-lg); } to 7-utilities
+  - Migrated: ".gap-5" { gap: var(--spacing-xl); } to 7-utilities
+Processing file: bubble-bg.css (1 !important declarations)
+  - Migrated: "/* 
+ * Bubble Background Styles - Only changes the background 
+ * Preserves the existing washing machine animation
+ */
+
+#loadingIndicator" { background: linear-gradient(to bottom, #e6f7ff, #b3e0ff); } to 3-generic
+Processing file: glassmorphism.css (1 !important declarations)
+  - Migrated: "}
+
+/* Utils */
+.hidden" { display: none; } to 3-generic
+Processing file: icon-fixes.css (1 !important declarations)
+  - Migrated: "/* Icon Fixes */
+.ti" { font-family: 'tabler-icons'; } to 3-generic
+Processing file: icon-styles.css (1 !important declarations)
+Processing file: list-view-fix.css (36 !important declarations)
+  - Migrated: "/* Fix for List View in the Viewer 
+   This CSS ensures the list view displays correctly
+*/
+
+/* List View Container */
+.image-gallery.list-view" { display: flex; } to 3-generic
+  - Migrated: "/* Fix for List View in the Viewer 
+   This CSS ensures the list view displays correctly
+*/
+
+/* List View Container */
+.image-gallery.list-view" { ;
+  flex-direction: column; } to 3-generic
+  - Migrated: "/* Fix for List View in the Viewer 
+   This CSS ensures the list view displays correctly
+*/
+
+/* List View Container */
+.image-gallery.list-view" { ;
+  gap: 15px; } to 3-generic
+  - Migrated: "/* List View Cards */
+.list-view .image-card" { display: flex; } to 3-generic
+  - Migrated: "/* List View Cards */
+.list-view .image-card" { ;
+  height: 120px; } to 3-generic
+  - Migrated: "/* List View Cards */
+.list-view .image-card" { ;
+  width: 100%; } to 3-generic
+  - Migrated: "/* List View Cards */
+.list-view .image-card" { ;
+  padding: 0; } to 3-generic
+  - Migrated: "/* List View Cards */
+.list-view .image-card" { ;
+  position: relative; } to 3-generic
+  - Migrated: "/* Image in List View */
+.list-view .image-card .card-image" { width: 120px; } to 3-generic
+  - Migrated: "/* Image in List View */
+.list-view .image-card .card-image" { ;
+  height: 120px; } to 3-generic
+  - Migrated: "/* Image in List View */
+.list-view .image-card .card-image" { ;
+  flex-shrink: 0; } to 3-generic
+  - Migrated: "/* Image in List View */
+.list-view .image-card .card-image" { ;
+  position: relative; } to 3-generic
+  - Migrated: "/* Image in List View */
+.list-view .image-card .card-image" { ;
+  object-fit: cover; } to 3-generic
+  - Migrated: "/* Content in List View */
+.list-view .image-card .card-content" { flex: 1; } to 3-generic
+  - Migrated: "/* Content in List View */
+.list-view .image-card .card-content" { ;
+  padding: 15px; } to 3-generic
+  - Migrated: "/* Content in List View */
+.list-view .image-card .card-content" { ;
+  display: flex; } to 3-generic
+  - Migrated: "/* Content in List View */
+.list-view .image-card .card-content" { ;
+  flex-direction: column; } to 3-generic
+  - Migrated: "/* Content in List View */
+.list-view .image-card .card-content" { ;
+  justify-content: space-between; } to 3-generic
+  - Migrated: "/* Content in List View */
+.list-view .image-card .card-content" { ;
+  background-color: inherit; } to 3-generic
+  - Migrated: "/* Title in List View */
+.list-view .card-title" { font-size: 14px; } to 3-generic
+  - Migrated: "/* Title in List View */
+.list-view .card-title" { ;
+  font-weight: 500; } to 3-generic
+  - Migrated: "/* Title in List View */
+.list-view .card-title" { ;
+  margin-bottom: 5px; } to 3-generic
+  - Migrated: "/* Title in List View */
+.list-view .card-title" { ;
+  overflow: hidden; } to 3-generic
+  - Migrated: "/* Title in List View */
+.list-view .card-title" { ;
+  text-overflow: ellipsis; } to 3-generic
+  - Migrated: "/* Title in List View */
+.list-view .card-title" { ;
+  white-space: nowrap; } to 3-generic
+  - Migrated: "/* Date in List View */
+.list-view .card-date" { font-size: 12px; } to 3-generic
+  - Migrated: "/* Date in List View */
+.list-view .card-date" { ;
+  color: var(--text-muted, #94a3b8); } to 3-generic
+  - Migrated: "/* Fix for empty state positioning in List View */
+.list-view .empty-state" { width: 100%; } to 3-generic
+  - Migrated: "/* Fix for card placeholder in list view */
+.list-view .card-placeholder" { width: 120px; } to 3-generic
+  - Migrated: "/* Fix for card placeholder in list view */
+.list-view .card-placeholder" { ;
+  height: 120px; } to 3-generic
+  - Migrated: "/* Fix for card placeholder in list view */
+.list-view .card-placeholder" { ;
+  display: flex; } to 3-generic
+  - Migrated: "/* Fix for card placeholder in list view */
+.list-view .card-placeholder" { ;
+  align-items: center; } to 3-generic
+  - Migrated: "/* Fix for card placeholder in list view */
+.list-view .card-placeholder" { ;
+  justify-content: center; } to 3-generic
+  - Migrated: "/* Fix for card placeholder in list view */
+.list-view .card-placeholder" { ;
+  background-color: #2c3e50; } to 3-generic
+  - Migrated: "/* Fix for card placeholder in list view */
+.list-view .card-placeholder" { ;
+  color: #94a3b8; } to 3-generic
+  - Migrated: ".list-view .card-placeholder i" { font-size: 32px; } to 6-components
+Processing file: list-view.css (1 !important declarations)
+Processing file: loading-background.css (2 !important declarations)
+  - Migrated: "/* 
+ * Loading Screen Background Styles
+ * Only modifying the background, preserving the existing washing machine animation 
+ */
+
+/* Creating a light blue background with animated bubbles */
+#loadingIndicator" { /* Override the background only */
+  background-color: rgba(173, 216, 230, 0.9); } to 3-generic
+  - Migrated: "/* Update text color to be readable on light blue background */
+#loadingIndicator p" { color: #2c3e50; } to 3-generic
+Processing file: styles.css (1 !important declarations)
+  - Migrated: "}
+
+/* Utility classes */
+.hidden" { display: none; } to 3-generic
+Processing file: top-controls-fix.css (1 !important declarations)
+Processing file: view-btn-fix.css (20 !important declarations)
+  - Migrated: "/* Fix for view-btn and refresh-btn states - matching main page style */
+
+/* Reset all view-btn and refresh-btn states */
+.view-btn,
+.refresh-btn,
+.toolbar .view-options .view-btn,
+.toolbar .view-options .refresh-btn,
+.viewer-content .toolbar .view-options .view-btn,
+.viewer-content .toolbar .view-options .refresh-btn" { background-color: var(--element-bg); } to 3-generic
+  - Migrated: "/* Fix for view-btn and refresh-btn states - matching main page style */
+
+/* Reset all view-btn and refresh-btn states */
+.view-btn,
+.refresh-btn,
+.toolbar .view-options .view-btn,
+.toolbar .view-options .refresh-btn,
+.viewer-content .toolbar .view-options .view-btn,
+.viewer-content .toolbar .view-options .refresh-btn" { ;
+  border: none; } to 3-generic
+  - Migrated: "/* Fix for view-btn and refresh-btn states - matching main page style */
+
+/* Reset all view-btn and refresh-btn states */
+.view-btn,
+.refresh-btn,
+.toolbar .view-options .view-btn,
+.toolbar .view-options .refresh-btn,
+.viewer-content .toolbar .view-options .view-btn,
+.viewer-content .toolbar .view-options .refresh-btn" { ;
+  color: var(--text-muted); } to 3-generic
+  - Migrated: "/* Fix for view-btn and refresh-btn states - matching main page style */
+
+/* Reset all view-btn and refresh-btn states */
+.view-btn,
+.refresh-btn,
+.toolbar .view-options .view-btn,
+.toolbar .view-options .refresh-btn,
+.viewer-content .toolbar .view-options .view-btn,
+.viewer-content .toolbar .view-options .refresh-btn" { ;
+  box-shadow: var(--shadow-light), var(--shadow-dark); } to 3-generic
+  - Migrated: "/* Hover state */
+.view-btn:hover,
+.refresh-btn:hover,
+.toolbar .view-options .view-btn:hover,
+.toolbar .view-options .refresh-btn:hover,
+.viewer-content .toolbar .view-options .view-btn:hover,
+.viewer-content .toolbar .view-options .refresh-btn:hover" { background-color: var(--element-bg); } to 3-generic
+  - Migrated: "/* Hover state */
+.view-btn:hover,
+.refresh-btn:hover,
+.toolbar .view-options .view-btn:hover,
+.toolbar .view-options .refresh-btn:hover,
+.viewer-content .toolbar .view-options .view-btn:hover,
+.viewer-content .toolbar .view-options .refresh-btn:hover" { ;
+  box-shadow: var(--shadow-dark), var(--shadow-light); } to 3-generic
+  - Migrated: "/* Hover state */
+.view-btn:hover,
+.refresh-btn:hover,
+.toolbar .view-options .view-btn:hover,
+.toolbar .view-options .refresh-btn:hover,
+.viewer-content .toolbar .view-options .view-btn:hover,
+.viewer-content .toolbar .view-options .refresh-btn:hover" { ;
+  transform: translateY(-2px); } to 3-generic
+  - Migrated: "/* Hover state */
+.view-btn:hover,
+.refresh-btn:hover,
+.toolbar .view-options .view-btn:hover,
+.toolbar .view-options .refresh-btn:hover,
+.viewer-content .toolbar .view-options .view-btn:hover,
+.viewer-content .toolbar .view-options .refresh-btn:hover" { ;
+  color: var(--text-muted); } to 3-generic
+  - Migrated: "/* Hover state */
+.view-btn:hover,
+.refresh-btn:hover,
+.toolbar .view-options .view-btn:hover,
+.toolbar .view-options .refresh-btn:hover,
+.viewer-content .toolbar .view-options .view-btn:hover,
+.viewer-content .toolbar .view-options .refresh-btn:hover" { ;
+  border: none; } to 3-generic
+  - Migrated: "/* Active state (when clicking) */
+.view-btn:active,
+.refresh-btn:active,
+.toolbar .view-options .view-btn:active,
+.toolbar .view-options .refresh-btn:active,
+.viewer-content .toolbar .view-options .view-btn:active,
+.viewer-content .toolbar .view-options .refresh-btn:active" { box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark); } to 3-generic
+  - Migrated: "/* Active state (when clicking) */
+.view-btn:active,
+.refresh-btn:active,
+.toolbar .view-options .view-btn:active,
+.toolbar .view-options .refresh-btn:active,
+.viewer-content .toolbar .view-options .view-btn:active,
+.viewer-content .toolbar .view-options .refresh-btn:active" { ;
+  transform: translateY(0); } to 3-generic
+  - Migrated: "/* Active state (when clicking) */
+.view-btn:active,
+.refresh-btn:active,
+.toolbar .view-options .view-btn:active,
+.toolbar .view-options .refresh-btn:active,
+.viewer-content .toolbar .view-options .view-btn:active,
+.viewer-content .toolbar .view-options .refresh-btn:active" { ;
+  background-color: var(--element-bg); } to 3-generic
+  - Migrated: "/* Active state (when clicking) */
+.view-btn:active,
+.refresh-btn:active,
+.toolbar .view-options .view-btn:active,
+.toolbar .view-options .refresh-btn:active,
+.viewer-content .toolbar .view-options .view-btn:active,
+.viewer-content .toolbar .view-options .refresh-btn:active" { ;
+  color: var(--text-muted); } to 3-generic
+  - Migrated: "/* Active state (when clicking) */
+.view-btn:active,
+.refresh-btn:active,
+.toolbar .view-options .view-btn:active,
+.toolbar .view-options .refresh-btn:active,
+.viewer-content .toolbar .view-options .view-btn:active,
+.viewer-content .toolbar .view-options .refresh-btn:active" { ;
+  border: none; } to 3-generic
+  - Migrated: "/* Selected state (active class) */
+.view-btn.active,
+.toolbar .view-options .view-btn.active,
+.viewer-content .toolbar .view-options .view-btn.active" { background-color: var(--element-bg); } to 3-generic
+  - Migrated: "/* Selected state (active class) */
+.view-btn.active,
+.toolbar .view-options .view-btn.active,
+.viewer-content .toolbar .view-options .view-btn.active" { ;
+  border: none; } to 3-generic
+  - Migrated: "/* Selected state (active class) */
+.view-btn.active,
+.toolbar .view-options .view-btn.active,
+.viewer-content .toolbar .view-options .view-btn.active" { ;
+  color: var(--text-muted); } to 3-generic
+  - Migrated: "/* Selected state (active class) */
+.view-btn.active,
+.toolbar .view-options .view-btn.active,
+.viewer-content .toolbar .view-options .view-btn.active" { ;
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark); } to 3-generic
+  - Migrated: "/* Selected state (active class) */
+.view-btn.active,
+.toolbar .view-options .view-btn.active,
+.viewer-content .toolbar .view-options .view-btn.active" { ;
+  font-weight: 700; } to 3-generic
+  - Migrated: "/* Selected state (active class) */
+.view-btn.active,
+.toolbar .view-options .view-btn.active,
+.viewer-content .toolbar .view-options .view-btn.active" { ;
+  transform: translateY(0); } to 3-generic
+Processing file: view-buttons.css (1 !important declarations)
+Created /Users/raphael.moreno/Projects/mcp/CURSOR/public/css/3-generic/migrated-generic.css with 41 selectors
+Updated /Users/raphael.moreno/Projects/mcp/CURSOR/public/css/3-generic/index.css with import
+Created /Users/raphael.moreno/Projects/mcp/CURSOR/public/css/5-objects/migrated-objects.css with 1 selectors
+Updated /Users/raphael.moreno/Projects/mcp/CURSOR/public/css/5-objects/index.css with import
+Created /Users/raphael.moreno/Projects/mcp/CURSOR/public/css/6-components/migrated-components.css with 1 selectors
+Updated /Users/raphael.moreno/Projects/mcp/CURSOR/public/css/6-components/index.css with import
+Created /Users/raphael.moreno/Projects/mcp/CURSOR/public/css/7-utilities/migrated-utilities.css with 117 selectors
+Updated /Users/raphael.moreno/Projects/mcp/CURSOR/public/css/7-utilities/index.css with import

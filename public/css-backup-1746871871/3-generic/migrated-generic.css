@@ -1,0 +1,355 @@
+/**
+ * Migrated styles for generic
+ * These styles were extracted from files with !important declarations
+ */
+
+/* Utils */
+.hidden {
+  display: none;
+}
+
+/*
+ * Components Layer - Icons
+ * ----------------------
+ * Styles for icons and icon elements
+ */
+
+/* Base icon styling */
+.ti {
+  font-family: 'tabler-icons';
+}
+
+}
+
+/* Transition utilities */
+.transition-fast {
+  transition: all var(--transition-fast);
+}
+
+/* Flexbox */
+.flex {
+  display: flex;
+}
+
+/* Positioning */
+.relative {
+  position: relative;
+}
+
+/* Width/Height */
+.w-full {
+  width: 100%;
+}
+
+/* Overflow */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* Z-index */
+.z-0 {
+  z-index: 0;
+}
+
+/*
+ * Utilities Layer - Spacing
+ * -----------------------
+ * Margin and padding utility classes
+ */
+
+/* Margin utilities */
+.m-0 {
+  margin: 0;
+}
+
+/* Margin horizontal */
+.mx-0 {
+  margin-left: 0;
+  ;
+  margin-right: 0;
+}
+
+/* Margin vertical */
+.my-0 {
+  margin-top: 0;
+  ;
+  margin-bottom: 0;
+}
+
+/* Margin top */
+.mt-0 {
+  margin-top: 0;
+}
+
+/* Margin right */
+.mr-0 {
+  margin-right: 0;
+}
+
+/* Margin bottom */
+.mb-0 {
+  margin-bottom: 0;
+}
+
+/* Margin left */
+.ml-0 {
+  margin-left: 0;
+}
+
+/* Padding utilities */
+.p-0 {
+  padding: 0;
+}
+
+/* Padding horizontal */
+.px-0 {
+  padding-left: 0;
+  ;
+  padding-right: 0;
+}
+
+/* Padding vertical */
+.py-0 {
+  padding-top: 0;
+  ;
+  padding-bottom: 0;
+}
+
+/* Padding top */
+.pt-0 {
+  padding-top: 0;
+}
+
+/* Padding right */
+.pr-0 {
+  padding-right: 0;
+}
+
+/* Padding bottom */
+.pb-0 {
+  padding-bottom: 0;
+}
+
+/* Padding left */
+.pl-0 {
+  padding-left: 0;
+}
+
+/* Gap */
+.gap-0 {
+  gap: 0;
+}
+
+/* 
+ * Bubble Background Styles - Only changes the background 
+ * Preserves the existing washing machine animation
+ */
+
+#loadingIndicator {
+  background: var(--bg-color);
+}
+
+}
+
+/* Utils */
+.hidden {
+  display: none;
+}
+
+/* Icon Fixes */
+.ti {
+  font-family: 'tabler-icons';
+}
+
+/* Fix for List View in the Viewer 
+   This CSS ensures the list view displays correctly
+*/
+
+/* List View Container */
+.image-gallery.list-view {
+  display: flex;
+  ;
+  flex-direction: column;
+  ;
+  gap: 15px;
+}
+
+/* List View Cards */
+.list-view .image-card {
+  display: flex;
+  ;
+  height: 120px;
+  ;
+  width: 100%;
+  ;
+  padding: 0;
+  ;
+  position: relative;
+}
+
+/* Image in List View */
+.list-view .image-card .card-image {
+  width: 120px;
+  ;
+  height: 120px;
+  ;
+  flex-shrink: 0;
+  ;
+  position: relative;
+  ;
+  object-fit: cover;
+}
+
+/* Content in List View */
+.list-view .image-card .card-content {
+  flex: 1;
+  ;
+  padding: 15px;
+  ;
+  display: flex;
+  ;
+  flex-direction: column;
+  ;
+  justify-content: space-between;
+  ;
+  background-color: inherit;
+}
+
+/* Title in List View */
+.list-view .card-title {
+  font-size: 14px;
+  ;
+  font-weight: 500;
+  ;
+  margin-bottom: 5px;
+  ;
+  overflow: hidden;
+  ;
+  text-overflow: ellipsis;
+  ;
+  white-space: nowrap;
+}
+
+/* Date in List View */
+.list-view .card-date {
+  font-size: 12px;
+  ;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Fix for empty state positioning in List View */
+.list-view .empty-state {
+  width: 100%;
+}
+
+/* Fix for card placeholder in list view */
+.list-view .card-placeholder {
+  width: 120px;
+  ;
+  height: 120px;
+  ;
+  display: flex;
+  ;
+  align-items: center;
+  ;
+  justify-content: center;
+  ;
+  background-color: var(--element-bg);
+  ;
+  color: var(--text-muted);
+}
+
+/* 
+ * Loading Screen Background Styles
+ * Only modifying the background, preserving the existing washing machine animation 
+ */
+
+/* Creating a light blue background with animated bubbles */
+#loadingIndicator {
+  /* Override the background only */
+  background-color: var(--bg-color);
+}
+
+/* Update text color to be readable on light blue background */
+#loadingIndicator p {
+  color: var(--text-color);
+}
+
+}
+
+/* Utility classes */
+.hidden {
+  display: none;
+}
+
+/* Fix for view-btn and refresh-btn states - matching main page style */
+
+/* Reset all view-btn and refresh-btn states */
+.view-btn,
+.refresh-btn,
+.toolbar .view-options .view-btn,
+.toolbar .view-options .refresh-btn,
+.viewer-content .toolbar .view-options .view-btn,
+.viewer-content .toolbar .view-options .refresh-btn {
+  background-color: var(--element-bg);
+  ;
+  border: none;
+  ;
+  color: var(--text-muted);
+  ;
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+/* Hover state */
+.view-btn:hover,
+.refresh-btn:hover,
+.toolbar .view-options .view-btn:hover,
+.toolbar .view-options .refresh-btn:hover,
+.viewer-content .toolbar .view-options .view-btn:hover,
+.viewer-content .toolbar .view-options .refresh-btn:hover {
+  background-color: var(--element-bg);
+  ;
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+  ;
+  transform: translateY(-2px);
+  ;
+  color: var(--text-muted);
+  ;
+  border: none;
+}
+
+/* Active state (when clicking) */
+.view-btn:active,
+.refresh-btn:active,
+.toolbar .view-options .view-btn:active,
+.toolbar .view-options .refresh-btn:active,
+.viewer-content .toolbar .view-options .view-btn:active,
+.viewer-content .toolbar .view-options .refresh-btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  ;
+  transform: translateY(0);
+  ;
+  background-color: var(--element-bg);
+  ;
+  color: var(--text-muted);
+  ;
+  border: none;
+}
+
+/* Selected state (active class) */
+.view-btn.active,
+.toolbar .view-options .view-btn.active,
+.viewer-content .toolbar .view-options .view-btn.active {
+  background-color: var(--element-bg);
+  ;
+  border: none;
+  ;
+  color: var(--text-muted);
+  ;
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  ;
+  font-weight: 700;
+  ;
+  transform: translateY(0);
+}
+
