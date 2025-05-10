@@ -368,11 +368,65 @@ document.addEventListener('DOMContentLoaded', () => {
       // Don't change the fancy button's innerHTML, just disable it
       generateBtn.style.opacity = '0.7';
       generateBtn.style.pointerEvents = 'none';
+      
+      // Start the random bubble appearance animation
+      animateBubblesRandomly();
     } else {
       loadingIndicator.classList.add('hidden');
       generateBtn.style.opacity = '1';
       generateBtn.style.pointerEvents = 'auto';
+      
+      // Hide all bubbles when loading is complete
+      document.querySelectorAll('.bubble').forEach(bubble => {
+        bubble.classList.remove('show');
+      });
     }
+  }
+  
+  // Function to animate bubbles with random delays
+  function animateBubblesRandomly() {
+    // Get all bubbles
+    const bubbles = document.querySelectorAll('.bubble');
+    
+    // Reset all bubbles (hide them first)
+    bubbles.forEach(bubble => {
+      bubble.classList.remove('show');
+    });
+    
+    // Generate a random schedule for each bubble
+    bubbles.forEach((bubble, index) => {
+      // Initial random delay between 0 and 3 seconds
+      const initialDelay = Math.random() * 3000;
+      
+      // Function to handle the bubble's cycle of appearing and disappearing
+      const cycleBubble = () => {
+        // Only proceed if the loading indicator is still visible
+        if (loadingIndicator.classList.contains('hidden')) return;
+        
+        // Show the bubble
+        bubble.classList.add('show');
+        
+        // Random duration for the bubble to stay visible (between 4 and 10 seconds)
+        const visibleDuration = 4000 + Math.random() * 6000;
+        
+        // Schedule bubble to hide after the visible duration
+        setTimeout(() => {
+          // Only hide if loading is still happening
+          if (!loadingIndicator.classList.contains('hidden')) {
+            bubble.classList.remove('show');
+            
+            // Random timeout before showing again (between 0.5 and 3 seconds)
+            const hideDelay = 500 + Math.random() * 2500;
+            
+            // Schedule the next cycle
+            setTimeout(cycleBubble, hideDelay);
+          }
+        }, visibleDuration);
+      };
+      
+      // Start the first cycle after the initial delay
+      setTimeout(cycleBubble, initialDelay);
+    });
   }
 
   // Show error message

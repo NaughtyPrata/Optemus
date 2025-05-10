@@ -8,6 +8,12 @@
   overflow: hidden; /* Keep bubbles contained */
 }
 
+/* Show class for bubbles */
+.bubble.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* Background bubble styling */
 .bubble {
   position: fixed; /* Use fixed positioning to ensure they show */
@@ -15,6 +21,9 @@
   box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.25);
   animation: animate_4010 8s ease-in-out infinite;
   z-index: 2; /* Above background, below loader */
+  opacity: 0; /* Initially hidden, will be shown via JS */
+  transform: scale(0.2); /* Start small */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smoother transition */
 }
 
 @keyframes animate_4010 {
