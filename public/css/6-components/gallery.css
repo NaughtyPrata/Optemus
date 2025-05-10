@@ -1,0 +1,564 @@
+/**
+ * Gallery Component
+ * 
+ * A unified file for all gallery-related styles following ITCSS principles.
+ * This consolidates multiple files into one clean implementation.
+ */
+
+/* -------------------------------------------------------------
+ * Gallery Container
+ * ------------------------------------------------------------ */
+body.viewer-page .viewer-content {
+  padding: 1.5rem;
+  /* Changed from fixed height to auto to fix stacking issues */
+  height: auto;
+  min-height: calc(100vh - 70px);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+body.viewer-page .image-gallery {
+  width: 100%;
+  height: auto; /* Critical fix - let gallery grow with content */
+  min-height: 200px;
+  overflow: visible; /* Changed from overflow-y: auto to prevent stacking */
+  background-color: var(--bg-color);
+  position: relative; /* Create containing block */
+}
+
+/* Fallback for browsers with poor grid support */
+@supports not (display: grid) {
+  body.viewer-page .image-gallery.grid-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 20px;
+  }
+  
+  body.viewer-page .grid-view .image-card {
+    flex: 0 0 calc(33.33% - 32px);
+    margin-bottom: 32px;
+  }
+  
+  @media (max-width: 768px) {
+    body.viewer-page .grid-view .image-card {
+      flex: 0 0 calc(50% - 16px);
+      margin-bottom: 16px;
+    }
+  }
+}
+
+/* -------------------------------------------------------------
+ * Gallery Grid View
+ * ------------------------------------------------------------ */
+body.viewer-page .image-gallery.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px; /* Increased gap to prevent overlapping */
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative; /* Create stacking context */
+}
+
+/* Force each card to be in its own grid cell with proper sizing */
+body.viewer-page .grid-view .image-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--element-bg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  cursor: pointer;
+  
+  /* Critical fixes for overlapping issues */
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  height: auto; /* Let the aspect ratio control height */
+  max-width: 100%;
+  position: relative; /* Ensure each card has its own stacking context */
+  z-index: 0; /* Default z-index */
+}
+
+body.viewer-page .grid-view .image-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 2; /* Higher z-index on hover to prevent overlap */
+}
+
+body.viewer-page .grid-view .image-card img.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative; /* Position relative to properly contain within parent */
+}
+
+body.viewer-page .grid-view .image-card:hover img.card-image {
+  transform: scale(1.05);
+}
+
+/* -------------------------------------------------------------
+ * Gallery List View
+ * ------------------------------------------------------------ */
+body.viewer-page .image-gallery.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+body.viewer-page .list-view .image-card {
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--element-bg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 120px;
+  width: 100%;
+  cursor: pointer;
+  aspect-ratio: auto;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body.viewer-page .list-view .image-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+body.viewer-page .list-view .image-card img.card-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+
+body.viewer-page .list-view .card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+body.viewer-page .list-view .card-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.viewer-page .list-view .card-date {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------------
+ * Toolbar
+ * ------------------------------------------------------------ */
+body.viewer-page .toolbar {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+body.viewer-page .view-options {
+  display: flex;
+  gap: 10px;
+}
+
+body.viewer-page .view-btn,
+body.viewer-page .refresh-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: var(--element-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+body.viewer-page .view-btn:hover,
+body.viewer-page .refresh-btn:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.05);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+body.viewer-page .view-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* Search container */
+body.viewer-page .search-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+body.viewer-page .search-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 16px 0 44px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: var(--element-bg);
+  color: var(--text-color);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+body.viewer-page .search-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+  outline: none;
+}
+
+body.viewer-page .search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------
+ * Tooltips
+ * ------------------------------------------------------------ */
+body.viewer-page .tooltip-container {
+  position: relative;
+}
+
+body.viewer-page .tooltip {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--text-color);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+  font-weight: 500;
+}
+
+body.viewer-page .tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--text-color) transparent transparent transparent;
+}
+
+body.viewer-page .tooltip-container:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* -------------------------------------------------------------
+ * Empty State
+ * ------------------------------------------------------------ */
+body.viewer-page .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  min-height: 400px;
+  margin: 20px 0;
+  width: 100%;
+  grid-column: 1 / -1;
+}
+
+body.viewer-page .empty-state i {
+  font-size: 64px;
+  margin-bottom: 24px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+body.viewer-page .empty-state p {
+  margin-bottom: 24px;
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+body.viewer-page .empty-state .btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------------
+ * Placeholder for Failed Images
+ * ------------------------------------------------------------ */
+body.viewer-page .card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.03);
+  color: var(--text-muted);
+  font-size: 32px;
+}
+
+/* -------------------------------------------------------------
+ * Header Styling
+ * ------------------------------------------------------------ */
+body.viewer-page .viewer-header {
+  background-color: var(--bg-color);
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  height: auto;
+}
+
+body.viewer-page .viewer-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+body.viewer-page .viewer-header h1 i {
+  color: var(--primary-color);
+  font-size: 28px;
+}
+
+body.viewer-page .header-left a.btn-outline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* -------------------------------------------------------------
+ * Modal Styling
+ * ------------------------------------------------------------ */
+body.viewer-page .image-modal {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+body.viewer-page .modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 800px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.viewer-page .modal-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+body.viewer-page .modal-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+body.viewer-page .close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+body.viewer-page .close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-color);
+}
+
+body.viewer-page .modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+body.viewer-page .image-preview {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+body.viewer-page .image-preview img {
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.viewer-page .image-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+body.viewer-page .detail-item {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+body.viewer-page .detail-item h4 {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+body.viewer-page .detail-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+body.viewer-page .modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+body.viewer-page .modal-image-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  background-color: var(--element-bg);
+  color: var(--text-muted);
+  font-size: 2rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+body.viewer-page .modal-image-error p {
+  font-size: 1rem;
+}
+
+/* -------------------------------------------------------------
+ * Responsive Adjustments
+ * ------------------------------------------------------------ */
+@media (max-width: 768px) {
+  body.viewer-page .viewer-header {
+    padding: 16px;
+  }
+  
+  body.viewer-page .viewer-content {
+    padding: 16px;
+    height: calc(100vh - 60px);
+  }
+  
+  body.viewer-page .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  
+  body.viewer-page .search-container {
+    max-width: none;
+    width: 100%;
+  }
+  
+  body.viewer-page .view-options {
+    justify-content: flex-end;
+  }
+  
+  body.viewer-page .image-gallery.grid-view {
+    display: grid !important; /* Force grid display */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+    gap: 16px !important;
+    padding: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Ensure grid items are properly positioned even on mobile */
+  body.viewer-page .grid-view .image-card {
+    position: relative !important;
+    margin: 0 !important;
+    width: 100% !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+  
+  body.viewer-page .image-gallery.list-view {
+    padding: 16px;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,103 @@
+/* 
+ * Gallery Overlap Fix
+ * This file specifically addresses the issue with images overlapping in the gallery view
+ */
+
+/* Primary fix for grid layout - ensure proper spacing and container sizing */
+body.viewer-page .image-gallery.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px; /* Increased gap to prevent any chance of overlap */
+  padding: 25px; /* Add padding around the entire gallery */
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Ensure all cards have proper box sizing and don't overflow */
+body.viewer-page .grid-view .image-card {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  aspect-ratio: 1 / 1; /* Maintain aspect ratio for consistent layout */
+}
+
+/* Ensure images stay contained within their cards */
+body.viewer-page .grid-view .image-card img.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix for hover effects to avoid breaking layout */
+body.viewer-page .grid-view .image-card:hover {
+  z-index: 1; /* Bring hovered cards to the front */
+}
+
+/* List view fixes to ensure consistent spacing */
+body.viewer-page .image-gallery.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Consistent gap between list items */
+  padding: 25px; /* Matching padding to grid view */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body.viewer-page .list-view .image-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix any container issues */
+body.viewer-page .viewer-content {
+  padding: 0; /* Remove padding from container as we're adding it to the gallery */
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keep toolbar properly spaced */
+body.viewer-page .toolbar {
+  padding: 25px 25px 0 25px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Clear any floats and ensure proper display */
+body.viewer-page .image-gallery::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Fix for mobile responsiveness */
+@media (max-width: 768px) {
+  body.viewer-page .image-gallery.grid-view {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  body.viewer-page .image-gallery.list-view {
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  body.viewer-page .toolbar {
+    padding: 15px 15px 0 15px;
+  }
+}

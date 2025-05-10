@@ -1,0 +1,100 @@
+/* 
+ * Emergency fix for gallery stacking issue
+ * This file contains critical overrides to ensure images don't stack
+ */
+
+/* Force proper stacking context and height behavior */
+html, body {
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow-y: auto !important;
+}
+
+body.viewer-page {
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+body.viewer-page .app-container {
+  min-height: 100vh !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+body.viewer-page .viewer-content {
+  height: auto !important;
+  min-height: calc(100vh - 70px) !important;
+  overflow: visible !important;
+}
+
+body.viewer-page .image-gallery {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Force grid layout with explicit properties */
+body.viewer-page .image-gallery.grid-view {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 40px !important;
+  padding: 40px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  width: 100% !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 300px !important;
+}
+
+/* Force card to take appropriate space */
+body.viewer-page .grid-view .image-card {
+  width: 100% !important;
+  position: relative !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  margin: 0 !important;
+  display: block !important;
+  overflow: hidden !important;
+}
+
+/* Force grid items to appropriate cells */
+body.viewer-page .grid-view .image-card:nth-child(1) { grid-row: 1; grid-column: 1; }
+body.viewer-page .grid-view .image-card:nth-child(2) { grid-row: 1; grid-column: 2; }
+body.viewer-page .grid-view .image-card:nth-child(3) { grid-row: 1; grid-column: 3; }
+body.viewer-page .grid-view .image-card:nth-child(4) { grid-row: 1; grid-column: 4; }
+body.viewer-page .grid-view .image-card:nth-child(5) { grid-row: 2; grid-column: 1; }
+body.viewer-page .grid-view .image-card:nth-child(6) { grid-row: 2; grid-column: 2; }
+body.viewer-page .grid-view .image-card:nth-child(7) { grid-row: 2; grid-column: 3; }
+body.viewer-page .grid-view .image-card:nth-child(8) { grid-row: 2; grid-column: 4; }
+body.viewer-page .grid-view .image-card:nth-child(9) { grid-row: 3; grid-column: 1; }
+body.viewer-page .grid-view .image-card:nth-child(10) { grid-row: 3; grid-column: 2; }
+body.viewer-page .grid-view .image-card:nth-child(11) { grid-row: 3; grid-column: 3; }
+body.viewer-page .grid-view .image-card:nth-child(12) { grid-row: 3; grid-column: 4; }
+body.viewer-page .grid-view .image-card:nth-child(13) { grid-row: 4; grid-column: 1; }
+body.viewer-page .grid-view .image-card:nth-child(14) { grid-row: 4; grid-column: 2; }
+body.viewer-page .grid-view .image-card:nth-child(15) { grid-row: 4; grid-column: 3; }
+body.viewer-page .grid-view .image-card:nth-child(16) { grid-row: 4; grid-column: 4; }
+
+/* Media queries to ensure responsive layout still works */
+@media (max-width: 1200px) {
+  body.viewer-page .grid-view .image-card:nth-child(n) {
+    /* Reset explicit grid positions for smaller screens */
+    grid-row: auto !important;
+    grid-column: auto !important;
+  }
+  
+  body.viewer-page .image-gallery.grid-view {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)) !important;
+    gap: 30px !important;
+    padding: 30px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body.viewer-page .image-gallery.grid-view {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 20px !important;
+  }
+}

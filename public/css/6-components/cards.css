@@ -14,23 +14,8 @@
   box-shadow: var(--shadow-dark), var(--shadow-light);
 }
 
-/* Image card styles */
-.image-card {
-  background-color: var(--element-bg);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-light), var(--shadow-dark);
-  transition: var(--transition);
-  cursor: pointer;
-  position: relative;
-  aspect-ratio: 1 / 1;
-  max-height: 350px;
-}
-
-.image-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 8px 8px 16px rgba(195, 195, 195, 0.6), -8px -8px 16px rgba(255, 255, 255, 0.9);
-}
+/* General card styles - specific image-card styles moved to gallery.css */
+=======
 
 /* Card Content */
 .card-content {
@@ -71,72 +56,8 @@
   line-height: 1.4;
 }
 
-/* List View Cards */
-.image-gallery.list-view .image-card {
-  display: flex;
-  height: 120px;
-  aspect-ratio: unset;
-}
-
-.image-gallery.list-view .card-image {
-  width: 120px;
-  height: 120px;
-  flex-shrink: 0;
-  object-fit: cover;
-}
-
-.image-gallery.list-view .card-content {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Image gallery card layouts */
-.image-gallery.grid-view {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.image-gallery {
-  padding: 16px 0;
-  overflow-y: auto;
-}
-
-/* Empty state card */
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  text-align: center;
-  color: var(--text-muted);
-}
-
-.empty-state i {
-  font-size: 5rem;
-  margin-bottom: 1.5rem;
-  opacity: 0.5;
-}
-
-.empty-state p {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-}
-
-/* Card placeholder for empty images */
-.card-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--element-bg);
-  color: var(--text-muted);
-  font-size: 1.5rem;
-  height: 100%;
-  width: 100%;
-}
+/* Note: All gallery-related card styles have been moved to gallery.css 
+   for better organization and to prevent CSS conflicts */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

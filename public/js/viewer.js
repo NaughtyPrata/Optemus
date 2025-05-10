@@ -1,4 +1,52 @@
+/**
+ * Image Gallery Viewer Script
+ * 
+ * IMPORTANT NOTE: This script contains critical fixes for image overlapping issues.
+ * If modifying the gallery layout or styling, please ensure these fixes are maintained:
+ * 1. Inline styles ensure proper grid positioning
+ * 2. Forced display:grid and position:relative on the gallery container
+ * 3. z-index management for hover states
+ * 4. Explicit grid-column and grid-row settings 
+ */
+/**
+ * Gallery viewer with fixed layout
+ * 
+ * This includes critical fixes to prevent image stacking issues:
+ * 1. Explicit grid layout with JS reinforcement
+ * 2. Forced proper card sizing and positioning
+ * 3. Overflow handling to allow content to expand naturally
+ * 4. Polyfill for browsers with poor grid support
+ */
 document.addEventListener('DOMContentLoaded', () => {
+  // Function to check for proper CSS Grid support
+  function checkGridSupport() {
+    // Check if CSS Grid is properly supported
+    if (window.CSS && CSS.supports && CSS.supports('display', 'grid')) {
+      console.log('CSS Grid is supported');
+      return true;
+    } else {
+      console.log('CSS Grid is NOT fully supported - applying polyfill');
+      return false;
+    }
+  }
+
+  // Apply polyfill if needed
+  const hasGridSupport = checkGridSupport();
+  
+  // Set an appropriate classname based on grid support
+  document.body.classList.add(hasGridSupport ? 'has-grid-support' : 'no-grid-support');
+  
+  // Add window resize handler to fix layout issues on resize
+  window.addEventListener('resize', function() {
+    if (document.getElementById('imageGallery')) {
+      // Force redraw of gallery on resize
+      const gallery = document.getElementById('imageGallery');
+      gallery.style.display = 'none';
+      setTimeout(() => {
+        gallery.style.display = 'grid';
+      }, 5);
+    }
+  });
   // Elements
   const imageGallery = document.getElementById('imageGallery');
   const searchInput = document.getElementById('searchInput');
@@ -183,12 +231,51 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     
+    // Force proper layout styles
+    imageGallery.style.display = 'grid';
+    imageGallery.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
+    imageGallery.style.gap = '40px';
+    imageGallery.style.padding = '40px';
+    imageGallery.style.boxSizing = 'border-box';
+    imageGallery.style.position = 'relative';
+    imageGallery.style.height = 'auto';
+    imageGallery.style.minHeight = '500px';
+    imageGallery.style.overflow = 'visible';
+    
     // Add image cards
     imagesToRender.forEach((image, index) => {
       console.log(`Creating card for image ${index + 1}/${imagesToRender.length}:`, image.filename);
       const card = createImageCard(image);
+      
+      // Force card to take its proper place in the grid
+      if (index < 16) {
+        // Explicitly position first 16 cards to ensure proper layout
+        const row = Math.floor(index / 4) + 1;
+        const col = (index % 4) + 1;
+        card.style.gridRow = row.toString();
+        card.style.gridColumn = col.toString();
+      }
+      
       imageGallery.appendChild(card);
     });
+    
+    // Add a subtle fade-in animation to all cards
+    const cards = imageGallery.querySelectorAll('.image-card');
+    cards.forEach((card, index) => {
+      // Let CSS handle the positioning
+      
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      
+      // Staggered animation
+      setTimeout(() => {
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, index * 50); // 50ms delay between each card
+    });
+    
+    // Let CSS handle the layout
   }
   
   // Create image card element
@@ -196,14 +283,27 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Creating image card for:', image.filename);
     console.log('Image path:', image.localPath || image.url);
     
+    // Create card with proper styling
     const card = document.createElement('div');
     card.className = 'image-card';
-    // Add a data attribute with the timestamp for debugging
     card.setAttribute('data-timestamp', image.createdAt || '');
     card.addEventListener('click', () => showImageDetails(image));
     
-    // For grid view, just show the image
+    // Add explicit inline styles to ensure proper positioning
     if (viewMode === 'grid') {
+      // Force proper card styling
+      card.style.position = 'relative';
+      card.style.width = '100%';
+      card.style.aspectRatio = '1 / 1';
+      card.style.margin = '0';
+      card.style.padding = '0';
+      card.style.boxSizing = 'border-box';
+      card.style.overflow = 'hidden';
+      card.style.borderRadius = '8px';
+      card.style.display = 'block';
+      card.style.backgroundColor = '#ffffff';
+      card.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+
       const img = document.createElement('img');
       img.className = 'card-image';
       
@@ -213,6 +313,15 @@ document.addEventListener('DOMContentLoaded', () => {
       
       console.log('Setting image src to:', img.src);
       img.alt = image.prompt || 'Generated image';
+      img.loading = 'lazy'; // Add lazy loading
+      
+      // Apply explicit styling to image
+      img.style.width = '100%';
+      img.style.height = '100%';
+      img.style.objectFit = 'cover';
+      img.style.display = 'block';
+      img.style.margin = '0';
+      img.style.padding = '0';
       
       // Add error handling for images
       img.onerror = function() {
@@ -225,11 +334,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const placeholder = document.createElement('div');
         placeholder.className = 'card-placeholder';
         placeholder.innerHTML = '<i class="ti ti-photo-off"></i>';
+        placeholder.style.width = '100%';
+        placeholder.style.height = '100%';
+        placeholder.style.display = 'flex';
+        placeholder.style.alignItems = 'center';
+        placeholder.style.justifyContent = 'center';
+        placeholder.style.backgroundColor = '#f5f5f5';
         parent.appendChild(placeholder);
-      };
-      
-      img.onload = function() {
-        console.log('Image loaded successfully:', img.src);
       };
       
       card.appendChild(img);

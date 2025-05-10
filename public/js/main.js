@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
               const downloadLink = document.createElement('a');
               downloadLink.href = `/api/download/${img.filename}`;
               downloadLink.download = img.filename;
-              downloadLink.style.display = 'none';
+              downloadLink.classList.add('hidden');
               document.body.appendChild(downloadLink);
               downloadLink.click();
               document.body.removeChild(downloadLink);
@@ -388,8 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isLoading) {
       loadingIndicator.classList.remove('hidden');
       // Don't change the fancy button's innerHTML, just disable it
-      generateBtn.style.opacity = '0.7';
-      generateBtn.style.pointerEvents = 'none';
+      generateBtn.classList.add('loading-state');
       
       // Start the random bubble appearance animation
       animateBubblesRandomly();
@@ -407,8 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 100);
     } else {
       loadingIndicator.classList.add('hidden');
-      generateBtn.style.opacity = '1';
-      generateBtn.style.pointerEvents = 'auto';
+      generateBtn.classList.remove('loading-state');
       
       // Hide all bubbles when loading is complete
       document.querySelectorAll('.bubble').forEach(bubble => {

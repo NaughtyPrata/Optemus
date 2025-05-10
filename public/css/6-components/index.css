@@ -9,7 +9,10 @@
 @import './modal.css';
 @import './images.css';
 @import './loaders.css';
-@import './custom-loader.css';  /* Make sure this gets loaded */
+@import './custom-loader.css';
 @import './bubble-bg.css';
 @import './documentation.css';
 @import './custom-buttons.css';
+@import './icons.css';
+@import './image-loader.css';
+@import './gallery.css';  /* Unified gallery component replaces all previous gallery CSS files */

@@ -8,6 +8,7 @@
   
   /* Primary Colors */
   --primary-color: #7e57c2;
+  --primary-color-rgb: 126, 87, 194; /* Added RGB format for rgba usage */
   --primary-dark: #673ab7;
   --primary-light: #b39ddb;
   
