@@ -71,6 +71,11 @@ body {
   margin: 0;
 }
 
+.centered-heading {
+  width: 100%;
+  text-align: center;
+}
+
 /* Form elements */
 .form-group {
   margin-bottom: 1.25rem;

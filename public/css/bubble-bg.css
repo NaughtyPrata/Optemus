@@ -1,0 +1,190 @@
+/* 
+ * Bubble Background Styles - Only changes the background 
+ * Preserves the existing washing machine animation
+ */
+
+#loadingIndicator {
+  background: linear-gradient(to bottom, #e6f7ff, #b3e0ff) !important; /* Better light blue gradient */
+  overflow: hidden; /* Keep bubbles contained */
+}
+
+/* Background bubble styling */
+.bubble {
+  position: fixed; /* Use fixed positioning to ensure they show */
+  border-radius: 50%;
+  box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.25);
+  animation: animate_4010 8s ease-in-out infinite;
+  z-index: 2; /* Above background, below loader */
+}
+
+@keyframes animate_4010 {
+  0%,100% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+/* First bubble - extra large */
+#bubble1 {
+  width: 250px;
+  height: 250px;
+  top: 15%;
+  left: 15%;
+}
+
+/* Second bubble - medium */
+#bubble2 {
+  width: 180px;
+  height: 180px;
+  top: 40%;
+  right: 25%;
+  animation-delay: -4s;
+}
+
+/* Third bubble - small */
+#bubble3 {
+  width: 120px;
+  height: 120px;
+  bottom: 20%;
+  left: 30%;
+  animation-delay: -6s;
+}
+
+/* Fourth bubble - tiny */
+#bubble4 {
+  width: 80px;
+  height: 80px;
+  top: 10%;
+  right: 20%;
+  animation-delay: -3s;
+}
+
+/* Fifth bubble - large */
+#bubble5 {
+  width: 220px;
+  height: 220px;
+  bottom: 30%;
+  right: 10%;
+  animation-delay: -5s;
+}
+
+/* Sixth bubble - extra small */
+#bubble6 {
+  width: 60px;
+  height: 60px;
+  top: 35%;
+  left: 45%;
+  animation-delay: -2s;
+}
+
+/* Seventh bubble - medium-small */
+#bubble7 {
+  width: 100px;
+  height: 100px;
+  bottom: 15%;
+  right: 35%;
+  animation-delay: -7s;
+}
+
+/* Eighth bubble - medium-large */
+#bubble8 {
+  width: 200px;
+  height: 200px;
+  top: 60%;
+  left: 10%;
+  animation-delay: -1s;
+}
+
+/* General bubble styling */
+.bubble::before {
+  content: '';
+  position: absolute;
+  width: 15%;
+  height: 15%;
+  top: 25%;
+  left: 22.5%;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 10;
+  filter: blur(2px);
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  top: 40%;
+  left: 40%;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 10;
+  filter: blur(2px);
+}
+
+.bubble span {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bubble span:nth-child(1) {
+  inset: 10px;
+  border-left: 15px solid #0fb4ff;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(2) {
+  inset: 10px;
+  border-right: 15px solid #ff4484;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(3) {
+  inset: 10px;
+  border-top: 15px solid #ffeb3b;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(4) {
+  inset: 30px;
+  border-left: 15px solid #ff4484;
+  filter: blur(12px);
+}
+
+.bubble span:nth-child(5) {
+  inset: 10px;
+  border-bottom: 10px solid #fff;
+  filter: blur(8px);
+  transform: rotate(330deg);
+}
+
+/* Additional animation for larger bubbles */
+#bubble1, #bubble5, #bubble8 {
+  animation: animate_4010_large 10s ease-in-out infinite;
+}
+
+@keyframes animate_4010_large {
+  0%,100% {
+    transform: translateY(-30px);
+  }
+  50% {
+    transform: translateY(30px);
+  }
+}
+
+/* Make sure the loader is above the bubbles */
+.loader {
+  position: relative;
+  z-index: 5;
+}
+
+#loadingIndicator p {
+  position: relative;
+  z-index: 5;
+  color: #333;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+</function_parameters>
+</invoke>

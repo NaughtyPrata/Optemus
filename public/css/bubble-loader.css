@@ -1,0 +1,112 @@
+/* Bubble loader animation styles */
+#loadingIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(173, 216, 230, 0.9); /* Light blue with some transparency */
+  z-index: 1000;
+  overflow: hidden;
+}
+
+#loadingIndicator p {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #2c3e50; /* Dark blue text */
+  text-align: center;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+  position: relative;
+  z-index: 10;
+}
+
+/* Washing machine container */
+.washing-machine {
+  width: 150px;
+  height: 150px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1), 
+              inset 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 8px solid #f0f0f0;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.machine-window {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(173, 216, 230, 0.3); /* Light blue */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Bubbles */
+.bubble-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+  opacity: 0;
+}
+
+/* Water waves effect */
+.water-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to bottom, 
+    rgba(173, 216, 230, 0.4) 0%,
+    rgba(135, 206, 235, 0.6) 50%,
+    rgba(100, 181, 246, 0.8) 100%);
+  border-radius: 0 0 50% 50%;
+}
+
+/* Bubbles in the background */
+.background-bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.bg-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+/* Hide the old loading spinner and loader */
+.loading-spinner, .loader {
+  display: none;
+}
+</function_parameters>
+</invoke>
