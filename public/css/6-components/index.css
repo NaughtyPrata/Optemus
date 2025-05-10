@@ -16,3 +16,6 @@
 @import './icons.css';
 @import './image-loader.css';
 @import './gallery.css';  /* Unified gallery component replaces all previous gallery CSS files */
+@import './advanced-controls.css';  /* Advanced filter and sort controls */
+@import './favorites.css';  /* Favorites functionality */
+@import './toast.css';  /* Toast notification system */

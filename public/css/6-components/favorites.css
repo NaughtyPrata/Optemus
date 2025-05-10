@@ -1,0 +1,83 @@
+/**
+ * Favorites Component
+ *
+ * Styles for favorite functionality in the image gallery
+ */
+
+/* Favorite indicator for grid view */
+body.viewer-page .grid-view .image-card.favorite::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.viewer-page .grid-view .image-card.favorite::before {
+  content: "\ea77"; /* Star icon from Tabler */
+  font-family: 'tabler-icons';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  font-size: 16px;
+}
+
+/* Favorite tag for list view */
+body.viewer-page .list-view .favorite-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  color: var(--primary-color);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* Favorite button in modal */
+body.viewer-page #favoriteBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+body.viewer-page #favoriteBtn.active {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+body.viewer-page #favoriteBtn.active i {
+  color: var(--primary-color);
+}
+
+/* Modal footer layout for favorites */
+body.viewer-page .modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+body.viewer-page .modal-footer-right {
+  display: flex;
+  gap: 10px;
+}

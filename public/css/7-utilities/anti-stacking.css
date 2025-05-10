@@ -1,0 +1,54 @@
+/**
+ * Anti-Stacking Utilities
+ *
+ * Utility classes to prevent elements from stacking incorrectly
+ */
+
+/* Apply these classes to any element with stacking issues */
+.no-stack {
+  isolation: isolate !important;
+  position: relative !important;
+  z-index: 1 !important;
+  transform-style: preserve-3d !important;
+  backface-visibility: hidden !important;
+  transform: translateZ(0) !important;
+}
+
+/* Force a clean stacking context for container elements */
+.stack-context {
+  isolation: isolate !important;
+  position: relative !important;
+  z-index: 0 !important;
+  transform: translateZ(0) !important;
+  will-change: transform !important;
+}
+
+/* Force proper grid layout with anti-stacking properties */
+.grid-fix {
+  display: grid !important;
+  position: relative !important;
+  z-index: 0 !important;
+  isolation: isolate !important;
+  transform: translateZ(0) !important;
+  will-change: transform !important;
+  gap: 16px !important;
+}
+
+/* Add this class to any image with stacking issues */
+.image-fix {
+  position: relative !important;
+  z-index: 2 !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+}
+
+/* Add this to the image-gallery to force proper grid behavior */
+html body.viewer-page .image-gallery.grid-view {
+  contain: layout style !important; /* Modern containment for performance */
+}
+
+/* Ensure image cards don't stack by fixing their 3D context */
+html body.viewer-page .grid-view .image-card {
+  contain: layout style !important;
+  transform: translate3d(0, 0, 0) !important;
+}

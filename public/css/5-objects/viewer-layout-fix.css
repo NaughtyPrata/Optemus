@@ -4,18 +4,20 @@
  */
 
 /* Special class for viewer page */
-body.viewer-page {
-  overflow: auto; /* Changed from hidden to allow scrolling */
+html body.viewer-page {
+  overflow: auto; /* Allow scrolling */
+  min-height: 100vh;
+  height: auto;
 }
 
 /* Override app-container specifically for the viewer */
-body.viewer-page .app-container {
+html body.viewer-page .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Changed from fixed height to min-height */
+  min-height: 100vh;
   width: 100%;
   background-color: var(--bg-color);
-  overflow: visible; /* Changed from hidden to fix stacking */
+  overflow: visible; /* Allow content to expand */
 }
 
 /* Fix header layout */
@@ -50,14 +52,14 @@ body.viewer-page .header-left {
 }
 
 /* Fix viewer content to take up 100% of the remaining space */
-body.viewer-page .viewer-content {
+html body.viewer-page .viewer-content {
   flex: 1;
   width: 100%;
   max-width: 100%;
-  height: auto; /* Changed from fixed height */
+  height: auto; /* Auto height is crucial for stacking fix */
   min-height: calc(100vh - 70px);
   padding: 1.5rem 2rem 2rem;
-  overflow: visible; /* Changed from overflow-y: auto to fix stacking */
+  overflow: visible; /* Allow content to expand */
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -75,18 +77,21 @@ body.viewer-page .toolbar {
 }
 
 /* Ensure gallery uses full width and proper layout */
-body.viewer-page .image-gallery {
+html body.viewer-page .image-gallery {
   width: 100%;
-  height: auto !important; /* Critical fix - explicitly set auto height */
+  height: auto; /* Critical fix - explicitly set auto height */
   flex: 1;
   padding: 0;
   margin: 0;
-  overflow: visible !important; /* Fix to prevent stacking issues */
+  overflow: visible; /* Fix to prevent stacking issues */
+  /* Reset stacking context */
+  position: relative;
+  z-index: 0;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  body.viewer-page .viewer-header {
+  html body.viewer-page .viewer-header {
     padding: 1rem;
     flex-direction: column;
     align-items: flex-start;
@@ -94,14 +99,14 @@ body.viewer-page .image-gallery {
     gap: 1rem;
   }
   
-  body.viewer-page .header-left {
+  html body.viewer-page .header-left {
     width: 100%;
     justify-content: space-between;
   }
   
-  body.viewer-page .viewer-content {
+  html body.viewer-page .viewer-content {
     padding: 1rem;
-    height: auto !important; /* Remove fixed height on mobile */
+    height: auto; /* Remove fixed height on mobile */
     min-height: calc(100vh - 120px);
   }
   

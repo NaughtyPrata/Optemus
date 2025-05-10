@@ -4,3 +4,5 @@
  */
 
 @import './utils.css';
+@import './animations.css'; /* Animation utilities */
+@import './anti-stacking.css'; /* Anti-stacking utilities */

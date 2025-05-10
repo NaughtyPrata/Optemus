@@ -7,8 +7,6 @@
   
   <!-- Single CSS import with ITCSS architecture -->
   <link rel="stylesheet" href="css/main.css">
-  <!-- Emergency fix for stacking issues -->
-  <link rel="stylesheet" href="css/emergency-fix.css">
   
   <!-- CDN Resources -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,11 +18,14 @@
     <header class="viewer-header">
       <div class="header-left">
         <h1><i class="ti ti-photo"></i> Image Gallery</h1>
-        <a href="index.html" class="btn btn-outline">
+        <a href="index.html" class="gallery-btn">
           <i class="ti ti-arrow-left"></i> Back to Generator
         </a>
       </div>
       <div class="header-right">
+        <a href="index.html" class="gallery-btn">
+          <i class="ti ti-plus"></i> Create New Image
+        </a>
       </div>
     </header>
     
@@ -54,6 +55,26 @@
             </button>
             <div class="tooltip">Refresh Gallery</div>
           </div>
+        </div>
+      </div>
+      
+      <!-- Filter and Sort controls -->
+      <div class="advanced-controls">
+        <div class="filter-options">
+          <span class="control-label">Filter by:</span>
+          <select id="filterSelect" class="filter-select">
+            <option value="all">All Images</option>
+            <option value="recent">Recently Created</option>
+            <option value="favorite">Favorites</option>
+          </select>
+        </div>
+        <div class="sort-options">
+          <span class="control-label">Sort by:</span>
+          <select id="sortSelect" class="sort-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="prompt">Prompt (A-Z)</option>
+          </select>
         </div>
       </div>
       
@@ -97,15 +118,25 @@
           </div>
         </div>
         <div class="modal-footer">
-          <a id="downloadBtn" href="#" class="btn btn-outline" download>
-            <i class="ti ti-download"></i> Download
-          </a>
-          <button id="deleteBtn" class="btn btn-danger">
-            <i class="ti ti-trash"></i> Delete
-          </button>
+          <div class="modal-footer-left">
+            <button id="favoriteBtn" class="gallery-btn">
+              <i class="ti ti-star"></i> Add to Favorites
+            </button>
+          </div>
+          <div class="modal-footer-right">
+            <a id="downloadBtn" href="#" class="gallery-btn" download>
+              <i class="ti ti-download"></i> Download
+            </a>
+            <button id="deleteBtn" class="gallery-btn">
+              <i class="ti ti-trash"></i> Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
+    
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
   </div>
   
   <!-- No test gallery needed anymore -->

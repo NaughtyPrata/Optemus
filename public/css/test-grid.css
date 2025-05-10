@@ -1,0 +1,74 @@
+/* Test Grid CSS */
+html body.viewer-page .viewer-content {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: calc(100vh - 70px) !important;
+}
+
+html body.viewer-page .image-gallery {
+  background-color: pink !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 500px !important;
+}
+
+html body.viewer-page .image-gallery.grid-view {
+  background-color: lightblue !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 40px !important;
+  padding: 40px !important;
+  
+  /* Test one of these at a time */
+  /* position: static !important; */
+  /* position: relative !important; */
+  /* position: absolute !important; */
+  /* z-index: auto !important; */
+  /* float: none !important; */
+  /* overflow: visible !important; */
+  /* overflow-x: visible !important; */
+  /* overflow-y: visible !important; */
+  
+  /* Reset positioning properties */
+  /* top: auto !important; */
+  /* left: auto !important; */
+  /* right: auto !important; */
+  /* bottom: auto !important; */
+  
+  /* Force layout */
+  /* max-height: none !important; */
+  /* height: auto !important; */
+  
+  /* TEST THIS - Force the height calculation for this element */
+  height: auto !important;
+}
+
+html body.viewer-page .grid-view .image-card {
+  background-color: yellow !important;
+  border: 3px solid red !important;
+  
+  /* Test properties */
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  z-index: 0 !important;
+  
+  /* Force grid placement */
+  grid-column: auto !important;
+  grid-row: auto !important;
+}
+
+html body.viewer-page .grid-view .image-card:nth-child(odd) {
+  border-color: blue !important;
+}
+
+html body.viewer-page .grid-view .image-card img.card-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}

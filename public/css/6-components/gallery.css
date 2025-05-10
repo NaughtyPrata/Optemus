@@ -50,20 +50,29 @@ body.viewer-page .image-gallery {
 }
 
 /* -------------------------------------------------------------
- * Gallery Grid View
+ * Gallery Grid View - Fix for card stacking issues
  * ------------------------------------------------------------ */
-body.viewer-page .image-gallery.grid-view {
+html body.viewer-page .image-gallery.grid-view {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 32px; /* Increased gap to prevent overlapping */
+  gap: 40px; /* Large gap to prevent overlapping */
   width: 100%;
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
   position: relative; /* Create stacking context */
+  height: auto;
+  min-height: 300px;
+  overflow: visible;
+  
+  /* Critical fixes for stacking issues */
+  isolation: isolate; /* Create a stacking context */
+  transform: translateZ(0); /* Force hardware acceleration */
+  will-change: transform; /* Hint for browser optimization */
+  z-index: 0; /* Base z-index */
 }
 
 /* Force each card to be in its own grid cell with proper sizing */
-body.viewer-page .grid-view .image-card {
+html body.viewer-page .grid-view .image-card {
   border-radius: 12px;
   overflow: hidden;
   background-color: var(--element-bg);
@@ -80,8 +89,12 @@ body.viewer-page .grid-view .image-card {
   display: block;
   height: auto; /* Let the aspect ratio control height */
   max-width: 100%;
-  position: relative; /* Ensure each card has its own stacking context */
-  z-index: 0; /* Default z-index */
+  grid-column: auto; /* Ensure proper grid placement */
+  grid-row: auto;
+  z-index: 1; /* Higher z-index to prevent stacking */
+  isolation: isolate; /* Create stacking context */
+  transform-style: preserve-3d; /* Force 3D context */
+  backface-visibility: hidden; /* Optimize rendering */
 }
 
 body.viewer-page .grid-view .image-card:hover {
@@ -99,7 +112,11 @@ body.viewer-page .grid-view .image-card img.card-image {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  position: relative; /* Position relative to properly contain within parent */
+  position: absolute; /* Position absolute for proper layout */
+  top: 0;
+  left: 0;
+  z-index: 2; /* Higher z-index than the card */
+  isolation: isolate; /* Create stacking context */
 }
 
 body.viewer-page .grid-view .image-card:hover img.card-image {
@@ -212,9 +229,8 @@ body.viewer-page .refresh-btn:hover {
 }
 
 body.viewer-page .view-btn.active {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  color: var(--primary-color);
 }
 
 /* Search container */
@@ -514,50 +530,62 @@ body.viewer-page .modal-image-error p {
  * Responsive Adjustments
  * ------------------------------------------------------------ */
 @media (max-width: 768px) {
-  body.viewer-page .viewer-header {
+  html body.viewer-page .viewer-header {
     padding: 16px;
   }
   
-  body.viewer-page .viewer-content {
+  html body.viewer-page .viewer-content {
     padding: 16px;
-    height: calc(100vh - 60px);
+    height: auto;
+    min-height: calc(100vh - 60px);
   }
   
-  body.viewer-page .toolbar {
+  html body.viewer-page .toolbar {
     flex-direction: column;
     align-items: stretch;
     gap: 16px;
     margin-bottom: 16px;
   }
   
-  body.viewer-page .search-container {
+  html body.viewer-page .search-container {
     max-width: none;
     width: 100%;
   }
   
-  body.viewer-page .view-options {
+  html body.viewer-page .view-options {
     justify-content: flex-end;
   }
   
-  body.viewer-page .image-gallery.grid-view {
-    display: grid !important; /* Force grid display */
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
-    gap: 16px !important;
-    padding: 16px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+  html body.viewer-page .image-gallery.grid-view {
+    display: grid; /* Force grid display */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    height: auto;
+    overflow: visible;
+    
+    /* Critical fixes for mobile stacking issues */
+    isolation: isolate;
+    transform: translateZ(0);
+    will-change: transform;
   }
   
   /* Ensure grid items are properly positioned even on mobile */
-  body.viewer-page .grid-view .image-card {
-    position: relative !important;
-    margin: 0 !important;
-    width: 100% !important;
-    grid-column: auto !important;
-    grid-row: auto !important;
+  html body.viewer-page .grid-view .image-card {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    grid-column: auto;
+    grid-row: auto;
+    z-index: 1;
+    isolation: isolate;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
   }
   
-  body.viewer-page .image-gallery.list-view {
+  html body.viewer-page .image-gallery.list-view {
     padding: 16px;
     gap: 12px;
   }

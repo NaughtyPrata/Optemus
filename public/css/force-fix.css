@@ -1,0 +1,77 @@
+/* 
+ * FORCE FIX - Only the properties absolutely needed to fix the issue
+ * This is a last-resort CSS file with only the most critical fixes
+ */
+
+/* Fix 1: Clear all stacking contexts and heights */
+html, body {
+  /* Force scroll */
+  overflow: visible !important;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/* Fix 2: Force proper container behavior */
+.app-container,
+.viewer-content,
+.image-gallery {
+  position: static !important;
+  overflow: visible !important;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
+  height: auto !important;
+  min-height: 300px !important;
+  max-height: none !important;
+  display: block !important;
+}
+
+/* Fix 3: Force grid display on image gallery */
+.image-gallery.grid-view {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 40px !important;
+  padding: 40px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: static !important;
+  background-color: #f0f0f0 !important; /* Visual indicator */
+  border: 5px solid red !important; /* Visual indicator */
+}
+
+/* Fix 4: Force card layout */
+.image-card {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  box-sizing: border-box !important;
+  aspect-ratio: 1 / 1 !important;
+  background-color: white !important; /* Visual indicator */
+  border: 3px solid blue !important; /* Visual indicator */
+  overflow: hidden !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+}
+
+.image-card img.card-image {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+/* Fix 5: Explicit grid positions for first 16 cards */
+.image-gallery.grid-view .image-card:nth-child(1) { grid-row: 1 !important; grid-column: 1 !important; }
+.image-gallery.grid-view .image-card:nth-child(2) { grid-row: 1 !important; grid-column: 2 !important; }
+.image-gallery.grid-view .image-card:nth-child(3) { grid-row: 1 !important; grid-column: 3 !important; }
+.image-gallery.grid-view .image-card:nth-child(4) { grid-row: 1 !important; grid-column: 4 !important; }
+.image-gallery.grid-view .image-card:nth-child(5) { grid-row: 2 !important; grid-column: 1 !important; }
+.image-gallery.grid-view .image-card:nth-child(6) { grid-row: 2 !important; grid-column: 2 !important; }
+.image-gallery.grid-view .image-card:nth-child(7) { grid-row: 2 !important; grid-column: 3 !important; }
+.image-gallery.grid-view .image-card:nth-child(8) { grid-row: 2 !important; grid-column: 4 !important; }
+.image-gallery.grid-view .image-card:nth-child(9) { grid-row: 3 !important; grid-column: 1 !important; }
+.image-gallery.grid-view .image-card:nth-child(10) { grid-row: 3 !important; grid-column: 2 !important; }
+.image-gallery.grid-view .image-card:nth-child(11) { grid-row: 3 !important; grid-column: 3 !important; }
+.image-gallery.grid-view .image-card:nth-child(12) { grid-row: 3 !important; grid-column: 4 !important; }

@@ -1,57 +1,20 @@
 /**
  * Image Gallery Viewer Script
  * 
- * IMPORTANT NOTE: This script contains critical fixes for image overlapping issues.
- * If modifying the gallery layout or styling, please ensure these fixes are maintained:
- * 1. Inline styles ensure proper grid positioning
- * 2. Forced display:grid and position:relative on the gallery container
- * 3. z-index management for hover states
- * 4. Explicit grid-column and grid-row settings 
- */
-/**
- * Gallery viewer with fixed layout
- * 
- * This includes critical fixes to prevent image stacking issues:
- * 1. Explicit grid layout with JS reinforcement
- * 2. Forced proper card sizing and positioning
- * 3. Overflow handling to allow content to expand naturally
- * 4. Polyfill for browsers with poor grid support
+ * Enhanced with:
+ * - Advanced filtering and sorting
+ * - Favorites system
+ * - Improved UI and error handling
+ * - Modern toast notifications
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // Function to check for proper CSS Grid support
-  function checkGridSupport() {
-    // Check if CSS Grid is properly supported
-    if (window.CSS && CSS.supports && CSS.supports('display', 'grid')) {
-      console.log('CSS Grid is supported');
-      return true;
-    } else {
-      console.log('CSS Grid is NOT fully supported - applying polyfill');
-      return false;
-    }
-  }
-
-  // Apply polyfill if needed
-  const hasGridSupport = checkGridSupport();
-  
-  // Set an appropriate classname based on grid support
-  document.body.classList.add(hasGridSupport ? 'has-grid-support' : 'no-grid-support');
-  
-  // Add window resize handler to fix layout issues on resize
-  window.addEventListener('resize', function() {
-    if (document.getElementById('imageGallery')) {
-      // Force redraw of gallery on resize
-      const gallery = document.getElementById('imageGallery');
-      gallery.style.display = 'none';
-      setTimeout(() => {
-        gallery.style.display = 'grid';
-      }, 5);
-    }
-  });
   // Elements
   const imageGallery = document.getElementById('imageGallery');
   const searchInput = document.getElementById('searchInput');
   const viewButtons = document.querySelectorAll('.view-btn');
   const refreshBtn = document.getElementById('refreshBtn');
+  const filterSelect = document.getElementById('filterSelect');
+  const sortSelect = document.getElementById('sortSelect');
   const imageModal = document.getElementById('imageModal');
   const closeModal = document.getElementById('closeModal');
   const modalImage = document.getElementById('modalImage');
@@ -61,11 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalImageTitle = document.getElementById('modalImageTitle');
   const downloadBtn = document.getElementById('downloadBtn');
   const deleteBtn = document.getElementById('deleteBtn');
+  const favoriteBtn = document.getElementById('favoriteBtn');
+  const toastContainer = document.getElementById('toastContainer');
   
   // State
   let images = [];
+  let filteredImages = [];
   let selectedImage = null;
   let viewMode = 'grid';
+  let favorites = loadFavorites();
   
   // Initialize
   init();
@@ -76,8 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add event listeners
     searchInput.addEventListener('input', filterImages);
+    filterSelect.addEventListener('change', applyFilters);
+    sortSelect.addEventListener('change', applyFilters);
     
-    // Need to handle button clicks after DOM changes with tooltip containers
+    // View mode buttons
     document.querySelectorAll('.view-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const mode = btn.getAttribute('data-view');
@@ -100,11 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
       refreshBtn.disabled = false;
       
       // Show toast notification
-      showToast('Gallery refreshed', false);
+      showToast('Gallery refreshed successfully', 'success');
     });
     
+    // Modal events
     closeModal.addEventListener('click', hideModal);
     deleteBtn.addEventListener('click', deleteSelectedImage);
+    favoriteBtn.addEventListener('click', toggleFavorite);
     
     // Close modal when clicking outside content
     imageModal.addEventListener('click', (e) => {
@@ -124,53 +95,48 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch images from server
   async function fetchImages() {
     try {
-      console.log('Fetching images from server...');
+      showLoading();
       
-      // Always trigger a rescan to ensure we have the latest images
       const response = await fetch('/api/images?rescan=true');
-      console.log('Response received:', response.status, response.statusText);
       
       if (!response.ok) {
         throw new Error(`API returned status ${response.status}`);
       }
       
       const data = await response.json();
-      console.log('Data received from API:', data);
       
       if (data.success) {
         images = data.images || [];
-        console.log(`Loaded ${images.length} images from server`);
         
-        // Ensure images are sorted by date (newest first)
+        // Sort by date (newest first) by default
         images.sort((a, b) => {
           const dateA = new Date(a.createdAt || 0);
           const dateB = new Date(b.createdAt || 0);
-          return dateB - dateA; // Sort descending (newest first)
+          return dateB - dateA;
         });
         
         // If no images returned from API, try scanning for images directly
         if (images.length === 0) {
-          console.log('No images from API, trying to detect images in directory...');
           await scanImagesDirectory();
-        } else if (images.length > 0) {
-          console.log('Sample image data:', images[0]);
         }
         
-        renderGallery();
+        // Apply any active filters/sorting
+        applyFilters();
       } else {
-        console.error('Error from server:', data.error);
-        showEmptyState('Failed to load images: ' + (data.error || 'Unknown error'));
+        throw new Error(data.error || 'Unknown error');
       }
     } catch (error) {
       console.error('Error fetching images:', error);
       showEmptyState('Error loading images: ' + error.message);
+      showToast('Failed to load images', 'error');
+    } finally {
+      hideLoading();
     }
   }
   
-  // Scan for images in the directory directly (fallback)
+  // Scan for images in the directory (fallback)
   async function scanImagesDirectory() {
     try {
-      console.log('Triggering server-side directory scan...');
       const response = await fetch('/api/images?rescan=true');
       
       if (!response.ok) {
@@ -181,15 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (data.success) {
         images = data.images || [];
-        console.log(`Rescan loaded ${images.length} images from server`);
       } else {
         throw new Error(data.error || 'Unknown error during rescan');
       }
     } catch (error) {
       console.error('Error scanning directory:', error);
-      
       // Last resort: try to show some well-known image paths
-      console.log('Falling back to known image paths...');
       const knownImagePaths = [
         'image_1746707539328.png',
         'image_1746708513886.png',
@@ -212,140 +175,171 @@ document.addEventListener('DOMContentLoaded', () => {
           stylePreset: 'unknown'
         }
       }));
-      
-      console.log(`Created ${images.length} fallback image entries`);
     }
   }
   
-  // Render image gallery
-  function renderGallery(filteredImages = null) {
-    const imagesToRender = filteredImages || images;
-    console.log(`Rendering gallery with ${imagesToRender.length} images`);
+  // Show loading state
+  function showLoading() {
+    imageGallery.innerHTML = `
+      <div class="empty-state">
+        <i class="ti ti-loader ti-spin"></i>
+        <p>Loading images...</p>
+      </div>
+    `;
+  }
+  
+  // Hide loading state
+  function hideLoading() {
+    // Will be replaced by renderGallery
+  }
+  
+  // Apply filters and sorting
+  function applyFilters() {
+    const query = searchInput.value.trim().toLowerCase();
+    const filter = filterSelect.value;
+    const sort = sortSelect.value;
     
+    // First apply search filter
+    filteredImages = images.filter(image => {
+      // Skip search if query is empty
+      if (!query) return true;
+      
+      // Search in prompt
+      if (image.prompt && image.prompt.toLowerCase().includes(query)) {
+        return true;
+      }
+      
+      // Search in settings
+      if (image.settings) {
+        const settingsStr = JSON.stringify(image.settings).toLowerCase();
+        if (settingsStr.includes(query)) {
+          return true;
+        }
+      }
+      
+      return false;
+    });
+    
+    // Then apply dropdown filter
+    if (filter !== 'all') {
+      if (filter === 'favorite') {
+        filteredImages = filteredImages.filter(image => 
+          favorites.includes(image.id || image.filename)
+        );
+      } else if (filter === 'recent') {
+        // Get images from the last 24 hours
+        const oneDayAgo = new Date();
+        oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+        
+        filteredImages = filteredImages.filter(image => {
+          const imageDate = new Date(image.createdAt || 0);
+          return imageDate > oneDayAgo;
+        });
+      }
+    }
+    
+    // Apply sorting
+    if (sort === 'newest') {
+      filteredImages.sort((a, b) => {
+        const dateA = new Date(a.createdAt || 0);
+        const dateB = new Date(b.createdAt || 0);
+        return dateB - dateA;
+      });
+    } else if (sort === 'oldest') {
+      filteredImages.sort((a, b) => {
+        const dateA = new Date(a.createdAt || 0);
+        const dateB = new Date(b.createdAt || 0);
+        return dateA - dateB;
+      });
+    } else if (sort === 'prompt') {
+      filteredImages.sort((a, b) => {
+        const promptA = (a.prompt || '').toLowerCase();
+        const promptB = (b.prompt || '').toLowerCase();
+        return promptA.localeCompare(promptB);
+      });
+    }
+    
+    // Render the filtered and sorted gallery
+    renderGallery();
+  }
+  
+  // Filter images based on search query
+  function filterImages() {
+    applyFilters();
+  }
+  
+  // Render image gallery
+  function renderGallery() {
     // Clear gallery
     imageGallery.innerHTML = '';
     
-    if (imagesToRender.length === 0) {
-      console.log('No images to display, showing empty state');
+    if (filteredImages.length === 0) {
       showEmptyState();
       return;
     }
     
-    // Force proper layout styles
-    imageGallery.style.display = 'grid';
-    imageGallery.style.gridTemplateColumns = 'repeat(auto-fill, minmax(280px, 1fr))';
-    imageGallery.style.gap = '40px';
-    imageGallery.style.padding = '40px';
-    imageGallery.style.boxSizing = 'border-box';
-    imageGallery.style.position = 'relative';
-    imageGallery.style.height = 'auto';
-    imageGallery.style.minHeight = '500px';
-    imageGallery.style.overflow = 'visible';
+    // Set class based on view mode
+    imageGallery.className = `image-gallery ${viewMode}-view`;
+    
+    // Remove any inline styles that might interfere with our CSS
+    imageGallery.removeAttribute('style');
     
     // Add image cards
-    imagesToRender.forEach((image, index) => {
-      console.log(`Creating card for image ${index + 1}/${imagesToRender.length}:`, image.filename);
+    filteredImages.forEach((image, index) => {
       const card = createImageCard(image);
       
-      // Force card to take its proper place in the grid
-      if (index < 16) {
-        // Explicitly position first 16 cards to ensure proper layout
-        const row = Math.floor(index / 4) + 1;
-        const col = (index % 4) + 1;
-        card.style.gridRow = row.toString();
-        card.style.gridColumn = col.toString();
-      }
+      // Ensure no inline styles that could cause stacking issues
+      card.style.position = 'relative';
+      card.style.zIndex = '1';
       
       imageGallery.appendChild(card);
-    });
-    
-    // Add a subtle fade-in animation to all cards
-    const cards = imageGallery.querySelectorAll('.image-card');
-    cards.forEach((card, index) => {
-      // Let CSS handle the positioning
       
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      
-      // Staggered animation
+      // Staggered animation with CSS classes instead of inline styles
       setTimeout(() => {
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      }, index * 50); // 50ms delay between each card
+        card.classList.add('fade-in');
+      }, index * 50);
     });
-    
-    // Let CSS handle the layout
   }
   
   // Create image card element
   function createImageCard(image) {
-    console.log('Creating image card for:', image.filename);
-    console.log('Image path:', image.localPath || image.url);
-    
-    // Create card with proper styling
     const card = document.createElement('div');
     card.className = 'image-card';
+    card.setAttribute('data-id', image.id || '');
     card.setAttribute('data-timestamp', image.createdAt || '');
     card.addEventListener('click', () => showImageDetails(image));
     
-    // Add explicit inline styles to ensure proper positioning
+    // Check if image is a favorite
+    const isFavorite = favorites.includes(image.id || image.filename);
+    if (isFavorite) {
+      card.classList.add('favorite');
+    }
+    
     if (viewMode === 'grid') {
-      // Force proper card styling
-      card.style.position = 'relative';
-      card.style.width = '100%';
-      card.style.aspectRatio = '1 / 1';
-      card.style.margin = '0';
-      card.style.padding = '0';
-      card.style.boxSizing = 'border-box';
-      card.style.overflow = 'hidden';
-      card.style.borderRadius = '8px';
-      card.style.display = 'block';
-      card.style.backgroundColor = '#ffffff';
-      card.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
-
       const img = document.createElement('img');
       img.className = 'card-image';
       
       // Make sure path starts with '/' for relative URLs
       const imagePath = (image.localPath || image.url);
       img.src = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-      
-      console.log('Setting image src to:', img.src);
       img.alt = image.prompt || 'Generated image';
-      img.loading = 'lazy'; // Add lazy loading
-      
-      // Apply explicit styling to image
-      img.style.width = '100%';
-      img.style.height = '100%';
-      img.style.objectFit = 'cover';
-      img.style.display = 'block';
-      img.style.margin = '0';
-      img.style.padding = '0';
+      img.loading = 'lazy';
       
       // Add error handling for images
       img.onerror = function() {
-        console.error('Failed to load image:', img.src);
-        // If image fails to load, create a placeholder div
         const parent = this.parentElement;
         this.style.display = 'none';
         
-        // Create a colored placeholder with an icon
+        // Create placeholder
         const placeholder = document.createElement('div');
         placeholder.className = 'card-placeholder';
         placeholder.innerHTML = '<i class="ti ti-photo-off"></i>';
-        placeholder.style.width = '100%';
-        placeholder.style.height = '100%';
-        placeholder.style.display = 'flex';
-        placeholder.style.alignItems = 'center';
-        placeholder.style.justifyContent = 'center';
-        placeholder.style.backgroundColor = '#f5f5f5';
         parent.appendChild(placeholder);
       };
       
       card.appendChild(img);
     } 
-    // For list view, show image and details
+    // List view
     else {
       const img = document.createElement('img');
       img.className = 'card-image';
@@ -353,36 +347,31 @@ document.addEventListener('DOMContentLoaded', () => {
       // Make sure path starts with '/' for relative URLs
       const imagePath = (image.localPath || image.url);
       img.src = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-      
-      console.log('Setting list view image src to:', img.src);
       img.alt = image.prompt || 'Generated image';
+      img.loading = 'lazy';
       
       // Add error handling for images
       img.onerror = function() {
-        console.error('Failed to load list view image:', img.src);
-        // If image fails to load, create a placeholder div
         const parent = this.parentElement;
         this.style.display = 'none';
         
-        // Create a colored placeholder with an icon
+        // Create placeholder
         const placeholder = document.createElement('div');
         placeholder.className = 'card-placeholder';
         placeholder.innerHTML = '<i class="ti ti-photo-off"></i>';
-        placeholder.style.width = '120px';
-        placeholder.style.height = '120px';
-        placeholder.style.display = 'flex';
-        placeholder.style.alignItems = 'center';
-        placeholder.style.justifyContent = 'center';
-        placeholder.style.backgroundColor = '#f5f5f5';
         parent.insertBefore(placeholder, parent.firstChild);
-      };
-      
-      img.onload = function() {
-        console.log('List view image loaded successfully:', img.src);
       };
       
       const content = document.createElement('div');
       content.className = 'card-content';
+      
+      // Add favorite indicator for list view
+      if (isFavorite) {
+        const favoriteIndicator = document.createElement('div');
+        favoriteIndicator.className = 'favorite-tag';
+        favoriteIndicator.innerHTML = '<i class="ti ti-star"></i> Favorite';
+        content.appendChild(favoriteIndicator);
+      }
       
       const title = document.createElement('div');
       title.className = 'card-title';
@@ -406,51 +395,26 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Show empty state
   function showEmptyState(message = 'No images found') {
+    // Check if it's specifically the favorites filter with no results
+    if (filterSelect.value === 'favorite' && images.length > 0) {
+      message = 'No favorite images found. Add some favorites first!';
+    }
+    
     imageGallery.innerHTML = `
       <div class="empty-state">
         <i class="ti ti-photo-off"></i>
         <p>${message}</p>
-        <a href="index.html" class="btn btn-primary">Generate Your First Image</a>
+        <a href="index.html" class="gallery-btn">Generate Your First Image</a>
       </div>
     `;
   }
   
-  // Filter images based on search query
-  function filterImages() {
-    const query = searchInput.value.trim().toLowerCase();
-    
-    if (!query) {
-      renderGallery();
-      return;
-    }
-    
-    const filtered = images.filter(image => {
-      // Search in prompt
-      if (image.prompt && image.prompt.toLowerCase().includes(query)) {
-        return true;
-      }
-      
-      // Search in settings
-      if (image.settings) {
-        const settingsStr = JSON.stringify(image.settings).toLowerCase();
-        if (settingsStr.includes(query)) {
-          return true;
-        }
-      }
-      
-      return false;
-    });
-    
-    renderGallery(filtered);
-  }
-  
   // Change view mode (grid or list)
   function changeViewMode(mode) {
-    console.log(`Changing view mode from ${viewMode} to ${mode}`);
     viewMode = mode;
     
     // Update active button
-    document.querySelectorAll('.view-btn').forEach(btn => {
+    viewButtons.forEach(btn => {
       if (btn.getAttribute('data-view') === mode) {
         btn.classList.add('active');
       } else {
@@ -458,19 +422,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    // Update gallery class
-    imageGallery.className = `image-gallery ${mode}-view`;
-    console.log(`Set gallery class to: image-gallery ${mode}-view`);
-    
     // Re-render gallery
     renderGallery();
   }
   
   // Show image details in modal
   function showImageDetails(image) {
-    console.log('Showing image details for:', image.filename);
-    console.log('Image data:', image);
-    
     selectedImage = image;
     
     // Make sure path starts with '/' for relative URLs
@@ -478,31 +435,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const fixedPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
     
     // Set modal content
-    console.log('Setting modal image src to:', fixedPath);
     modalImage.src = fixedPath;
     modalPrompt.textContent = image.prompt || 'No prompt available';
     modalDate.textContent = formatDate(image.createdAt);
     
-    // Add error handling for modal image
+    // Update favorite button state
+    const isImageFavorite = favorites.includes(image.id || image.filename);
+    if (isImageFavorite) {
+      favoriteBtn.innerHTML = '<i class="ti ti-star-filled"></i> Remove from Favorites';
+      favoriteBtn.classList.add('active');
+    } else {
+      favoriteBtn.innerHTML = '<i class="ti ti-star"></i> Add to Favorites';
+      favoriteBtn.classList.remove('active');
+    }
+    
+    // Handle image loading errors
     modalImage.onerror = function() {
-      console.error('Failed to load modal image:', modalImage.src);
-      // If image fails to load, create a placeholder
-      const parent = this.parentElement;
       this.style.display = 'none';
       
-      // Check if we already added an error message
       if (!document.getElementById('modalImageError')) {
         const errorMsg = document.createElement('div');
         errorMsg.id = 'modalImageError';
         errorMsg.className = 'modal-image-error';
         errorMsg.innerHTML = '<i class="ti ti-photo-off"></i><p>Image could not be loaded</p>';
-        parent.appendChild(errorMsg);
+        this.parentElement.appendChild(errorMsg);
       }
     };
     
     modalImage.onload = function() {
-      console.log('Modal image loaded successfully:', modalImage.src);
-      // Remove any error message if the image loads successfully
       const errorMsg = document.getElementById('modalImageError');
       if (errorMsg) {
         errorMsg.remove();
@@ -553,6 +513,8 @@ document.addEventListener('DOMContentLoaded', () => {
   async function deleteSelectedImage() {
     if (!selectedImage || !selectedImage.id) return;
     
+    if (!confirm('Are you sure you want to delete this image?')) return;
+    
     try {
       const response = await fetch(`/api/images/${selectedImage.id}`, {
         method: 'DELETE'
@@ -561,8 +523,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
       
       if (data.success) {
-        // Remove from array
+        // Remove from arrays
         images = images.filter(img => img.id !== selectedImage.id);
+        filteredImages = filteredImages.filter(img => img.id !== selectedImage.id);
+        
+        // Remove from favorites if present
+        const index = favorites.indexOf(selectedImage.id);
+        if (index !== -1) {
+          favorites.splice(index, 1);
+          saveFavorites();
+        }
         
         // Hide modal
         hideModal();
@@ -571,13 +541,76 @@ document.addEventListener('DOMContentLoaded', () => {
         renderGallery();
         
         // Show success toast
-        showToast('Image deleted successfully');
+        showToast('Image deleted successfully', 'success');
       } else {
-        showToast('Failed to delete image', true);
+        showToast('Failed to delete image', 'error');
       }
     } catch (error) {
       console.error('Error deleting image:', error);
-      showToast('Error deleting image', true);
+      showToast('Error deleting image', 'error');
+    }
+  }
+  
+  // Toggle favorite status for the selected image
+  function toggleFavorite() {
+    if (!selectedImage) return;
+    
+    const imageId = selectedImage.id || selectedImage.filename;
+    const index = favorites.indexOf(imageId);
+    
+    if (index === -1) {
+      // Add to favorites
+      favorites.push(imageId);
+      favoriteBtn.innerHTML = '<i class="ti ti-star-filled"></i> Remove from Favorites';
+      favoriteBtn.classList.add('active');
+      showToast('Added to favorites', 'success');
+    } else {
+      // Remove from favorites
+      favorites.splice(index, 1);
+      favoriteBtn.innerHTML = '<i class="ti ti-star"></i> Add to Favorites';
+      favoriteBtn.classList.remove('active');
+      showToast('Removed from favorites', 'success');
+    }
+    
+    // Save favorites to localStorage
+    saveFavorites();
+    
+    // Re-render gallery if currently filtered by favorites
+    if (filterSelect.value === 'favorite') {
+      applyFilters();
+    } else {
+      // Just update the current card in the DOM
+      const cards = document.querySelectorAll('.image-card');
+      cards.forEach(card => {
+        const cardId = card.getAttribute('data-id');
+        if (cardId === imageId) {
+          if (index === -1) {
+            card.classList.add('favorite');
+          } else {
+            card.classList.remove('favorite');
+          }
+        }
+      });
+    }
+  }
+  
+  // Load favorites from localStorage
+  function loadFavorites() {
+    try {
+      const storedFavorites = localStorage.getItem('imageGalleryFavorites');
+      return storedFavorites ? JSON.parse(storedFavorites) : [];
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+      return [];
+    }
+  }
+  
+  // Save favorites to localStorage
+  function saveFavorites() {
+    try {
+      localStorage.setItem('imageGalleryFavorites', JSON.stringify(favorites));
+    } catch (error) {
+      console.error('Error saving favorites:', error);
     }
   }
   
@@ -592,10 +625,9 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Check if the date is valid
       if (isNaN(date.getTime())) {
-        // Try to extract date from a filename format (e.g., "something_2023-05-20T12-30-45.png")
+        // Try to extract date from a filename format
         const match = dateStr.match(/_(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})/);
         if (match && match[1]) {
-          // Replace hyphens in the time portion with colons
           const formattedStr = match[1].replace(/-(\d{2})-(\d{2})-(\d{2})$/, 'T$1:$2:$3');
           date = new Date(formattedStr);
         } else {
@@ -618,30 +650,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Show toast message
-  function showToast(message, isError = false) {
-    // Check if there's already a toast showing
-    const existingToast = document.querySelector('.error-toast, .success-toast');
-    if (existingToast) {
-      existingToast.remove();
+  function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}-toast`;
+    
+    let icon = '';
+    if (type === 'success') {
+      icon = '<i class="ti ti-check"></i>';
+    } else if (type === 'error') {
+      icon = '<i class="ti ti-alert-circle"></i>';
+    } else if (type === 'info') {
+      icon = '<i class="ti ti-info-circle"></i>';
     }
     
-    const toast = document.createElement('div');
-    toast.className = isError ? 'error-toast' : 'success-toast';
-    toast.innerHTML = `
-      <i class="${isError ? 'ti ti-alert-circle' : 'ti ti-check'}"></i>
-      <span>${message}</span>
-    `;
+    toast.innerHTML = `${icon}<span>${message}</span>`;
     
-    document.body.appendChild(toast);
+    toastContainer.appendChild(toast);
     
     // Animate and remove after timeout
     setTimeout(() => {
       toast.classList.add('show');
       
       setTimeout(() => {
-        toast.classList.remove('show');
+        toast.style.animation = 'slideOut 0.3s forwards';
         setTimeout(() => toast.remove(), 300);
       }, 3000);
     }, 10);
   }
-}); 
+});
