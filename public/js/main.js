@@ -339,27 +339,16 @@ document.addEventListener('DOMContentLoaded', () => {
       img.alt = `Generated image ${index + 1}`;
       img.src = imageData.image;
       
+      // DOWNLOAD FEATURE TEMPORARILY DISABLED
+      // Uncomment the code below to re-enable image download on click
+      /*
       // Add click event to show image details or download
       img.addEventListener('click', () => {
         console.log(`Image ${index + 1} clicked: ${imageData.filename}`);
         // Open image download link
         window.open(`/api/download/${imageData.filename}`, '_blank');
       });
-      
-      // Add hover effect to show the image is clickable
-      imgWrapper.addEventListener('mouseenter', () => {
-        const downloadIcon = document.createElement('div');
-        downloadIcon.className = 'download-icon';
-        downloadIcon.innerHTML = '<i class="ti ti-download"></i>';
-        imgWrapper.appendChild(downloadIcon);
-      });
-      
-      imgWrapper.addEventListener('mouseleave', () => {
-        const downloadIcon = imgWrapper.querySelector('.download-icon');
-        if (downloadIcon) {
-          downloadIcon.remove();
-        }
-      });
+      */
       
       imgWrapper.appendChild(img);
       galleryWrapper.appendChild(imgWrapper);
