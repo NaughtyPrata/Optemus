@@ -1,5 +1,18 @@
 // DOM Elements
 document.addEventListener('DOMContentLoaded', () => {
+  // Fix position of top controls - debugging only, CSS should handle the positioning
+  const topControls = document.querySelector('.image-top-controls');
+  if (topControls) {
+    // Log current styles for debugging
+    console.log('Top controls computed styles:', {
+      display: window.getComputedStyle(topControls).display,
+      position: window.getComputedStyle(topControls).position,
+      top: window.getComputedStyle(topControls).top,
+      right: window.getComputedStyle(topControls).right,
+      width: window.getComputedStyle(topControls).width,
+      justifyContent: window.getComputedStyle(topControls).justifyContent
+    });
+  }
   const promptForm = document.getElementById('promptForm');
   const promptInput = document.getElementById('prompt');
   const generateBtn = document.getElementById('generateBtn');
@@ -107,11 +120,21 @@ document.addEventListener('DOMContentLoaded', () => {
       // Unmute
       loadingSound.volume = 0.4;
       soundToggleBtn.classList.remove('muted');
+      soundToggleBtn.innerHTML = '<i class="ti ti-volume"></i>';
+      soundToggleBtn.title = "Mute Sound";
       isMuted = false;
+      
+      // Play a short sound to indicate sound is on
+      const beepSound = new Audio();
+      beepSound.src = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjIwLjEwMAAAAAAAAAAAAAAA//tQwAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAASAAAGWgBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr///////////////////////////////////////////8AAAAATGF2YzU4LjM1AAAAAAAAAAAAAAAAJAQgAAAAAAAABlojXtEiAAAAAAD/+xDEAAAKkDVq0EMAg4sYu94YwkAkYFgcGAwGFFSQDiIBZuFIgGEplvk1Q1YgGFYokiwhEEzQsNz4iBgKCY2BCYKhQDIYHBgYGfA4MDBpCP+CgGBgYGBBWA0IB/4Pg4f/3Hgw+BA4M+BAw//liDQP/+yDEBQAK9MMIvMmAEZ8YIjeeQFG+BAQOCYYDgkGAQMCgccAgYDDCEAfpYogGKMfB8HxQBDkP8CEYBISEgsJAYUBT//jMAgUAPrEYQgxhCD/LQoB/8JBIH//6FCgP8w5JM++4e3iP//7IMQEgAuQTQw8+UPRj4xgg580ejBgUITw8LCTQLC5wxdOCrU9HkSVqHqQgIDwQbM6kPAQYLmoUEkSBhUNj1/8JCABUaZD48aPjR////BQu///////7BwtEMzKBCYSNRlGq//+dFZB//sgxAKACrStBrz5ROGdl58jnyxiCTFhUNmhkXExkQEwoLGRYZO7JXILjEikdyFSC5UXGigyNv9OeEQ+ZGhMvNDwyOj//+ndE/////////iRpM0sZzEgkXGRMTnLq//9PnxSSy//+yDEAoAMNLT7vPljCTuWn7+WDW1qeqaFhlMCwsLCQGBi4eDt3VQEDFkYg+xEOB4kWADYYs1T/3biwkHn/V5Sh4P///////0PTRE9ZSGtrbxo58yk//9HFyQgU0iAUlFEQPv/+xDIAAAAAANIAAAAAL8QYceFoBBdRJXFt0q9VVVVVRSIpQbxhjDGI2KhjHRjkTZ/9PUVVVTEFNRTMuOTkuNaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq';      
+      beepSound.volume = 0.3;
+      beepSound.play().catch(e => console.log('Could not play sound indicator'));
     } else {
       // Mute
       loadingSound.volume = 0;
       soundToggleBtn.classList.add('muted');
+      soundToggleBtn.innerHTML = '<i class="ti ti-volume-off"></i>';
+      soundToggleBtn.title = "Unmute Sound";
       isMuted = true;
     }
   });

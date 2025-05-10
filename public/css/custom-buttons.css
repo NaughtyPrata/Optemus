@@ -1,5 +1,5 @@
 /* Custom Gallery Button */
-.gallery-btn {
+.gallery-btn, .sound-toggle-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,21 +15,47 @@
   border-width: 2px 2px 2px 2px;
   border-color: rgba(255, 255, 255, 0.333);
   border-radius: 30px;
-  padding: 10px 16px 10px 18px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
   transform: translate(0px, 0px) rotate(0deg);
   transition: 0.2s;
-  box-shadow: -3px -2px 12px 0px #ffffff, 3px 2px 12px 0px rgb(95 157 231 / 48%);
+  box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgb(95 157 231 / 38%);
   text-decoration: none;
 }
 
-.gallery-btn:hover {
+.gallery-btn:hover, .sound-toggle-btn:hover {
   color: #516d91;
   background-color: #E5EDF5;
-  box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgb(95 157 231 / 48%);
+  box-shadow: -1px 0px 5px 0px #ffffff, 1px 1px 5px 0px rgb(95 157 231 / 35%);
 }
 
-.gallery-btn:active {
+.gallery-btn:active, .sound-toggle-btn:active {
   box-shadow: none;
+}
+
+/* Sound Toggle Button - Muted State */
+.sound-toggle-btn.muted {
+  background-color: #f9e0e0;
+  color: #cc5555;
+  border-color: rgba(255, 235, 235, 0.333);
+  box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgba(231, 95, 95, 0.35);
+}
+
+.sound-toggle-btn.muted:hover {
+  background-color: #f5e5e5;
+  color: #b54b4b;
+  box-shadow: -1px 0px 5px 0px #ffffff, 1px 1px 5px 0px rgba(231, 95, 95, 0.35);
+}
+
+/* Icon styles for buttons */
+.gallery-btn i, .sound-toggle-btn i {
+  margin: 0;
+  font-size: 18px;
+}
+
+.sound-toggle-btn.muted i::before {
+  content: '\ebc1'; /* Tabler icon for volume-off */
 }
 
 /* Custom Generate Button */
