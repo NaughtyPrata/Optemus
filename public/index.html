@@ -118,6 +118,11 @@
       
       <!-- Loading indicator -->
       <div id="loadingIndicator" class="loading hidden">
+        <!-- Hidden audio element for background sound -->
+        <audio id="loadingSound" preload="auto" loop>
+          <source src="sounds/washingmachine.mp3" type="audio/mp3">
+        </audio>
+        
         <!-- Bubbles for background effect -->
         <div id="bubble1" class="bubble">
           <span></span>
@@ -175,6 +180,11 @@
           <span></span>
           <span></span>
         </div>
+        
+        <!-- Sound control button -->
+        <button id="soundToggleBtn" class="sound-toggle">
+          <i class="ti ti-volume"></i>
+        </button>
         
         <!-- Original loader (washing machine) -->
         <div class="loader"></div>

@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const imageContainer = document.getElementById('imageContainer');
   const placeholder = document.getElementById('placeholder');
   const loadingIndicator = document.getElementById('loadingIndicator');
+  const loadingSound = document.getElementById('loadingSound');
+  const soundToggleBtn = document.getElementById('soundToggleBtn');
   const saveImageBtn = document.getElementById('saveImageBtn');
   
   // Size buttons
@@ -97,6 +99,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Event Listeners
   generateBtn.addEventListener('click', handleFormSubmit);
+  
+  // Sound toggle handler
+  let isMuted = false;
+  soundToggleBtn.addEventListener('click', () => {
+    if (isMuted) {
+      // Unmute
+      loadingSound.volume = 0.4;
+      soundToggleBtn.classList.remove('muted');
+      isMuted = false;
+    } else {
+      // Mute
+      loadingSound.volume = 0;
+      soundToggleBtn.classList.add('muted');
+      isMuted = true;
+    }
+  });
 
   // Form submission handler
   async function handleFormSubmit(e) {
@@ -371,6 +389,18 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Start the random bubble appearance animation
       animateBubblesRandomly();
+      
+      // Play the sound with a slight delay to ensure the audio context is ready
+      setTimeout(() => {
+        // Reset the audio to the beginning
+        loadingSound.currentTime = 0;
+        // Set volume based on mute state
+        loadingSound.volume = isMuted ? 0 : 0.4;
+        // Play the sound
+        loadingSound.play().catch(error => {
+          console.log('Audio playback failed:', error);
+        });
+      }, 100);
     } else {
       loadingIndicator.classList.add('hidden');
       generateBtn.style.opacity = '1';
@@ -380,6 +410,16 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.bubble').forEach(bubble => {
         bubble.classList.remove('show');
       });
+      
+      // Fade out and stop the sound
+      const fadeOutInterval = setInterval(() => {
+        if (!isMuted && loadingSound.volume > 0.05) {
+          loadingSound.volume -= 0.05;
+        } else {
+          loadingSound.pause();
+          clearInterval(fadeOutInterval);
+        }
+      }, 50);
     }
   }
   
@@ -510,4 +550,32 @@ document.addEventListener('DOMContentLoaded', () => {
     opacity: [0, 1],
     duration: 800
   }, '-=400');
+  
+  // Initialize audio context for browsers that require user interaction before playing audio
+  function initAudio() {
+    // Create a context for managing audio (needed for some browsers)
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) {
+      const audioContext = new AudioContext();
+      // Resume the audio context on user interaction
+      document.addEventListener('click', function resumeAudio() {
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+        document.removeEventListener('click', resumeAudio);
+      }, { once: true });
+    }
+    
+    // Also try to unlock mobile audio
+    document.addEventListener('touchstart', function unlockAudio() {
+      // Create and play a short silent sound
+      const silentSound = document.createElement('audio');
+      silentSound.src = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjM1LjEwNAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAABAAABIADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMD/wAARCAACAAQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+iiigD//2Q==';
+      silentSound.play().catch(() => {});
+      document.removeEventListener('touchstart', unlockAudio);
+    }, { once: true });
+  }
+  
+  // Call the initAudio function to prepare audio playback
+  initAudio();
 }); 
