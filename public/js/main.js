@@ -312,17 +312,50 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Auto-download the images
         currentImages.forEach((img, index) => {
-          if (img.filename) {
+          if (img.image && img.filename) {
             // Add slight delay between downloads to prevent browser throttling
-            setTimeout(() => {
+            setTimeout(async () => {
               console.log(`Auto-downloading image ${index + 1}: ${img.filename}`);
-              const downloadLink = document.createElement('a');
-              downloadLink.href = `/api/download/${img.filename}`;
-              downloadLink.download = img.filename;
-              downloadLink.classList.add('hidden');
-              document.body.appendChild(downloadLink);
-              downloadLink.click();
-              document.body.removeChild(downloadLink);
+              try {
+                // For blob URLs or direct image URLs, we need to fetch and create a blob
+                if (img.image.startsWith('http') || img.image.startsWith('blob:')) {
+                  const response = await fetch(img.image);
+                  const blob = await response.blob();
+                  const blobUrl = URL.createObjectURL(blob);
+                  
+                  const downloadLink = document.createElement('a');
+                  downloadLink.href = blobUrl;
+                  downloadLink.download = img.filename;
+                  downloadLink.style.display = 'none';
+                  document.body.appendChild(downloadLink);
+                  downloadLink.click();
+                  document.body.removeChild(downloadLink);
+                  
+                  // Clean up the blob URL after a short delay
+                  setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+                } else if (img.image.startsWith('data:')) {
+                  // For base64 images, we can download directly
+                  const downloadLink = document.createElement('a');
+                  downloadLink.href = img.image;
+                  downloadLink.download = img.filename;
+                  downloadLink.style.display = 'none';
+                  document.body.appendChild(downloadLink);
+                  downloadLink.click();
+                  document.body.removeChild(downloadLink);
+                }
+              } catch (error) {
+                console.error(`Failed to download image ${index + 1}:`, error);
+                // Fallback to the old method if available
+                if (img.filename) {
+                  const downloadLink = document.createElement('a');
+                  downloadLink.href = `/api/download/${img.filename}`;
+                  downloadLink.download = img.filename;
+                  downloadLink.style.display = 'none';
+                  document.body.appendChild(downloadLink);
+                  downloadLink.click();
+                  document.body.removeChild(downloadLink);
+                }
+              }
             }, index * 500); // Stagger downloads by 500ms
           }
         });
