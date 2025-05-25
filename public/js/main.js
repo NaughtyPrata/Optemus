@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Quality buttons
   const qualityButtons = document.querySelectorAll('.quality-btn');
-  let selectedQuality = "low"; // Default to low
+  let selectedQuality = "standard"; // Default to standard
 
   // Style Type buttons
   const styleTypeButtons = document.querySelectorAll('.style-type-btn');

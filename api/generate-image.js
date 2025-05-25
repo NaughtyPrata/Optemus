@@ -31,7 +31,7 @@ async function generateImageWithFetch(prompt, size, quality) {
       model: "dall-e-3",
       prompt: prompt,
       size: size || "1024x1024",
-      quality: quality || "standard",
+      quality: (quality === "low" || quality === "medium") ? "standard" : (quality || "standard"),
       n: 1
     })
   });
@@ -180,7 +180,7 @@ export default async function handler(req, res) {
         timestamp: new Date().toISOString(),
         settings: {
           size: size || "1024x1024",
-          quality: quality || "medium",
+          quality: quality || "standard",
           styleType: styleType || "standard",
           stylePreset: stylePreset || "default"
         },
@@ -225,7 +225,7 @@ export default async function handler(req, res) {
             createdAt: new Date().toISOString(),
             settings: {
               size: size || "1024x1024",
-              quality: quality || "medium",
+              quality: quality || "standard",
               styleType: styleType || "standard",
               stylePreset: stylePreset || "default"
             }
