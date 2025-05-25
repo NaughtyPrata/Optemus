@@ -181,6 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         applyFilters();
+        
+        // Show helpful message if no images
+        if (images.length === 0 && data.message) {
+          showEmptyState(data.message);
+        }
       } else {
         throw new Error(data.error || 'Unknown error');
       }
