@@ -28,6 +28,29 @@ A web application for generating and managing AI-generated images using the Open
    ```
 5. Open your browser and navigate to: `http://localhost:4001`
 
+## Deployment
+
+### Vercel Deployment
+
+This application is configured for deployment on Vercel with the following considerations:
+
+- **Serverless Function Timeout**: Set to 60 seconds in `vercel.json` for image generation
+- **OpenAI API Integration**: Uses direct fetch calls instead of OpenAI client library for Vercel compatibility
+- **Environment Variables**: Configure `OPENAI_API_KEY` in Vercel dashboard
+- **Blob Storage**: Utilizes Vercel Blob for storing generated images
+
+#### Important Fix for Vercel Deployment
+
+**Issue**: The OpenAI client library (`openai` npm package) was causing "Connection error" in Vercel's serverless environment, despite working perfectly in local development.
+
+**Solution**: Replaced the OpenAI client library with direct fetch calls to the OpenAI API in `api/generate-image.js`. This maintains all functionality while ensuring compatibility with Vercel's serverless functions.
+
+**Technical Details**:
+- Direct API calls to `https://api.openai.com/v1/images/generations`
+- Maintained support for all features: multiple images, style modifiers, Vercel Blob storage
+- No changes required to frontend code or user experience
+- Improved reliability in serverless environments
+
 ## Using the Image Generator
 
 1. Enter a descriptive prompt in the text area
