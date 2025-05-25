@@ -40,6 +40,14 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Debug environment
+    console.log('Environment check:', {
+      hasApiKey: !!process.env.OPENAI_API_KEY,
+      apiKeyLength: process.env.OPENAI_API_KEY?.length || 0,
+      nodeEnv: process.env.NODE_ENV,
+      vercelEnv: process.env.VERCEL_ENV
+    });
+
     const { prompt, size, quality, styleType, stylePreset, count = 1 } = req.body;
     
     // Validate count (only allow 1, 2, or 4)
@@ -47,6 +55,11 @@ export default async function handler(req, res) {
 
     if (!prompt) {
       return res.status(400).json({ success: false, error: 'Prompt is required' });
+    }
+
+    if (!process.env.OPENAI_API_KEY) {
+      console.error('Missing OPENAI_API_KEY environment variable');
+      return res.status(500).json({ success: false, error: 'API configuration error' });
     }
 
     console.log(`Generating ${imageCount} images with prompt: ${prompt}`);
@@ -90,17 +103,29 @@ export default async function handler(req, res) {
       
       console.log(`Generating image ${i+1}/${imageCount} with prompt: ${currentPrompt.substring(0, 100)}...`);
       
-      // Generate the image with the varied prompt
-      const response = await openai.images.generate({
-        model: "gpt-image-1",
-        prompt: currentPrompt,
-        size: size || "1024x1024",
-        quality: quality || "medium", // gpt-image-1 supports 'low', 'medium', 'high', and 'auto'
-        n: 1
-      });
-      
-      if (response.data && response.data.length > 0) {
-        generatedResponses.push(response.data[0]);
+      try {
+        // Generate the image with the varied prompt
+        const response = await openai.images.generate({
+          model: "gpt-image-1",
+          prompt: currentPrompt,
+          size: size || "1024x1024",
+          quality: quality || "medium", // gpt-image-1 supports 'low', 'medium', 'high', and 'auto'
+          n: 1
+        });
+        
+        if (response.data && response.data.length > 0) {
+          generatedResponses.push(response.data[0]);
+          console.log(`Successfully generated image ${i+1}`);
+        } else {
+          console.warn(`No data received for image ${i+1}`);
+        }
+      } catch (imageError) {
+        console.error(`Error generating image ${i+1}:`, imageError.message);
+        // Continue with other images instead of failing completely
+        if (i === 0) {
+          // If the first image fails, rethrow the error
+          throw imageError;
+        }
       }
     }
     
@@ -138,10 +163,10 @@ export default async function handler(req, res) {
       
       let blobUrl = imageUrl; // Default to original URL
       
-      // If we have a URL, download and store in Vercel Blob
+      // If we have a URL, try to store in Vercel Blob (optional)
       if (imageUrl && imageUrl.startsWith('http')) {
         try {
-          console.log(`Storing image ${i+1} in Vercel Blob storage...`);
+          console.log(`Attempting to store image ${i+1} in Vercel Blob storage...`);
           const imageBuffer = await downloadImageToBuffer(imageUrl);
           
           const blob = await put(filename, imageBuffer, {
@@ -153,7 +178,7 @@ export default async function handler(req, res) {
           console.log(`Image ${i+1} stored in Vercel Blob: ${blobUrl}`);
         } catch (blobError) {
           console.warn(`Warning: Could not store image ${i+1} in Vercel Blob:`, blobError.message);
-          // Continue with original URL
+          // Continue with original URL - this is not a critical failure
         }
       }
       
@@ -179,16 +204,35 @@ export default async function handler(req, res) {
     }
 
     // Return success with all generated images
+    console.log(`Returning ${generatedImages.length} successfully generated images`);
     res.json({
       success: true,
       images: generatedImages,
       count: generatedImages.length
     });
   } catch (error) {
-    console.error('Error generating image:', error);
+    console.error('Error generating image:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+      status: error.status
+    });
+    
+    // Return more detailed error information
+    let errorMessage = 'Failed to generate image';
+    if (error.message.includes('model')) {
+      errorMessage = 'Model configuration error';
+    } else if (error.message.includes('API')) {
+      errorMessage = 'OpenAI API error';
+    } else if (error.message.includes('network') || error.message.includes('connect')) {
+      errorMessage = 'Connection error';
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
     res.status(500).json({ 
       success: false, 
-      error: error.message || 'Failed to generate image' 
+      error: errorMessage
     });
   }
 }
