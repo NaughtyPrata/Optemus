@@ -235,7 +235,7 @@ export default async function handler(req, res) {
         
         console.log(`Created ${imageRecords.length} image records for Notion:`, JSON.stringify(imageRecords, null, 2));
         
-        // Save metadata via the images API
+                // Save metadata via multiple storage methods
         // Determine the correct base URL for the API call
         let baseUrl;
         if (req.headers.host) {
@@ -246,21 +246,49 @@ export default async function handler(req, res) {
           // Fallback for local development
           baseUrl = 'http://localhost:3000';
         }
-        console.log(`Attempting to save metadata to: ${baseUrl}/api/images`);
-        const metadataResponse = await fetch(`${baseUrl}/api/images`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ imageData: imageRecords })
-        });
         
-        if (metadataResponse.ok) {
-          const responseData = await metadataResponse.json();
-          console.log(`Successfully saved metadata for ${imageRecords.length} images:`, responseData);
-        } else {
-          const errorText = await metadataResponse.text();
-          console.error(`Failed to save image metadata (${metadataResponse.status}):`, errorText);
+        // Try to save to Notion first
+        console.log(`Attempting to save metadata to Notion: ${baseUrl}/api/images`);
+        try {
+          const notionResponse = await fetch(`${baseUrl}/api/images`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ imageData: imageRecords })
+          });
+
+          if (notionResponse.ok) {
+            const responseData = await notionResponse.json();
+            console.log(`Successfully saved metadata to Notion for ${imageRecords.length} images:`, responseData);
+          } else {
+            const errorText = await notionResponse.text();
+            console.error(`Failed to save to Notion (${notionResponse.status}):`, errorText);
+          }
+        } catch (notionError) {
+          console.error('Notion save failed:', notionError.message);
+        }
+        
+        // Also save to file store as backup
+        console.log(`Attempting to save to file store: ${baseUrl}/api/file-store`);
+        try {
+          const fileStoreResponse = await fetch(`${baseUrl}/api/file-store`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ imageData: imageRecords })
+          });
+
+          if (fileStoreResponse.ok) {
+            const responseData = await fileStoreResponse.json();
+            console.log(`Successfully saved metadata to file store for ${imageRecords.length} images:`, responseData);
+          } else {
+            const errorText = await fileStoreResponse.text();
+            console.error(`Failed to save to file store (${fileStoreResponse.status}):`, errorText);
+          }
+        } catch (fileStoreError) {
+          console.error('File store save failed:', fileStoreError.message);
         }
       } catch (metadataError) {
         console.warn('Error saving image metadata:', metadataError.message);

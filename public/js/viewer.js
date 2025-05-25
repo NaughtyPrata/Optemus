@@ -162,17 +162,49 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       showLoading();
       
-      const response = await fetch('/api/images?rescan=true');
+      let images = [];
+      let source = 'unknown';
       
-      if (!response.ok) {
-        throw new Error(`API returned status ${response.status}`);
+      // Try to load from Notion first
+      try {
+        const notionResponse = await fetch('/api/images?rescan=true');
+        
+        if (notionResponse.ok) {
+          const notionData = await notionResponse.json();
+          
+          if (notionData.success && notionData.images && notionData.images.length > 0) {
+            images = notionData.images;
+            source = 'Notion';
+            console.log(`Loaded ${images.length} images from Notion database`);
+          }
+        }
+      } catch (notionError) {
+        console.warn('Failed to load from Notion:', notionError);
       }
       
-      const data = await response.json();
+      // If no images from Notion, try file store
+      if (images.length === 0) {
+        try {
+          const fileStoreResponse = await fetch('/api/file-store');
+          
+          if (fileStoreResponse.ok) {
+            const fileStoreData = await fileStoreResponse.json();
+            
+            if (fileStoreData.success && fileStoreData.images && fileStoreData.images.length > 0) {
+              images = fileStoreData.images;
+              source = 'File Store';
+              console.log(`Loaded ${images.length} images from file store`);
+            }
+          }
+        } catch (fileStoreError) {
+          console.warn('Failed to load from file store:', fileStoreError);
+        }
+      }
       
-      if (data.success) {
-        images = data.images || [];
-        
+      // Update global images array
+      window.images = images;
+      
+      if (images.length > 0) {
         // Sort by date (newest first) by default
         images.sort((a, b) => {
           const dateA = new Date(a.createdAt || 0);
@@ -181,14 +213,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         applyFilters();
-        
-        // Show helpful message if no images
-        if (images.length === 0 && data.message) {
-          showEmptyState(data.message);
-        }
+        showToast(`Loaded ${images.length} images from ${source}`, 'success');
       } else {
-        throw new Error(data.error || 'Unknown error');
+        showEmptyState('No images found. Generate some images to see them here!');
+        showToast('No images found in any storage', 'info');
       }
+      
     } catch (error) {
       console.error('Error fetching images:', error);
       showEmptyState('Error loading images: ' + error.message);
