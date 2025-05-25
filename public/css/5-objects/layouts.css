@@ -9,6 +9,13 @@
   overflow: hidden; /* Prevent scrolling of the app container */
 }
 
+/* Override for viewer page - allow natural height and scrolling */
+body.viewer-page .app-container {
+  height: auto;
+  min-height: 100vh;
+  overflow: visible;
+}
+
 /* Panel layout */
 .control-panel {
   width: 350px;
@@ -86,6 +93,13 @@
   padding: 1.5rem;
   height: calc(100vh - 70px);
   overflow-y: auto;
+}
+
+/* Override for viewer page - allow natural height and scrolling */
+body.viewer-page .viewer-content {
+  height: auto;
+  min-height: calc(100vh - 70px);
+  overflow: visible;
 }
 
 .toolbar {

@@ -19,8 +19,6 @@
   font-family: 'tabler-icons';
 }
 
-}
-
 /* Transition utilities */
 .transition-fast {
   transition: all var(--transition-fast);
@@ -149,8 +147,6 @@
   background: var(--bg-color);
 }
 
-}
-
 /* Utils */
 .hidden {
   display: none;
@@ -161,103 +157,7 @@
   font-family: 'tabler-icons';
 }
 
-/* Fix for List View in the Viewer 
-   This CSS ensures the list view displays correctly
-*/
-
-/* List View Container */
-.image-gallery.list-view {
-  display: flex;
-  ;
-  flex-direction: column;
-  ;
-  gap: 15px;
-}
-
-/* List View Cards */
-.list-view .image-card {
-  display: flex;
-  ;
-  height: 120px;
-  ;
-  width: 100%;
-  ;
-  padding: 0;
-  ;
-  position: relative;
-}
-
-/* Image in List View */
-.list-view .image-card .card-image {
-  width: 120px;
-  ;
-  height: 120px;
-  ;
-  flex-shrink: 0;
-  ;
-  position: relative;
-  ;
-  object-fit: cover;
-}
-
-/* Content in List View */
-.list-view .image-card .card-content {
-  flex: 1;
-  ;
-  padding: 15px;
-  ;
-  display: flex;
-  ;
-  flex-direction: column;
-  ;
-  justify-content: space-between;
-  ;
-  background-color: inherit;
-}
-
-/* Title in List View */
-.list-view .card-title {
-  font-size: 14px;
-  ;
-  font-weight: 500;
-  ;
-  margin-bottom: 5px;
-  ;
-  overflow: hidden;
-  ;
-  text-overflow: ellipsis;
-  ;
-  white-space: nowrap;
-}
-
-/* Date in List View */
-.list-view .card-date {
-  font-size: 12px;
-  ;
-  color: var(--text-muted, #94a3b8);
-}
-
-/* Fix for empty state positioning in List View */
-.list-view .empty-state {
-  width: 100%;
-}
-
-/* Fix for card placeholder in list view */
-.list-view .card-placeholder {
-  width: 120px;
-  ;
-  height: 120px;
-  ;
-  display: flex;
-  ;
-  align-items: center;
-  ;
-  justify-content: center;
-  ;
-  background-color: var(--element-bg);
-  ;
-  color: var(--text-muted);
-}
+/* Gallery styles moved to gallery.css to prevent conflicts */
 
 /* 
  * Loading Screen Background Styles
@@ -273,8 +173,6 @@
 /* Update text color to be readable on light blue background */
 #loadingIndicator p {
   color: var(--text-color);
-}
-
 }
 
 /* Utility classes */

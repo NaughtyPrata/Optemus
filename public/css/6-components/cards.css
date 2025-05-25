@@ -15,7 +15,6 @@
 }
 
 /* General card styles - specific image-card styles moved to gallery.css */
-=======
 
 /* Card Content */
 .card-content {
@@ -59,9 +58,4 @@
 /* Note: All gallery-related card styles have been moved to gallery.css 
    for better organization and to prevent CSS conflicts */
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .image-gallery.grid-view {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-}
+/* Gallery responsive styles moved to gallery.css to prevent conflicts */

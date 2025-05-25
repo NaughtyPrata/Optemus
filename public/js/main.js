@@ -1,3 +1,87 @@
+// Sound Manager
+class SoundManager {
+  constructor() {
+    this.sounds = {};
+    this.isMuted = false;
+    this.volume = 0.3;
+    this.init();
+  }
+  
+  init() {
+    // Preload click sound
+    this.sounds.click = new Audio();
+    this.sounds.click.src = 'sounds/click.mp3';
+    this.sounds.click.volume = this.volume;
+    this.sounds.click.preload = 'auto';
+    
+    // Preload loading sound (washing machine) - will be set in DOM ready
+    this.sounds.loading = null;
+  }
+  
+  playClick() {
+    if (this.isMuted) return;
+    
+    try {
+      // Reset the sound to the beginning and play
+      this.sounds.click.currentTime = 0;
+      this.sounds.click.volume = this.volume;
+      this.sounds.click.play().catch(e => console.log('Could not play click sound:', e));
+    } catch (error) {
+      console.log('Error playing click sound:', error);
+    }
+  }
+  
+  playLoading() {
+    if (this.isMuted || !this.sounds.loading) return;
+    
+    try {
+      this.sounds.loading.currentTime = 0;
+      this.sounds.loading.volume = 0.4;
+      this.sounds.loading.play().catch(e => console.log('Could not play loading sound:', e));
+    } catch (error) {
+      console.log('Error playing loading sound:', error);
+    }
+  }
+  
+  stopLoading() {
+    if (!this.sounds.loading) return;
+    
+    // Fade out and stop the sound
+    const fadeOutInterval = setInterval(() => {
+      if (!this.isMuted && this.sounds.loading.volume > 0.05) {
+        this.sounds.loading.volume -= 0.05;
+      } else {
+        this.sounds.loading.pause();
+        clearInterval(fadeOutInterval);
+      }
+    }, 50);
+  }
+  
+  mute() {
+    this.isMuted = true;
+    if (this.sounds.loading) {
+      this.sounds.loading.volume = 0;
+    }
+  }
+  
+  unmute() {
+    this.isMuted = false;
+    if (this.sounds.loading) {
+      this.sounds.loading.volume = 0.4;
+    }
+    
+    // Play a confirmation sound
+    this.playClick();
+  }
+  
+  isSoundMuted() {
+    return this.isMuted;
+  }
+}
+
+// Initialize Sound Manager
+const soundManager = new SoundManager();
+
 // DOM Elements
 document.addEventListener('DOMContentLoaded', () => {
   // Fix position of top controls - debugging only, CSS should handle the positioning
@@ -13,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
       justifyContent: window.getComputedStyle(topControls).justifyContent
     });
   }
+  
   const promptForm = document.getElementById('promptForm');
   const promptInput = document.getElementById('prompt');
   const generateBtn = document.getElementById('generateBtn');
@@ -22,6 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingSound = document.getElementById('loadingSound');
   const soundToggleBtn = document.getElementById('soundToggleBtn');
   const saveImageBtn = document.getElementById('saveImageBtn');
+  
+  // Set up loading sound reference in sound manager
+  soundManager.sounds.loading = loadingSound;
+  if (loadingSound) {
+    loadingSound.volume = 0.4;
+  }
   
   // Size buttons
   const sizeButtons = document.querySelectorAll('.size-btn');
@@ -42,6 +133,31 @@ document.addEventListener('DOMContentLoaded', () => {
   // Image Count buttons
   const countButtons = document.querySelectorAll('.count-btn');
   let selectedCount = "1"; // Default to 1 image
+
+  // Add universal click sound to all buttons
+  function addClickSoundToButtons() {
+    // Get all buttons and links that should have click sounds
+    const clickableElements = document.querySelectorAll(`
+      button,
+      .button,
+      .size-btn,
+      .quality-btn,
+      .style-type-btn,
+      .style-preset-btn,
+      .count-btn,
+      .sound-toggle-btn,
+      .gallery-btn,
+      .help-link,
+      a[class*="btn"],
+      [role="button"]
+    `);
+    
+    clickableElements.forEach(element => {
+      element.addEventListener('click', () => {
+        soundManager.playClick();
+      });
+    });
+  }
 
   // Add click event to size buttons
   sizeButtons.forEach(button => {
@@ -114,28 +230,19 @@ document.addEventListener('DOMContentLoaded', () => {
   generateBtn.addEventListener('click', handleFormSubmit);
   
   // Sound toggle handler
-  let isMuted = false;
   soundToggleBtn.addEventListener('click', () => {
-    if (isMuted) {
+    if (soundManager.isSoundMuted()) {
       // Unmute
-      loadingSound.volume = 0.4;
+      soundManager.unmute();
       soundToggleBtn.classList.remove('muted');
       soundToggleBtn.innerHTML = '<i class="ti ti-volume"></i>';
       soundToggleBtn.title = "Mute Sound";
-      isMuted = false;
-      
-      // Play a short sound to indicate sound is on
-      const beepSound = new Audio();
-      beepSound.src = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjIwLjEwMAAAAAAAAAAAAAAA//tQwAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAASAAAGWgBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr///////////////////////////////////////////8AAAAATGF2YzU4LjM1AAAAAAAAAAAAAAAAJAQgAAAAAAAABlojXtEiAAAAAAD/+xDEAAAKkDVq0EMAg4sYu94YwkAkYFgcGAwGFFSQDiIBZuFIgGEplvk1Q1YgGFYokiwhEEzQsNz4iBgKCY2BCYKhQDIYHBgYGfA4MDBpCP+CgGBgYGBBWA0IB/4Pg4f/3Hgw+BA4M+BAw//liDQP/+yDEBQAK9MMIvMmAEZ8YIjeeQFG+BAQOCYYDgkGAQMCgccAgYDDCEAfpYogGKMfB8HxQBDkP8CEYBISEgsJAYUBT//jMAgUAPrEYQgxhCD/LQoB/8JBIH//6FCgP8w5JM++4e3iP//7IMQEgAuQTQw8+UPRj4xgg580ejBgUITw8LCTQLC5wxdOCrU9HkSVqHqQgIDwQbM6kPAQYLmoUEkSBhUNj1/8JCABUaZD48aPjR////BQu///////7BwtEMzKBCYSNRlGq//+dFZB//sgxAKACrStBrz5ROGdl58jnyxiCTFhUNmhkXExkQEwoLGRYZO7JXILjEikdyFSC5UXGigyNv9OeEQ+ZGhMvNDwyOj//+ndE/////////iRpM0sZzEgkXGRMTnLq//9PnxSSy//+yDEAoAMNLT7vPljCTuWn7+WDW1qeqaFhlMCwsLCQGBi4eDt3VQEDFkYg+xEOB4kWADYYs1T/3biwkHn/V5Sh4P///////0PTRE9ZSGtrbxo58yk//9HFyQgU0iAUlFEQPv/+xDIAAAAAANIAAAAAL8QYceFoBBdRJXFt0q9VVVVVRSIpQbxhjDGI2KhjHRjkTZ/9PUVVVTEFNRTMuOTkuNaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq';      
-      beepSound.volume = 0.3;
-      beepSound.play().catch(e => console.log('Could not play sound indicator'));
     } else {
       // Mute
-      loadingSound.volume = 0;
+      soundManager.mute();
       soundToggleBtn.classList.add('muted');
       soundToggleBtn.innerHTML = '<i class="ti ti-volume-off"></i>';
       soundToggleBtn.title = "Unmute Sound";
-      isMuted = true;
     }
   });
 
@@ -393,16 +500,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Start the random bubble appearance animation
       animateBubblesRandomly();
       
-      // Play the sound with a slight delay to ensure the audio context is ready
+      // Play the loading sound
       setTimeout(() => {
-        // Reset the audio to the beginning
-        loadingSound.currentTime = 0;
-        // Set volume based on mute state
-        loadingSound.volume = isMuted ? 0 : 0.4;
-        // Play the sound
-        loadingSound.play().catch(error => {
-          console.log('Audio playback failed:', error);
-        });
+        soundManager.playLoading();
       }, 100);
     } else {
       loadingIndicator.classList.add('hidden');
@@ -413,15 +513,8 @@ document.addEventListener('DOMContentLoaded', () => {
         bubble.classList.remove('show');
       });
       
-      // Fade out and stop the sound
-      const fadeOutInterval = setInterval(() => {
-        if (!isMuted && loadingSound.volume > 0.05) {
-          loadingSound.volume -= 0.05;
-        } else {
-          loadingSound.pause();
-          clearInterval(fadeOutInterval);
-        }
-      }, 50);
+      // Stop the loading sound
+      soundManager.stopLoading();
     }
   }
   
@@ -580,4 +673,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Call the initAudio function to prepare audio playback
   initAudio();
+  
+  // Add click sounds to all buttons after a short delay to ensure DOM is ready
+  setTimeout(() => {
+    addClickSoundToButtons();
+  }, 100);
 });
