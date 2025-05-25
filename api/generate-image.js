@@ -188,11 +188,69 @@ export default async function handler(req, res) {
         blobUrl
       };
       
+      // Create image record for viewer
+      const imageRecord = {
+        id: randomUUID(),
+        prompt: prompt,
+        url: blobUrl,
+        localPath: blobUrl,
+        filename: filename,
+        createdAt: new Date().toISOString(),
+        settings: {
+          size: size || "1024x1024",
+          quality: quality || "medium",
+          styleType: styleType || "standard",
+          stylePreset: stylePreset || "default"
+        }
+      };
+      
       generatedImages.push({
         image: blobUrl,
         filename: filename,
         metadata: metadata
       });
+    }
+
+    // Save metadata to the images API for the viewer
+    if (generatedImages.length > 0) {
+      try {
+        const imageRecords = [];
+        for (let i = 0; i < generatedImages.length; i++) {
+          const imageRecord = {
+            id: randomUUID(),
+            prompt: prompt,
+            url: generatedImages[i].image,
+            localPath: generatedImages[i].image,
+            filename: generatedImages[i].filename,
+            createdAt: new Date().toISOString(),
+            settings: {
+              size: size || "1024x1024",
+              quality: quality || "medium",
+              styleType: styleType || "standard",
+              stylePreset: stylePreset || "default"
+            }
+          };
+          imageRecords.push(imageRecord);
+        }
+        
+        // Save metadata via the images API
+        const metadataResponse = await fetch(`${req.headers.origin || 'https://optemus-fresh.rapmoreno.com'}/api/images`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ imageData: imageRecords })
+        });
+        
+        if (metadataResponse.ok) {
+          console.log(`Successfully saved metadata for ${imageRecords.length} images`);
+        } else {
+          console.warn('Failed to save image metadata, but images were generated successfully');
+        }
+      } catch (metadataError) {
+        console.warn('Error saving image metadata:', metadataError.message);
+        // Don't fail the whole request if metadata saving fails
+      }
     }
 
     // Return success with all generated images
