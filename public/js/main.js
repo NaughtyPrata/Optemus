@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const placeholder = document.getElementById('placeholder');
   const loadingIndicator = document.getElementById('loadingIndicator');
   const loadingSound = document.getElementById('loadingSound');
-  const soundToggleBtn = document.getElementById('soundToggleBtn');
+  const newSoundToggle = document.getElementById('newSoundToggle');
   const saveImageBtn = document.getElementById('saveImageBtn');
   
   // Set up loading sound reference in sound manager
@@ -145,15 +145,18 @@ document.addEventListener('DOMContentLoaded', () => {
       .style-type-btn,
       .style-preset-btn,
       .count-btn,
-      .sound-toggle-btn,
+      .new-sound-toggle,
       .gallery-btn,
       .help-link,
       a[class*="btn"],
       [role="button"]
     `);
     
+    console.log(`Found ${clickableElements.length} clickable elements for sound:`, clickableElements);
+    
     clickableElements.forEach(element => {
       element.addEventListener('click', () => {
+        console.log('Playing click sound for:', element.className || element.tagName);
         soundManager.playClick();
       });
     });
@@ -229,20 +232,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event Listeners
   generateBtn.addEventListener('click', handleFormSubmit);
   
-  // Sound toggle handler
-  soundToggleBtn.addEventListener('click', () => {
+  // New Sound toggle handler
+  newSoundToggle.addEventListener('click', () => {
+    // Play click sound first (before muting/unmuting)
+    if (!soundManager.isSoundMuted()) {
+      soundManager.playClick();
+    }
+    
     if (soundManager.isSoundMuted()) {
       // Unmute
       soundManager.unmute();
-      soundToggleBtn.classList.remove('muted');
-      soundToggleBtn.innerHTML = '<i class="ti ti-volume"></i>';
-      soundToggleBtn.title = "Mute Sound";
+      newSoundToggle.classList.remove('muted');
+      newSoundToggle.querySelector('.sound-icon').textContent = '🔊';
+      newSoundToggle.title = "Mute Sound";
     } else {
       // Mute
       soundManager.mute();
-      soundToggleBtn.classList.add('muted');
-      soundToggleBtn.innerHTML = '<i class="ti ti-volume-off"></i>';
-      soundToggleBtn.title = "Unmute Sound";
+      newSoundToggle.classList.add('muted');
+      newSoundToggle.querySelector('.sound-icon').textContent = '🔇';
+      newSoundToggle.title = "Unmute Sound";
     }
   });
 

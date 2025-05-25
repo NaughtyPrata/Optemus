@@ -1,12 +1,55 @@
 /**
  * Image Gallery Viewer Script
- * 
- * Enhanced with:
- * - Advanced filtering and sorting
- * - Favorites system
- * - Improved UI and error handling
- * - Modern toast notifications
+ * Simple click sounds implementation
  */
+
+// Sound Manager (copied from main.js)
+class SoundManager {
+  constructor() {
+    this.sounds = {};
+    this.isMuted = false;
+    this.volume = 0.3;
+    this.init();
+  }
+  
+  init() {
+    // Preload click sound
+    this.sounds.click = new Audio();
+    this.sounds.click.src = 'sounds/click.mp3';
+    this.sounds.click.volume = this.volume;
+    this.sounds.click.preload = 'auto';
+  }
+  
+  playClick() {
+    if (this.isMuted) return;
+    
+    try {
+      // Reset the sound to the beginning and play
+      this.sounds.click.currentTime = 0;
+      this.sounds.click.volume = this.volume;
+      this.sounds.click.play().catch(e => console.log('Could not play click sound:', e));
+    } catch (error) {
+      console.log('Error playing click sound:', error);
+    }
+  }
+  
+  mute() {
+    this.isMuted = true;
+  }
+  
+  unmute() {
+    this.isMuted = false;
+    this.playClick();
+  }
+  
+  isSoundMuted() {
+    return this.isMuted;
+  }
+}
+
+// Initialize Sound Manager
+const soundManager = new SoundManager();
+
 document.addEventListener('DOMContentLoaded', () => {
   // Elements
   const imageGallery = document.getElementById('imageGallery');
@@ -34,10 +77,37 @@ document.addEventListener('DOMContentLoaded', () => {
   let viewMode = 'grid';
   let favorites = loadFavorites();
   
+  // Add universal click sound to all buttons (copied from main.js)
+  function addClickSoundToButtons() {
+    const clickableElements = document.querySelectorAll(`
+      button,
+      .button,
+      .view-btn,
+      .refresh-btn,
+      .gallery-btn,
+      .create-new-btn,
+      .close-btn,
+      .btn,
+      .filter-select,
+      .sort-select,
+      a[href="index.html"],
+      [role="button"]
+    `);
+    
+    clickableElements.forEach(element => {
+      element.addEventListener('click', () => {
+        soundManager.playClick();
+      });
+    });
+  }
+  
   // Initialize
   init();
   
   function init() {
+    // Add click sounds to all buttons
+    addClickSoundToButtons();
+    
     // Fetch images
     fetchImages();
     
@@ -50,25 +120,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.view-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const mode = btn.getAttribute('data-view');
-        console.log('Changing view mode to:', mode);
         changeViewMode(mode);
       });
     });
     
     // Add refresh button event listener
     refreshBtn.addEventListener('click', async () => {
-      // Show loading animation
       refreshBtn.innerHTML = '<i class="ti ti-loader ti-spin"></i>';
       refreshBtn.disabled = true;
       
-      // Fetch images with rescan
       await fetchImages();
       
-      // Restore button
       refreshBtn.innerHTML = '<i class="ti ti-refresh"></i>';
       refreshBtn.disabled = false;
       
-      // Show toast notification
       showToast('Gallery refreshed successfully', 'success');
     });
     
@@ -115,12 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
           return dateB - dateA;
         });
         
-        // If no images returned from API, try scanning for images directly
-        if (images.length === 0) {
-          await scanImagesDirectory();
-        }
-        
-        // Apply any active filters/sorting
         applyFilters();
       } else {
         throw new Error(data.error || 'Unknown error');
@@ -131,50 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
       showToast('Failed to load images', 'error');
     } finally {
       hideLoading();
-    }
-  }
-  
-  // Scan for images in the directory (fallback)
-  async function scanImagesDirectory() {
-    try {
-      const response = await fetch('/api/images?rescan=true');
-      
-      if (!response.ok) {
-        throw new Error(`API rescan returned status ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        images = data.images || [];
-      } else {
-        throw new Error(data.error || 'Unknown error during rescan');
-      }
-    } catch (error) {
-      console.error('Error scanning directory:', error);
-      // Last resort: try to show some well-known image paths
-      const knownImagePaths = [
-        'image_1746707539328.png',
-        'image_1746708513886.png',
-        'image_1746708650397.png',
-        'image_1746709754968.png'
-      ];
-      
-      // Create fallback image objects
-      images = knownImagePaths.map((filename, index) => ({
-        id: `fallback_${index}`,
-        filename,
-        url: `/images/${filename}`,
-        localPath: `/images/${filename}`,
-        prompt: 'Fallback image (no metadata available)',
-        createdAt: new Date().toISOString(),
-        settings: {
-          size: 'unknown',
-          quality: 'unknown',
-          styleType: 'unknown',
-          stylePreset: 'unknown'
-        }
-      }));
     }
   }
   
@@ -201,15 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // First apply search filter
     filteredImages = images.filter(image => {
-      // Skip search if query is empty
       if (!query) return true;
       
-      // Search in prompt
       if (image.prompt && image.prompt.toLowerCase().includes(query)) {
         return true;
       }
       
-      // Search in settings
       if (image.settings) {
         const settingsStr = JSON.stringify(image.settings).toLowerCase();
         if (settingsStr.includes(query)) {
@@ -227,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
           favorites.includes(image.id || image.filename)
         );
       } else if (filter === 'recent') {
-        // Get images from the last 24 hours
         const oneDayAgo = new Date();
         oneDayAgo.setDate(oneDayAgo.getDate() - 1);
         
@@ -259,7 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     
-    // Render the filtered and sorted gallery
     renderGallery();
   }
   
@@ -270,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Render image gallery
   function renderGallery() {
-    // Clear gallery
     imageGallery.innerHTML = '';
     
     if (filteredImages.length === 0) {
@@ -278,27 +287,23 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     
-    // Set class based on view mode
     imageGallery.className = `image-gallery ${viewMode}-view`;
-    
-    // Remove any inline styles that might interfere with our CSS
     imageGallery.removeAttribute('style');
     
-    // Add image cards
     filteredImages.forEach((image, index) => {
       const card = createImageCard(image);
-      
-      // Ensure no inline styles that could cause stacking issues
       card.style.position = 'relative';
       card.style.zIndex = '1';
       
       imageGallery.appendChild(card);
       
-      // Staggered animation with CSS classes instead of inline styles
       setTimeout(() => {
         card.classList.add('fade-in');
       }, index * 50);
     });
+    
+    // Re-add click sounds to any new buttons
+    addClickSoundToButtons();
   }
   
   // Create image card element
@@ -307,9 +312,13 @@ document.addEventListener('DOMContentLoaded', () => {
     card.className = 'image-card';
     card.setAttribute('data-id', image.id || '');
     card.setAttribute('data-timestamp', image.createdAt || '');
-    card.addEventListener('click', () => showImageDetails(image));
     
-    // Check if image is a favorite
+    // Add click sound to image card
+    card.addEventListener('click', () => {
+      soundManager.playClick();
+      showImageDetails(image);
+    });
+    
     const isFavorite = favorites.includes(image.id || image.filename);
     if (isFavorite) {
       card.classList.add('favorite');
@@ -319,18 +328,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const img = document.createElement('img');
       img.className = 'card-image';
       
-      // Make sure path starts with '/' for relative URLs
       const imagePath = (image.localPath || image.url);
       img.src = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
       img.alt = image.prompt || 'Generated image';
       img.loading = 'lazy';
       
-      // Add error handling for images
       img.onerror = function() {
         const parent = this.parentElement;
         this.style.display = 'none';
         
-        // Create placeholder
         const placeholder = document.createElement('div');
         placeholder.className = 'card-placeholder';
         placeholder.innerHTML = '<i class="ti ti-photo-off"></i>';
@@ -338,24 +344,19 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       
       card.appendChild(img);
-    } 
-    // List view
-    else {
+    } else {
       const img = document.createElement('img');
       img.className = 'card-image';
       
-      // Make sure path starts with '/' for relative URLs
       const imagePath = (image.localPath || image.url);
       img.src = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
       img.alt = image.prompt || 'Generated image';
       img.loading = 'lazy';
       
-      // Add error handling for images
       img.onerror = function() {
         const parent = this.parentElement;
         this.style.display = 'none';
         
-        // Create placeholder
         const placeholder = document.createElement('div');
         placeholder.className = 'card-placeholder';
         placeholder.innerHTML = '<i class="ti ti-photo-off"></i>';
@@ -365,7 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const content = document.createElement('div');
       content.className = 'card-content';
       
-      // Add favorite indicator for list view
       if (isFavorite) {
         const favoriteIndicator = document.createElement('div');
         favoriteIndicator.className = 'favorite-tag';
@@ -395,7 +395,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Show empty state
   function showEmptyState(message = 'No images found') {
-    // Check if it's specifically the favorites filter with no results
     if (filterSelect.value === 'favorite' && images.length > 0) {
       message = 'No favorite images found. Add some favorites first!';
     }
@@ -407,13 +406,14 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="index.html" class="gallery-btn">Generate Your First Image</a>
       </div>
     `;
+    
+    addClickSoundToButtons();
   }
   
   // Change view mode (grid or list)
   function changeViewMode(mode) {
     viewMode = mode;
     
-    // Update active button
     viewButtons.forEach(btn => {
       if (btn.getAttribute('data-view') === mode) {
         btn.classList.add('active');
@@ -422,7 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    // Re-render gallery
     renderGallery();
   }
   
@@ -430,16 +429,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function showImageDetails(image) {
     selectedImage = image;
     
-    // Make sure path starts with '/' for relative URLs
     const imagePath = (image.localPath || image.url);
     const fixedPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
     
-    // Set modal content
     modalImage.src = fixedPath;
     modalPrompt.textContent = image.prompt || 'No prompt available';
     modalDate.textContent = formatDate(image.createdAt);
     
-    // Update favorite button state
     const isImageFavorite = favorites.includes(image.id || image.filename);
     if (isImageFavorite) {
       favoriteBtn.innerHTML = '<i class="ti ti-star-filled"></i> Remove from Favorites';
@@ -449,7 +445,6 @@ document.addEventListener('DOMContentLoaded', () => {
       favoriteBtn.classList.remove('active');
     }
     
-    // Handle image loading errors
     modalImage.onerror = function() {
       this.style.display = 'none';
       
@@ -470,7 +465,6 @@ document.addEventListener('DOMContentLoaded', () => {
       this.style.display = 'block';
     };
     
-    // Format settings
     if (image.settings) {
       const { size, quality, styleType, stylePreset } = image.settings;
       let settingsText = '';
@@ -485,12 +479,10 @@ document.addEventListener('DOMContentLoaded', () => {
       modalSettings.textContent = 'No settings available';
     }
     
-    // Set title
     modalImageTitle.textContent = image.prompt ? 
       (image.prompt.length > 40 ? image.prompt.substring(0, 40) + '...' : image.prompt) : 
       'Image Details';
     
-    // Set download link
     if (image.localPath) {
       downloadBtn.href = image.localPath;
       downloadBtn.download = image.filename || 'generated-image.png';
@@ -499,7 +491,6 @@ document.addEventListener('DOMContentLoaded', () => {
       downloadBtn.style.display = 'none';
     }
     
-    // Show modal
     imageModal.classList.add('active');
   }
   
@@ -523,24 +514,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
       
       if (data.success) {
-        // Remove from arrays
         images = images.filter(img => img.id !== selectedImage.id);
         filteredImages = filteredImages.filter(img => img.id !== selectedImage.id);
         
-        // Remove from favorites if present
         const index = favorites.indexOf(selectedImage.id);
         if (index !== -1) {
           favorites.splice(index, 1);
           saveFavorites();
         }
         
-        // Hide modal
         hideModal();
-        
-        // Re-render gallery
         renderGallery();
-        
-        // Show success toast
         showToast('Image deleted successfully', 'success');
       } else {
         showToast('Failed to delete image', 'error');
@@ -559,27 +543,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const index = favorites.indexOf(imageId);
     
     if (index === -1) {
-      // Add to favorites
       favorites.push(imageId);
       favoriteBtn.innerHTML = '<i class="ti ti-star-filled"></i> Remove from Favorites';
       favoriteBtn.classList.add('active');
       showToast('Added to favorites', 'success');
     } else {
-      // Remove from favorites
       favorites.splice(index, 1);
       favoriteBtn.innerHTML = '<i class="ti ti-star"></i> Add to Favorites';
       favoriteBtn.classList.remove('active');
       showToast('Removed from favorites', 'success');
     }
     
-    // Save favorites to localStorage
     saveFavorites();
     
-    // Re-render gallery if currently filtered by favorites
     if (filterSelect.value === 'favorite') {
       applyFilters();
     } else {
-      // Just update the current card in the DOM
       const cards = document.querySelectorAll('.image-card');
       cards.forEach(card => {
         const cardId = card.getAttribute('data-id');
@@ -620,12 +599,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let date;
     try {
-      // First try parsing the date string
       date = new Date(dateStr);
       
-      // Check if the date is valid
       if (isNaN(date.getTime())) {
-        // Try to extract date from a filename format
         const match = dateStr.match(/_(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})/);
         if (match && match[1]) {
           const formattedStr = match[1].replace(/-(\d{2})-(\d{2})-(\d{2})$/, 'T$1:$2:$3');
@@ -635,7 +611,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
       
-      // Format the date nicely
       return date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
@@ -667,7 +642,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     toastContainer.appendChild(toast);
     
-    // Animate and remove after timeout
     setTimeout(() => {
       toast.classList.add('show');
       

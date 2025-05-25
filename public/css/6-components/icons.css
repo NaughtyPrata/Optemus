@@ -3,6 +3,16 @@
    No !important declarations needed
 */
 
+/* Tabler Icons Font Face */
+@font-face {
+  font-family: 'tabler-icons';
+  src: url('https://cdn.jsdelivr.net/npm/@tabler/icons@1.119.0/iconfont/fonts/tabler-icons.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/npm/@tabler/icons@1.119.0/iconfont/fonts/tabler-icons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Icon base styles */
 .ti {
   font-family: 'tabler-icons';
@@ -73,6 +83,34 @@ a i.ti {
 
 .ti-photo-off:before {
   content: "\eb3e";
+}
+
+.ti-volume:before {
+  content: "\eb50";
+}
+
+.ti-volume-off:before {
+  content: "\f1c3";
+}
+
+.ti-check:before {
+  content: "\ea44";
+}
+
+.ti-alert-circle:before {
+  content: "\ea39";
+}
+
+.ti-star:before {
+  content: "\ebc1";
+}
+
+.ti-star-filled:before {
+  content: "\ebc2";
+}
+
+.ti-plus:before {
+  content: "\eb0b";
 }
 
 /* Additional styles for the help link specific case */

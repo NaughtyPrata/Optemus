@@ -18,13 +18,17 @@ html body .image-top-controls,
 
 /* Add spacing between buttons */
 body .image-top-controls .sound-toggle-btn,
+body .image-top-controls .new-sound-toggle,
 html body .image-top-controls .sound-toggle-btn,
-.app-container .image-top-controls .sound-toggle-btn {
+html body .image-top-controls .new-sound-toggle,
+.app-container .image-top-controls .sound-toggle-btn,
+.app-container .image-top-controls .new-sound-toggle {
   margin-right: 10px;
 }
 
 /* Button styling for controls */
 .image-top-controls .sound-toggle-btn,
+.image-top-controls .new-sound-toggle,
 .image-top-controls .gallery-btn {
   width: 40px;
   height: 40px;
@@ -41,12 +45,15 @@ html body .image-top-controls .sound-toggle-btn,
 }
 
 .image-top-controls .sound-toggle-btn:hover,
+.image-top-controls .new-sound-toggle:hover,
 .image-top-controls .gallery-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-dark), var(--shadow-light);
+  color: var(--primary-color);
 }
 
 .image-top-controls .sound-toggle-btn:active,
+.image-top-controls .new-sound-toggle:active,
 .image-top-controls .gallery-btn:active {
   transform: translateY(0);
   box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);

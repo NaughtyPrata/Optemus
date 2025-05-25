@@ -264,3 +264,44 @@
   font-weight: 700;
   color: var(--primary-color);
 }
+
+/* New Sound Toggle Button - Following Project Style */
+.new-sound-toggle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--element-bg);
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-muted);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+}
+
+.new-sound-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-dark), var(--shadow-light);
+  color: var(--primary-color);
+}
+
+.new-sound-toggle:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+}
+
+.new-sound-toggle.muted {
+  color: #e74c3c;
+}
+
+.new-sound-toggle.muted:hover {
+  color: #c0392b;
+}
+
+.sound-icon {
+  font-size: 18px;
+  line-height: 1;
+  user-select: none;
+}
