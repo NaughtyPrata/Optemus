@@ -28,10 +28,10 @@ async function generateImageWithFetch(prompt, size, quality) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: "dall-e-3",
+      model: "gpt-image-1",
       prompt: prompt,
       size: size || "1024x1024",
-      quality: (quality === "low" || quality === "medium") ? "standard" : (quality || "standard"),
+      quality: quality || "medium",
       n: 1
     })
   });
@@ -180,7 +180,7 @@ export default async function handler(req, res) {
         timestamp: new Date().toISOString(),
         settings: {
           size: size || "1024x1024",
-          quality: quality || "standard",
+          quality: quality || "medium",
           styleType: styleType || "standard",
           stylePreset: stylePreset || "default"
         },
@@ -225,7 +225,7 @@ export default async function handler(req, res) {
             createdAt: new Date().toISOString(),
             settings: {
               size: size || "1024x1024",
-              quality: quality || "standard",
+              quality: quality || "medium",
               styleType: styleType || "standard",
               stylePreset: stylePreset || "default"
             }
