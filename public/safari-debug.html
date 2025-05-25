@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safari Debug Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .test { 
+            margin: 10px 0; 
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <h1>Safari Compatibility Debug</h1>
+    <div id="results"></div>
+    
+    <script>
+        const results = document.getElementById('results');
+        
+        function addResult(test, success, message) {
+            const div = document.createElement('div');
+            div.className = `test ${success ? 'success' : 'error'}`;
+            div.innerHTML = `<strong>${test}:</strong> ${success ? '✅' : '❌'} ${message}`;
+            results.appendChild(div);
+        }
+        
+        // Test 1: Basic JavaScript
+        addResult('Basic JavaScript', true, 'Working');
+        
+        // Test 2: Fetch API
+        try {
+            if (typeof fetch !== 'undefined') {
+                addResult('Fetch API', true, 'Available');
+            } else {
+                addResult('Fetch API', false, 'Not available');
+            }
+        } catch (e) {
+            addResult('Fetch API', false, e.message);
+        }
+        
+        // Test 3: CSS @import support
+        const linkEl = document.createElement('link');
+        linkEl.rel = 'stylesheet';
+        linkEl.href = 'css/main.css';
+        linkEl.onload = () => addResult('CSS Loading', true, 'main.css loaded');
+        linkEl.onerror = () => addResult('CSS Loading', false, 'main.css failed to load');
+        document.head.appendChild(linkEl);
+        
+        // Test 4: External CDN resources
+        const testCDN = document.createElement('script');
+        testCDN.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+        testCDN.onload = () => addResult('CDN Resources', true, 'anime.js loaded');
+        testCDN.onerror = () => addResult('CDN Resources', false, 'anime.js failed');
+        document.head.appendChild(testCDN);
+        
+        // Test 5: Check for console errors
+        window.addEventListener('error', (e) => {
+            addResult('JavaScript Error', false, e.message);
+        });
+        
+        // Test 6: HTTPS check
+        addResult('HTTPS Protocol', window.location.protocol === 'https:', window.location.protocol);
+        
+        // Test 7: User Agent
+        addResult('User Agent', true, navigator.userAgent.substring(0, 50) + '...');
+        
+        console.log('Debug page loaded successfully');
+    </script>
+</body>
+</html>
