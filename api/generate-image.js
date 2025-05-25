@@ -1,12 +1,6 @@
-import { OpenAI } from 'openai';
 import { put } from '@vercel/blob';
 import https from 'https';
 import { randomUUID } from 'crypto';
-
-// Initialize OpenAI
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 // Helper function to download image from URL to buffer
 async function downloadImageToBuffer(url) {
@@ -23,6 +17,31 @@ async function downloadImageToBuffer(url) {
       response.on('error', reject);
     }).on('error', reject);
   });
+}
+
+// Helper function to call OpenAI API directly with fetch
+async function generateImageWithFetch(prompt, size, quality) {
+  const response = await fetch('https://api.openai.com/v1/images/generations', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: "gpt-image-1",
+      prompt: prompt,
+      size: size || "1024x1024",
+      quality: quality || "medium",
+      n: 1
+    })
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(`OpenAI API error: ${response.status} ${response.statusText} - ${errorData.error?.message || 'Unknown error'}`);
+  }
+
+  return await response.json();
 }
 
 export default async function handler(req, res) {
@@ -49,6 +68,10 @@ export default async function handler(req, res) {
       return res.status(400).json({ success: false, error: 'Prompt is required' });
     }
 
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({ success: false, error: 'OpenAI API key not configured' });
+    }
+
     console.log(`Generating ${imageCount} images with prompt: ${prompt}`);
     console.log(`Settings: size=${size}, quality=${quality}, styleType=${styleType}, stylePreset=${stylePreset}`);
 
@@ -68,7 +91,7 @@ export default async function handler(req, res) {
       enhancedPrompt += " Make it bold, attention-grabbing, and visually striking.";
     }
 
-    // Request image from OpenAI using GPT-4o's image generation (gpt-image-1)
+    // Request images from OpenAI using direct fetch calls
     const generatedResponses = [];
     
     // For multiple images, we'll create variations on the prompt to encourage diversity
@@ -90,14 +113,8 @@ export default async function handler(req, res) {
       
       console.log(`Generating image ${i+1}/${imageCount} with prompt: ${currentPrompt.substring(0, 100)}...`);
       
-      // Generate the image with the varied prompt
-      const response = await openai.images.generate({
-        model: "gpt-image-1",
-        prompt: currentPrompt,
-        size: size || "1024x1024",
-        quality: quality || "medium", // gpt-image-1 supports 'low', 'medium', 'high', and 'auto'
-        n: 1
-      });
+      // Generate the image with the varied prompt using fetch
+      const response = await generateImageWithFetch(currentPrompt, size, quality);
       
       if (response.data && response.data.length > 0) {
         generatedResponses.push(response.data[0]);
