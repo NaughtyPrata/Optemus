@@ -364,7 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
       img.className = 'card-image';
       
       const imagePath = (image.localPath || image.url);
-      img.src = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+      // Handle both full URLs and relative paths
+      if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        img.src = imagePath;
+      } else {
+        img.src = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+      }
       img.alt = image.prompt || 'Generated image';
       img.loading = 'lazy';
       
@@ -384,7 +389,12 @@ document.addEventListener('DOMContentLoaded', () => {
       img.className = 'card-image';
       
       const imagePath = (image.localPath || image.url);
-      img.src = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+      // Handle both full URLs and relative paths
+      if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        img.src = imagePath;
+      } else {
+        img.src = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+      }
       img.alt = image.prompt || 'Generated image';
       img.loading = 'lazy';
       
@@ -465,7 +475,13 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedImage = image;
     
     const imagePath = (image.localPath || image.url);
-    const fixedPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+    // Handle both full URLs and relative paths
+    let fixedPath;
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+      fixedPath = imagePath;
+    } else {
+      fixedPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+    }
     
     modalImage.src = fixedPath;
     modalPrompt.textContent = image.prompt || 'No prompt available';
