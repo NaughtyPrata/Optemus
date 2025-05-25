@@ -233,8 +233,20 @@ export default async function handler(req, res) {
           imageRecords.push(imageRecord);
         }
         
+        console.log(`Created ${imageRecords.length} image records for Notion:`, JSON.stringify(imageRecords, null, 2));
+        
         // Save metadata via the images API
-        const baseUrl = req.headers.host ? `https://${req.headers.host}` : 'https://optemus-fresh-68in5cwdb-naughtypratas-projects.vercel.app';
+        // Determine the correct base URL for the API call
+        let baseUrl;
+        if (req.headers.host) {
+          // If we have a host header, use it (works for both local and deployed)
+          const protocol = req.headers.host.includes('localhost') ? 'http' : 'https';
+          baseUrl = `${protocol}://${req.headers.host}`;
+        } else {
+          // Fallback for local development
+          baseUrl = 'http://localhost:3000';
+        }
+        console.log(`Attempting to save metadata to: ${baseUrl}/api/images`);
         const metadataResponse = await fetch(`${baseUrl}/api/images`, {
           method: 'POST',
           headers: {
@@ -244,9 +256,11 @@ export default async function handler(req, res) {
         });
         
         if (metadataResponse.ok) {
-          console.log(`Successfully saved metadata for ${imageRecords.length} images`);
+          const responseData = await metadataResponse.json();
+          console.log(`Successfully saved metadata for ${imageRecords.length} images:`, responseData);
         } else {
-          console.warn('Failed to save image metadata, but images were generated successfully');
+          const errorText = await metadataResponse.text();
+          console.error(`Failed to save image metadata (${metadataResponse.status}):`, errorText);
         }
       } catch (metadataError) {
         console.warn('Error saving image metadata:', metadataError.message);
