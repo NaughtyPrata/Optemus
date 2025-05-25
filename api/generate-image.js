@@ -234,7 +234,8 @@ export default async function handler(req, res) {
         }
         
         // Save metadata via the images API
-        const metadataResponse = await fetch(`${req.headers.origin || 'https://optemus-fresh.rapmoreno.com'}/api/images`, {
+        const baseUrl = req.headers.host ? `https://${req.headers.host}` : 'https://optemus-fresh-68in5cwdb-naughtypratas-projects.vercel.app';
+        const metadataResponse = await fetch(`${baseUrl}/api/images`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

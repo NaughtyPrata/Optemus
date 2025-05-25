@@ -8,7 +8,7 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-const DATABASE_ID = process.env.NOTION_DATABASE_ID;
+const DATABASE_ID = process.env.NOTION_DATABASE_ID?.trim();
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
             },
             properties: {
               'ID': {
-                title: [
+                rich_text: [
                   {
                     text: {
                       content: image.id || 'Unknown ID',
@@ -147,7 +147,7 @@ export default async function handler(req, res) {
       const properties = page.properties;
       
       return {
-        id: properties.ID?.title?.[0]?.text?.content || page.id,
+        id: properties.ID?.rich_text?.[0]?.text?.content || page.id,
         prompt: properties.Prompt?.rich_text?.[0]?.text?.content || 'No prompt',
         url: properties['Image URL']?.url || '',
         localPath: properties['Image URL']?.url || '',
