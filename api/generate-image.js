@@ -1,4 +1,4 @@
-// import { put } from '@vercel/blob';
+import { put } from '@vercel/blob';
 import https from 'https';
 import { randomUUID } from 'crypto';
 
@@ -28,10 +28,10 @@ async function generateImageWithFetch(prompt, size, quality) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: "gpt-image-1",
+      model: "dall-e-3",
       prompt: prompt,
       size: size || "1024x1024",
-      quality: quality || "medium",
+      quality: quality || "standard",
       n: 1
     })
   });
@@ -158,16 +158,16 @@ export default async function handler(req, res) {
       // If we have a URL, download and store in Vercel Blob
       if (imageUrl && imageUrl.startsWith('http')) {
         try {
-          console.log(`Would store image ${i+1} in Vercel Blob storage, but using original URL for now...`);
-          // const imageBuffer = await downloadImageToBuffer(imageUrl);
+          console.log(`Storing image ${i+1} in Vercel Blob storage...`);
+          const imageBuffer = await downloadImageToBuffer(imageUrl);
           
-          // const blob = await put(filename, imageBuffer, {
-          //   access: 'public',
-          //   contentType: 'image/png'
-          // });
+          const blob = await put(filename, imageBuffer, {
+            access: 'public',
+            contentType: 'image/png'
+          });
           
-          // blobUrl = blob.url;
-          console.log(`Image ${i+1} using original URL: ${blobUrl}`);
+          blobUrl = blob.url;
+          console.log(`Image ${i+1} stored in Vercel Blob: ${blobUrl}`);
         } catch (blobError) {
           console.warn(`Warning: Could not store image ${i+1} in Vercel Blob:`, blobError.message);
           // Continue with original URL
