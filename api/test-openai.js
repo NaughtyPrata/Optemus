@@ -11,74 +11,71 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Check if API key exists
     if (!process.env.OPENAI_API_KEY) {
-      return res.status(500).json({ 
-        success: false, 
-        error: 'OpenAI API key not configured' 
+      return res.status(500).json({
+        success: false,
+        error: 'No OpenAI API key configured'
       });
     }
 
-    console.log('API Key exists:', !!process.env.OPENAI_API_KEY);
-    console.log('API Key length:', process.env.OPENAI_API_KEY?.length);
-    console.log('API Key starts with:', process.env.OPENAI_API_KEY?.substring(0, 10));
-
-    // Initialize OpenAI client with additional config for serverless
+    console.log('Testing OpenAI connection...');
+    
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
-      timeout: 60000, // 60 second timeout
-      maxRetries: 2,
+      timeout: 30000, // 30 seconds
+      maxRetries: 1,
     });
 
-    console.log('OpenAI client initialized');
-
-    // Try a simple model list call first
-    try {
-      console.log('Testing models list...');
-      const models = await openai.models.list();
-      console.log('Models list successful, count:', models.data?.length);
-    } catch (modelsError) {
-      console.error('Models list error:', modelsError);
-      return res.status(500).json({ 
-        success: false, 
-        error: 'OpenAI API connection failed',
-        details: modelsError.message,
-        type: 'models_error'
-      });
-    }
-
-    // Try image generation with dall-e-3 first
-    console.log('Testing image generation with dall-e-3...');
-    const response = await openai.images.generate({
-      model: "dall-e-3",
-      prompt: "A simple red circle",
-      size: "1024x1024",
-      quality: "standard",
-      n: 1
+    // Test 1: List models
+    console.log('Fetching models...');
+    const models = await openai.models.list();
+    
+    // Test 2: Check for gpt-image-1 model
+    const gptImageModel = models.data.find(m => m.id === 'gpt-image-1');
+    
+    // Test 3: Try a simple completion call to verify API connectivity
+    console.log('Testing chat completion...');
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: "Hello" }],
+      max_tokens: 5
     });
-
-    console.log('Image generation successful');
-    console.log('Response:', JSON.stringify(response, null, 2));
 
     res.json({
       success: true,
-      message: 'OpenAI API test successful',
-      hasImages: response.data?.length > 0,
-      imageCount: response.data?.length || 0
+      tests: {
+        modelsApi: {
+          success: true,
+          count: models.data.length,
+          hasGptImage1: !!gptImageModel
+        },
+        chatCompletion: {
+          success: true,
+          response: completion.choices[0]?.message?.content || 'No response'
+        }
+      },
+      environment: {
+        nodeEnv: process.env.NODE_ENV,
+        vercelEnv: process.env.VERCEL_ENV,
+        region: process.env.VERCEL_REGION
+      }
+    });
+  } catch (error) {
+    console.error('OpenAI test error:', {
+      message: error.message,
+      status: error.status,
+      code: error.code,
+      type: error.type
     });
 
-  } catch (error) {
-    console.error('Test error:', error);
-    console.error('Error name:', error.name);
-    console.error('Error message:', error.message);
-    console.error('Error stack:', error.stack);
-    
-    res.status(500).json({ 
-      success: false, 
-      error: error.message || 'Test failed',
-      errorName: error.name,
-      errorType: typeof error,
-      details: error.toString()
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      details: {
+        status: error.status,
+        code: error.code,
+        type: error.type
+      }
     });
   }
 }

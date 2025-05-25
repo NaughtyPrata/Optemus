@@ -1,29 +1,11 @@
 import { OpenAI } from 'openai';
-import { put } from '@vercel/blob';
-import https from 'https';
-import { randomUUID } from 'crypto';
 
-// Initialize OpenAI
+// Initialize OpenAI with more robust configuration for Vercel
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  timeout: 60000, // 60 seconds timeout
+  maxRetries: 2,
 });
-
-// Helper function to download image from URL to buffer
-async function downloadImageToBuffer(url) {
-  return new Promise((resolve, reject) => {
-    https.get(url, (response) => {
-      if (response.statusCode !== 200) {
-        reject(new Error(`Failed to download image: ${response.statusCode}`));
-        return;
-      }
-
-      const chunks = [];
-      response.on('data', (chunk) => chunks.push(chunk));
-      response.on('end', () => resolve(Buffer.concat(chunks)));
-      response.on('error', reject);
-    }).on('error', reject);
-  });
-}
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -45,7 +27,8 @@ export default async function handler(req, res) {
       hasApiKey: !!process.env.OPENAI_API_KEY,
       apiKeyLength: process.env.OPENAI_API_KEY?.length || 0,
       nodeEnv: process.env.NODE_ENV,
-      vercelEnv: process.env.VERCEL_ENV
+      vercelEnv: process.env.VERCEL_ENV,
+      region: process.env.VERCEL_REGION
     });
 
     const { prompt, size, quality, styleType, stylePreset, count = 1 } = req.body;
@@ -81,10 +64,10 @@ export default async function handler(req, res) {
       enhancedPrompt += " Make it bold, attention-grabbing, and visually striking.";
     }
 
-    // Request image from OpenAI using GPT-4o's image generation (gpt-image-1)
-    const generatedResponses = [];
+    // For Vercel's serverless environment, we'll process images sequentially to avoid timeout
+    // and generate them one by one to be more reliable
+    const generatedImages = [];
     
-    // For multiple images, we'll create variations on the prompt to encourage diversity
     for (let i = 0; i < imageCount; i++) {
       let currentPrompt = enhancedPrompt;
       
@@ -109,102 +92,75 @@ export default async function handler(req, res) {
           model: "gpt-image-1",
           prompt: currentPrompt,
           size: size || "1024x1024",
-          quality: quality || "medium", // gpt-image-1 supports 'low', 'medium', 'high', and 'auto'
+          quality: quality || "medium",
           n: 1
         });
         
         if (response.data && response.data.length > 0) {
-          generatedResponses.push(response.data[0]);
-          console.log(`Successfully generated image ${i+1}`);
+          const imageData = response.data[0];
+          
+          // Check different possible response formats and extract the image URL
+          let imageUrl = '';
+          if (imageData.url) {
+            imageUrl = imageData.url;
+          } else if (imageData.b64_json) {
+            imageUrl = `data:image/png;base64,${imageData.b64_json}`;
+          }
+          
+          if (imageUrl) {
+            console.log(`Image ${i+1} generated successfully`);
+            
+            // Generate a filename
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+            const filename = `generated_${timestamp}_${i+1}.png`;
+            
+            // Create metadata for the image
+            const metadata = {
+              prompt: prompt,
+              timestamp: new Date().toISOString(),
+              settings: {
+                size: size || "1024x1024",
+                quality: quality || "medium",
+                styleType: styleType || "standard",
+                stylePreset: stylePreset || "default"
+              },
+              filename
+            };
+            
+            generatedImages.push({
+              image: imageUrl,
+              filename: filename,
+              metadata: metadata
+            });
+          } else {
+            console.warn(`No URL or base64 data found for image ${i+1}`);
+          }
         } else {
           console.warn(`No data received for image ${i+1}`);
         }
       } catch (imageError) {
-        console.error(`Error generating image ${i+1}:`, imageError.message);
-        // Continue with other images instead of failing completely
+        console.error(`Error generating image ${i+1}:`, {
+          message: imageError.message,
+          status: imageError.status,
+          code: imageError.code
+        });
+        
+        // If it's the first image and it fails, throw the error
         if (i === 0) {
-          // If the first image fails, rethrow the error
           throw imageError;
         }
+        // Otherwise, continue with remaining images
       }
     }
     
     // Check if we got any images back
-    if (generatedResponses.length === 0) {
-      throw new Error('No image data received from OpenAI');
+    if (generatedImages.length === 0) {
+      throw new Error('No images were successfully generated');
     }
     
-    console.log(`Successfully generated ${generatedResponses.length} images`);
-    
-    // Process each image in the responses
-    const generatedImages = [];
-    
-    for (let i = 0; i < generatedResponses.length; i++) {
-      let imageUrl = '';
-      const imageData = generatedResponses[i];
-      
-      // Check different possible response formats and extract the image URL
-      if (imageData.url) {
-        imageUrl = imageData.url;
-      } else if (imageData.b64_json) {
-        imageUrl = `data:image/png;base64,${imageData.b64_json}`;
-      }
-      
-      if (!imageUrl) {
-        console.warn(`No URL or base64 data found for image ${i+1}`);
-        continue;
-      }
-      
-      console.log(`Image ${i+1} generated successfully`);
-      
-      // Generate a filename for Vercel Blob storage
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const filename = `generated_${timestamp}_${randomUUID().substring(0, 8)}_${i+1}.png`;
-      
-      let blobUrl = imageUrl; // Default to original URL
-      
-      // If we have a URL, try to store in Vercel Blob (optional)
-      if (imageUrl && imageUrl.startsWith('http')) {
-        try {
-          console.log(`Attempting to store image ${i+1} in Vercel Blob storage...`);
-          const imageBuffer = await downloadImageToBuffer(imageUrl);
-          
-          const blob = await put(filename, imageBuffer, {
-            access: 'public',
-            contentType: 'image/png'
-          });
-          
-          blobUrl = blob.url;
-          console.log(`Image ${i+1} stored in Vercel Blob: ${blobUrl}`);
-        } catch (blobError) {
-          console.warn(`Warning: Could not store image ${i+1} in Vercel Blob:`, blobError.message);
-          // Continue with original URL - this is not a critical failure
-        }
-      }
-      
-      // Create metadata for the image
-      const metadata = {
-        prompt: prompt, // Store the original prompt without the variations
-        timestamp: new Date().toISOString(),
-        settings: {
-          size: size || "1024x1024",
-          quality: quality || "medium",
-          styleType: styleType || "standard",
-          stylePreset: stylePreset || "default"
-        },
-        filename,
-        blobUrl
-      };
-      
-      generatedImages.push({
-        image: blobUrl,
-        filename: filename,
-        metadata: metadata
-      });
-    }
+    console.log(`Successfully generated ${generatedImages.length} images`);
 
     // Return success with all generated images
-    console.log(`Returning ${generatedImages.length} successfully generated images`);
     res.json({
       success: true,
       images: generatedImages,
@@ -213,19 +169,30 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Error generating image:', {
       message: error.message,
-      stack: error.stack,
+      stack: error.stack?.substring(0, 500),
       name: error.name,
-      status: error.status
+      status: error.status,
+      code: error.code,
+      type: error.type
     });
     
-    // Return more detailed error information
+    // Return more detailed error information based on the error type
     let errorMessage = 'Failed to generate image';
-    if (error.message.includes('model')) {
-      errorMessage = 'Model configuration error';
-    } else if (error.message.includes('API')) {
-      errorMessage = 'OpenAI API error';
-    } else if (error.message.includes('network') || error.message.includes('connect')) {
-      errorMessage = 'Connection error';
+    
+    if (error.code === 'insufficient_quota') {
+      errorMessage = 'OpenAI API quota exceeded';
+    } else if (error.code === 'invalid_api_key') {
+      errorMessage = 'Invalid API key';
+    } else if (error.status === 429) {
+      errorMessage = 'Rate limit exceeded, please try again later';
+    } else if (error.status === 400) {
+      errorMessage = 'Invalid request parameters';
+    } else if (error.status === 401) {
+      errorMessage = 'Authentication error';
+    } else if (error.message?.includes('network') || error.message?.includes('connect')) {
+      errorMessage = 'Network connection error';
+    } else if (error.message?.includes('timeout') || error.code === 'TIMEOUT') {
+      errorMessage = 'Request timeout - please try again';
     } else if (error.message) {
       errorMessage = error.message;
     }
